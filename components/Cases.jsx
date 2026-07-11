@@ -20,7 +20,7 @@ const PROOF = [
     stats: [
       { v: 'Audiovisual', l: 'Produções' },
       { v: 'Elencos', l: 'Treinamento' },
-      { v: 'Exposição', l: 'Confidencialidade' },
+      { v: 'Exposição', l: 'Discrição' },
     ],
   },
   {

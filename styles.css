@@ -1126,6 +1126,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  min-width: 0;
 }
 
 .case-meta {
@@ -1719,6 +1720,17 @@ footer.foot {
 
   .stages, .cases-grid, .prod-grid {
     grid-template-columns: 1fr;
+  }
+
+  .case {
+    padding: 36px 24px;
+  }
+
+  /* Estatísticas quebram linha em vez de forçar 3 colunas estreitas */
+  .case-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
   }
 
   /* Linha do tempo vertical no mobile */
