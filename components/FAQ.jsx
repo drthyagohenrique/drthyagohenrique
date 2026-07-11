@@ -1,13 +1,15 @@
 import React from 'react';
 
 const FAQS = [
-  { q: 'O protocolo substitui meu tratamento atual?', a: 'Não. O protocolo é complementar e nunca interrompe medicação ou terapia em curso. Qualquer ajuste de fármaco é feito sob supervisão do seu médico assistente — nunca de forma autônoma.' },
-  { q: 'Saturação Neural é diagnóstico oficial?', a: 'Não é diagnóstico médico no CID/DSM. Saturação Neural é o framework clínico que o Dr. Thyago utiliza para nomear e descarregar um padrão neuroendócrino observado em mais de 3.400 atendimentos. A terminologia oficial permanece em paralelo, sempre que aplicável.' },
-  { q: 'Como funciona a supervisão de 365 dias?', a: 'Encontros quinzenais ao vivo em pequenos grupos clínicos, aplicação do score quinzenalmente, ajustes de protocolo a cada bloco de 90 dias, e canal direto para dúvidas técnicas com a equipe clínica.' },
-  { q: 'Eu preciso parar minha medicação?', a: 'Em hipótese alguma sem supervisão médica direta. O protocolo opera em paralelo. Reduções, ajustes ou descontinuações são decisões clínicas individuais, sempre acompanhadas pelo médico que prescreveu.' },
-  { q: 'Quanto tempo até eu sentir diferença?', a: 'A primeira fase (Estabilização) dura 60 dias. A maioria dos pacientes relata mudança mensurável no score dentro deste primeiro bloco — mas o protocolo é desenhado para 12 meses porque a consolidação neuroendócrina exige tempo biológico, não tempo de marketing.' },
-  { q: 'Funciona se eu já tentei terapia e remédio?', a: 'O protocolo foi construído precisamente para esse perfil. A maior parte dos pacientes chega após terapia, ansiolítico, mindfulness, retiros — tendo tentado tudo, menos uma moldura clínica do estado de saturação.' },
-  { q: 'Há contraindicações?', a: 'Sim. Quadros psiquiátricos agudos não estabilizados, transtornos psicóticos em crise, dependência química ativa e gestantes em primeiro trimestre são casos em que o protocolo não é indicado neste momento. A triagem clínica avalia compatibilidade antes da entrada.' },
+  { q: 'Para quem a consulta costuma fazer sentido?', a: 'Para pessoas que vivem sob pressão constante, sustentam grandes responsabilidades e percebem sinais como mente acelerada, sono não reparador, irritabilidade, fadiga cognitiva, queda de clareza ou dificuldade de recuperação.' },
+  { q: 'A consulta é apenas para executivos e figuras públicas?', a: 'Não. Esse é um território importante da atuação do Dr. Thyago, mas a consulta também pode fazer sentido para médicos, advogados, profissionais liberais, líderes, artistas, atletas, comunicadores e pessoas em ambientes de alta exigência.' },
+  { q: 'Como é a primeira consulta?', a: 'A primeira consulta organiza o quadro: queixas atuais, sono, rotina, pressão profissional, histórico médico, uso de medicações, hábitos, riscos, objetivos e contexto de vida. A conduta depende da avaliação individual.' },
+  { q: 'O atendimento pode envolver medicação?', a: 'Quando indicado, sim. A decisão é médica e individualizada. A consulta também pode envolver orientações de sono, rotina, estilo de vida, acompanhamento, exames, encaminhamentos ou integração com outros profissionais.' },
+  { q: 'Existe atendimento online?', a: 'Os documentos institucionais indicam consultas presenciais e online. A disponibilidade e a modalidade devem ser confirmadas diretamente pelo WhatsApp institucional no momento do agendamento.' },
+  { q: 'Como é tratado o sigilo?', a: 'Confidencialidade e discrição são parte central do atendimento, especialmente para pessoas com exposição pública, responsabilidades estratégicas ou agendas sensíveis.' },
+  { q: 'Saturação Neural é um diagnóstico?', a: 'Não. Saturação Neural é apresentada nesta página apenas como conceito de estudo e linha de pensamento clínico sobre sobrecarga mental crônica. Não é diagnóstico, doença, tratamento ou promessa de resultado.' },
+  { q: 'A consulta substitui atendimento de urgência?', a: 'Não. Em risco imediato, ideação suicida, surto, intoxicação, violência, dor intensa ou emergência clínica, procure imediatamente um serviço de urgência.' },
+  { q: 'Como faço para marcar?', a: 'Clique em qualquer botão de CTA da página. O WhatsApp será aberto com a mensagem: "Vim do site e quero marcar a minha consulta."' },
 ];
 
 const FAQ = () => {
@@ -18,8 +20,8 @@ const FAQ = () => {
         <div className="section-num">08 · Perguntas frequentes</div>
         <div className="faq-grid">
           <div>
-            <h2 className="title" style={{marginBottom:24}}>Dúvidas <em>clínicas.</em><br/>Respostas <em>diretas.</em></h2>
-            <p className="lede">Sem floreios, sem evasivas. Se a sua pergunta não estiver aqui, escreva — respondemos em até 24h.</p>
+            <h2 className="title" style={{marginBottom:24}}>Dúvidas objetivas antes da consulta.</h2>
+            <p className="lede">Informações práticas para quem busca cuidado médico com clareza, privacidade e uma leitura mais precisa da pressão que vive.</p>
           </div>
           <div className="faq-list">
             {FAQS.map((f, i) => (

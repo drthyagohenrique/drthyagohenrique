@@ -249,7 +249,7 @@ section {
   opacity: 0.6;
 }
 
-/* ============= HERO (REDESIGN 70/30) ============= */
+/* ============= HERO ============= */
 .hero {
   background: var(--ink);
   color: var(--bone);
@@ -266,7 +266,7 @@ section {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 70% 30%, rgba(123, 77, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 78% 22%, rgba(123, 77, 255, 0.22) 0%, transparent 48%),
     radial-gradient(circle at 20% 80%, rgba(10, 10, 10, 1) 0%, transparent 60%);
   z-index: 1;
 }
@@ -284,7 +284,7 @@ section {
 .hero-shadow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--ink) 0%, rgba(10, 10, 10, 0.8) 30%, transparent 70%);
+  background: linear-gradient(90deg, var(--ink) 0%, rgba(10, 10, 10, 0.82) 42%, transparent 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -293,16 +293,17 @@ section {
   position: relative;
   z-index: 5;
   display: grid;
-  grid-template-columns: 7fr 3fr;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 80px;
 }
 
 .hero-content {
-  padding-bottom: 100px; /* Espaço extra abaixo das ações */
+  padding-bottom: 100px;
+  max-width: 880px;
 }
 
 .hero-eyebrow {
@@ -401,37 +402,6 @@ section {
   border-color: var(--bone);
 }
 
-/* Lado Direito - Visual do Sistema */
-.hero-visual {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 60%; /* Aumentado para permitir sobreposição suave */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.hero-doctor-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  opacity: 0.45;
-  filter: contrast(1.1) saturate(0.8);
-  /* Máscara radial muito mais suave para evitar quebras verticais */
-  mask-image: radial-gradient(circle at 70% 50%, black 20%, transparent 85%);
-  -webkit-mask-image: radial-gradient(circle at 70% 50%, black 20%, transparent 85%);
-}
-
-.hero-doctor-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
 
 .hero-bottom {
   position: absolute;
@@ -834,7 +804,7 @@ section {
   color: var(--stone);
 }
 
-/* ============= COMPARISON ============= */
+/* ============= AUDIENCE ============= */
 .compare {
   background: var(--bone-2);
 }
@@ -847,7 +817,7 @@ section {
 
 .compare-row {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  grid-template-columns: 1.1fr 1.15fr 1.45fr;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1294,6 +1264,12 @@ section {
   border-bottom: 1px solid currentColor;
   padding-bottom: 6px;
   align-self: flex-start;
+  background: transparent;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  color: inherit;
+  cursor: pointer;
 }
 
 /* ============= CASES ============= */
@@ -1426,7 +1402,7 @@ section {
 }
 
 .guar-frame::before {
-  content: 'GARANTIA INCONDICIONAL';
+  content: 'ATENDIMENTO MÉDICO';
   position: absolute;
   top: -12px;
   left: 48px;
@@ -1749,10 +1725,6 @@ footer.foot {
     text-align: left;
   }
   .hero-content { padding-top: 140px; padding-bottom: 80px; }
-  .hero-visual {
-    width: 100%; height: 50%; top: auto; bottom: 0;
-    opacity: 0.3;
-  }
   .hero h1 { font-size: clamp(48px, 10vw, 80px); }
   
   .mech-head, .doc-grid, .prod-head, .faq-grid, .guar-frame, .mech-tm-grid {
@@ -1765,7 +1737,7 @@ footer.foot {
   }
   
   .compare-row {
-    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1.25fr;
   }
   
   .foot-top {
@@ -1836,8 +1808,6 @@ footer.foot {
   }
   .btn-ghost { text-align: center; border: none; opacity: 0.8; }
   
-  .hero-visual { display: none; }
-  
   .hero-bottom {
     position: static;
     margin: 80px 24px 0;
@@ -1885,7 +1855,7 @@ footer.foot {
 
   .compare-row {
     min-width: 800px;
-    grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1fr 1.05fr 1.35fr;
   }
   
   .mech-tm-name { font-size: 48px; }

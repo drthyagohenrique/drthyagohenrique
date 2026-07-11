@@ -1,61 +1,61 @@
 import React from 'react';
 
-const CASES = [
+const PROOF = [
   {
-    name: 'Marina, 38',
-    meta: 'Advogada · São Paulo',
-    stage: 'Estágio 03 → 01',
-    quote: 'Eu já sabia que não era só estresse. Mas ninguém tinha me dado uma resposta clínica que fizesse sentido. Foi a primeira vez em três anos que voltei a dormir a noite inteira.',
+    name: 'Mídia',
+    meta: 'Reconhecimento público',
+    stage: 'O Globo · SBT · TV Globo',
+    quote: 'Participações e citações em veículos de grande alcance reforçam a presença pública do Dr. Thyago em temas de saúde mental, burnout, qualidade de vida e trabalho.',
     stats: [
-      { v: '−72%', l: 'Despertar 3h' },
-      { v: '6.8h', l: 'Sono médio' },
-      { v: '08m', l: 'Para Estágio 01' },
+      { v: 'O Globo', l: 'Burnout' },
+      { v: 'SBT', l: 'Saúde' },
+      { v: 'TV Globo', l: 'Entrevista' },
     ],
   },
   {
-    name: 'Rafael, 44',
-    meta: 'CFO · Rio de Janeiro',
-    stage: 'Estágio 04 → 02',
-    quote: 'Cheguei depois de um afastamento. Outros médicos diziam que era só descanso. O protocolo me devolveu uma estrutura mensurável — eu via no score que estava melhorando, mesmo nos dias ruins.',
+    name: 'Alta exposição',
+    meta: 'Entretenimento · audiovisual',
+    stage: 'Elencos e equipes',
+    quote: 'Experiência com profissionais ligados a produções de Globo, Record, Netflix e Globoplay, em contextos de pressão, agenda intensa e exposição pública.',
     stats: [
-      { v: '−58%', l: 'Carga acumulada' },
-      { v: '0', l: 'Crises · 6 meses' },
-      { v: '11m', l: 'Para Estágio 02' },
+      { v: 'Globo', l: 'Produções' },
+      { v: 'Record', l: 'Audiovisual' },
+      { v: 'Netflix', l: 'Elencos' },
     ],
   },
   {
-    name: 'Camila, 34',
-    meta: 'Médica · Belo Horizonte',
-    stage: 'Estágio 03 → 01',
-    quote: 'Como médica, eu desconfiava de tudo o que prometesse rápido. O que me convenceu foi ver protocolo escrito, score aferido, fases nomeadas. Senti que estava sendo tratada como adulta.',
+    name: 'Docência',
+    meta: 'Formação médica',
+    stage: 'Professor Universitário',
+    quote: 'A sala de aula mantém o raciocínio clínico em revisão constante: organizar evidências, discutir casos e comunicar com clareza para formar novos médicos.',
     stats: [
-      { v: '−65%', l: 'Cortisol matinal' },
-      { v: '7.4h', l: 'Sono médio' },
-      { v: '09m', l: 'Para Estágio 01' },
+      { v: 'Medicina', l: 'Docência' },
+      { v: 'Ensino', l: 'Clareza' },
+      { v: 'Ética', l: 'Prática' },
     ],
   },
   {
-    name: 'Lucas, 41',
-    meta: 'Engenheiro · Curitiba',
-    stage: 'Estágio 03 → 02',
-    quote: 'Não acreditava mais em nenhum tratamento. O que mudou foi a primeira fase — em 60 dias o aperto no peito sumiu. Pela primeira vez vi um caminho com prazo, não uma promessa.',
+    name: 'Palestras',
+    meta: 'Ambientes corporativos',
+    stage: 'Estresse · foco · performance',
+    quote: 'Palestras e treinamentos em controle da ansiedade, gestão do estresse, comunicação sob pressão, foco e regulação emocional em ambientes de alta exigência.',
     stats: [
-      { v: '−81%', l: 'Sintomas físicos' },
-      { v: '+44%', l: 'Foco diário' },
-      { v: '10m', l: 'Para Estágio 02' },
+      { v: 'Foco', l: 'Concentração' },
+      { v: 'Estresse', l: 'Gestão' },
+      { v: 'Pressão', l: 'Comunicação' },
     ],
   },
 ];
 
-const Cases = () => (
-  <section className="cases" id="casos">
+const Proof = () => (
+  <section className="cases" id="provas">
     <div className="wrap">
-      <div className="section-num">06 · Casos clínicos</div>
-      <h2 className="title">Quatro pacientes.<br/>Quatro <em>scores diferentes.</em></h2>
-      <p className="lede">Casos selecionados de pacientes que completaram pelo menos 8 meses do protocolo. Nomes alterados, dados clínicos preservados, consentimento por escrito arquivado conforme CFM.</p>
+      <div className="section-num">06 · Provas e reconhecimento</div>
+      <h2 className="title">Autoridade se constrói com trajetória visível.</h2>
+      <p className="lede">Formação, docência, mídia, palestras e atuação com públicos de alta exigência sustentam uma presença médica que vai além do consultório, sem transformar cuidado em espetáculo.</p>
 
       <div className="cases-grid">
-        {CASES.map((c, i) => (
+        {PROOF.map((c, i) => (
           <div className="case" key={i}>
             <div className="case-meta">
               <div>
@@ -76,9 +76,9 @@ const Cases = () => (
           </div>
         ))}
       </div>
-      <p className="case-disclaimer">Resultados individuais variam · Não constitui promessa de resultado · CFM 1.974/2011</p>
+      <p className="case-disclaimer">Informações institucionais extraídas dos documentos profissionais do Dr. Thyago Henrique · Sem promessa de resultado.</p>
     </div>
   </section>
 );
 
-export default Cases;
+export default Proof;

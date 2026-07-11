@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
-import Nav from './components/Hero.jsx'; // In the current setup Nav and Hero are in the same file
+import Nav from './components/Hero.jsx';
 import { Hero } from './components/Hero.jsx';
 import Authority from './components/Authority.jsx';
-import Mechanism from './components/Mechanism.jsx';
+import Audience from './components/Comparison.jsx';
 import Doctor from './components/Doctor.jsx';
-import Comparison from './components/Comparison.jsx';
-import Quiz from './components/Quiz.jsx';
-import Products from './components/Products.jsx';
-import Cases from './components/Cases.jsx';
-import Guarantee from './components/Guarantee.jsx';
+import CareModel from './components/Products.jsx';
+import CareFlow from './components/Guarantee.jsx';
+import Proof from './components/Cases.jsx';
+import NeuralSaturation from './components/Mechanism.jsx';
 import FAQ from './components/FAQ.jsx';
 import Footer from './components/Footer.jsx';
 import StickyCTA from './components/StickyCTA.jsx';
@@ -44,13 +43,12 @@ const App = () => {
       <Nav />
       <Hero />
       <Authority />
-      <Mechanism />
+      <Audience />
       <Doctor />
-      <Comparison />
-      <Quiz />
-      <Products />
-      <Cases />
-      <Guarantee />
+      <CareModel />
+      <CareFlow />
+      <Proof />
+      <NeuralSaturation />
       <FAQ />
       <Footer />
       <StickyCTA />

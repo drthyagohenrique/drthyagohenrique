@@ -4,55 +4,55 @@ import { motion } from 'framer-motion';
 const STAGES = [
   {
     num: '01',
-    name: ['Saturação', 'Latente'],
-    score: '25 — 50',
+    name: ['Alerta', 'persistente'],
+    score: 'Sinal',
     fill: 35,
     symptoms: [
-      'Cansaço que não passa com fim de semana',
-      'Sono parece bom, mas o corpo acorda em alerta',
-      'Produtividade ainda funciona — pelo medo',
-      'Irritabilidade subterrânea, contida',
+      'Dificuldade real de desligar a mente',
+      'Sensação de prontidão mesmo em repouso',
+      'Tensão acumulada ao fim do dia',
+      'Recuperação menor do que a carga exige',
     ],
   },
   {
     num: '02',
-    name: ['Saturação', 'Ativa'],
-    score: '50 — 70',
-    fill: 60,
+    name: ['Sono', 'não reparador'],
+    score: 'Ritmo',
+    fill: 58,
     symptoms: [
-      'Acordar 3h da manhã virou rotina',
-      'Irritabilidade explode com quem você ama',
-      'Esquecimentos pontuais, traves decisórias',
-      'Crises silenciosas no carro, na escada',
+      'Sono leve, interrompido ou insuficiente',
+      'Acordar cansado apesar de ter dormido',
+      'Uso de energia mental desde as primeiras horas',
+      'Dificuldade de recuperar depois de ciclos intensos',
     ],
   },
   {
     num: '03',
-    name: ['Saturação', 'Crônica'],
-    score: '70 — 88',
-    fill: 79,
+    name: ['Fadiga', 'cognitiva'],
+    score: 'Clareza',
+    fill: 76,
     symptoms: [
-      'Sintomas físicos aparecem',
-      'Aperto no peito, refluxo persistente',
-      'Pressão alta sem causa identificada',
-      'Corpo entrega o que a mente vinha empurrando',
+      'Queda de concentração em tarefas decisivas',
+      'Irritabilidade fora do padrão habitual',
+      'Memória e tomada de decisão menos consistentes',
+      'Sensação de funcionar no limite por tempo demais',
     ],
   },
   {
     num: '04',
-    name: ['Colapso', 'Funcional'],
-    score: '88 — 100',
-    fill: 94,
+    name: ['Risco de', 'ruptura'],
+    score: 'Cuidado',
+    fill: 92,
     symptoms: [
-      'Burnout clínico, travas decisórias',
-      'Ataques de pânico recorrentes',
-      'Afastamento involuntário do trabalho',
-      'Esgotamento que não cede com nada',
+      'Perda progressiva de desempenho sustentável',
+      'Corpo cobrando pausas que a agenda não permite',
+      'Impacto em relações, decisões e rotina',
+      'Necessidade de avaliação médica individualizada',
     ],
   },
 ];
 
-const Mechanism = () => {
+const NeuralSaturation = () => {
   const [active, setActive] = React.useState(1);
 
   const containerVariants = {
@@ -75,7 +75,7 @@ const Mechanism = () => {
   };
 
   return (
-    <section className="mechanism" id="mecanismo">
+    <section className="mechanism" id="saturacao-neural">
       <div className="wrap">
         <motion.div 
           className="section-num"
@@ -84,7 +84,7 @@ const Mechanism = () => {
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          02 · Mecanismo Proprietário
+          07 · Linha de pensamento clínico
         </motion.div>
         
         <div className="mech-head">
@@ -95,7 +95,7 @@ const Mechanism = () => {
             viewport={{ once: true }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            Saturação Neural <em>não é diagnóstico.</em><br/>É a moldura clínica do que você <em>já sente.</em>
+            Saturação Neural ajuda a pensar a sobrecarga antes que ela vire ruptura.
           </motion.h2>
           <motion.p 
             className="lede"
@@ -104,7 +104,7 @@ const Mechanism = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            Estado de hiperatividade crônica do eixo HPA caracterizado por ativação simpática persistente, ritmo circadiano fragmentado e exaustão funcional progressiva — distribuído em quatro estágios mensuráveis.
+            Ao longo da prática clínica, Dr. Thyago passou a observar padrões recorrentes em pessoas submetidas a pressão contínua: alerta persistente, sono ruim, fadiga cognitiva e perda gradual de recuperação.
           </motion.p>
         </div>
 
@@ -116,8 +116,8 @@ const Mechanism = () => {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="mech-tm-grid">
-            <h3 className="mech-tm-name">Saturação<br/><em>Neural</em><sup>™</sup></h3>
-            <p className="mech-tm-def">Quando o eixo <strong>HPA</strong> permanece em alerta crônico, o corpo perde a capacidade de descer para repouso. Cortisol não acumula — mas o estado de ativação que ele produz, sim. <strong>Esse é o terreno onde toda a clínica opera.</strong></p>
+            <h3 className="mech-tm-name">Saturação<br/><em>Neural</em></h3>
+            <p className="mech-tm-def">Neste site, o termo aparece apenas como <strong>conceito de estudo e linha de pensamento clínico</strong> sobre sobrecarga mental crônica. Não é diagnóstico, não é doença, não é tratamento, não é método comercial e não substitui avaliação médica individualizada.</p>
           </div>
         </motion.div>
 
@@ -137,7 +137,7 @@ const Mechanism = () => {
               onClick={() => setActive(i)}
             >
               <div>
-                <div className="stage-num">Estágio {s.num}</div>
+                <div className="stage-num">Observação {s.num}</div>
                 <h4 className="stage-name">{s.name[0]}<br/><em>{s.name[1]}</em></h4>
                 <ul className="stage-symptoms">
                   {s.symptoms.map((sm, j) => <li key={j}>{sm}</li>)}
@@ -152,7 +152,7 @@ const Mechanism = () => {
                   ></motion.div>
                 </div>
                 <div className="stage-score">
-                  <span>Score</span>
+                  <span>Foco</span>
                   <span>{s.score}</span>
                 </div>
               </div>
@@ -164,4 +164,4 @@ const Mechanism = () => {
   );
 };
 
-export default Mechanism;
+export default NeuralSaturation;

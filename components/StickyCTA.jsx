@@ -1,4 +1,5 @@
 import React from 'react';
+import { openWhatsApp } from './config.js';
 
 const StickyCTA = () => {
   const [show, setShow] = React.useState(false);
@@ -6,12 +7,9 @@ const StickyCTA = () => {
     const onScroll = () => {
       const y = window.scrollY;
       const h = window.innerHeight;
-      // show after first viewport, hide near footer & near quiz
-      const quiz = document.getElementById('diagnostico');
       const foot = document.querySelector('footer.foot');
-      const inQuiz = quiz && y + h > quiz.offsetTop && y < quiz.offsetTop + quiz.offsetHeight;
       const inFoot = foot && y + h > foot.offsetTop;
-      setShow(y > h * 0.8 && !inQuiz && !inFoot);
+      setShow(y > h * 0.8 && !inFoot);
     };
     window.addEventListener('scroll', onScroll);
     onScroll();
@@ -20,11 +18,11 @@ const StickyCTA = () => {
   return (
     <div className={`sticky-cta ${show ? 'show' : ''}`}>
       <span className="sticky-cta-text">
-        <span>Avaliação inicial · <em>gratuito</em></span>
-        <strong>4 perguntas, 90 segundos</strong>
+        <span>Saúde mental · <em>alta pressão</em></span>
+        <strong>Marcar consulta pelo WhatsApp</strong>
       </span>
-      <button className="sticky-cta-btn" onClick={() => document.getElementById('diagnostico').scrollIntoView({ behavior: 'smooth' })}>
-        Começar →
+      <button className="sticky-cta-btn" onClick={openWhatsApp}>
+        Marcar →
       </button>
     </div>
   );

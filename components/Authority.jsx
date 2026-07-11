@@ -2,14 +2,14 @@ import React from 'react';
 
 const Authority = () => {
   const items = [
-    'CRM-GO 30392',
-    'Pós-graduação · Hospital Israelita Albert Einstein',
-    'Psiquiatria Infantil · IBCMED',
-    'ACLS · American Heart Association',
-    'Coordenador & Autor · Livro ISBN · 29 capítulos',
-    'Preceptor de Medicina · UNICERRADO',
+    'Médico · CRM-GO 30.392',
+    'Pós-graduação em Psiquiatria · Hospital Israelita Albert Einstein',
+    'Mestrando em Neurociências',
+    'Professor Universitário',
+    'Palestras e treinamentos · Ambientes de alta exigência',
+    'Mídia · O Globo · SBT · TV Globo',
+    'Atuação · Artistas · Empresários · Atletas · Lideranças',
   ];
-  // Duplicate for seamless loop
   const list = [...items, ...items];
   return (
     <div className="authority">

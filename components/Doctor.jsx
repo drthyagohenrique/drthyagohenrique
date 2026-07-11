@@ -44,9 +44,9 @@ const Doctor = () => {
             <div className="doc-photo-cap">
               <div>
                 <strong>Dr. Thyago Henrique</strong>
-                <span>Medicina · <em>Psiquiatria Einstein</em></span>
+                <span>Médico · <em>CRM-GO 30.392</em></span>
               </div>
-              <div>CRM-GO<br /><span style={{ color: 'var(--bone)', fontFamily: 'var(--mono)', fontSize: 11 }}>30.392</span></div>
+              <div>Saúde<br /><span style={{ color: 'var(--bone)', fontFamily: 'var(--mono)', fontSize: 11 }}>Mental</span></div>
             </div>
           </motion.div>
 
@@ -59,7 +59,7 @@ const Doctor = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              Apresentação clínica
+              Formação, clínica e decisão
             </motion.div>
 
             <motion.h3
@@ -68,7 +68,7 @@ const Doctor = () => {
               viewport={{ once: true }}
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              Quatorze anos atendendo pacientes que <em>já tentaram tudo.</em>
+              Um médico formado para olhar saúde mental onde pressão, desempenho e vida real se encontram.
             </motion.h3>
 
             <motion.p
@@ -78,7 +78,7 @@ const Doctor = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              Dr. Thyago Henrique é médico formado pela Universidade José do Rosário Vellano (UNIFENAS), com pós-graduação em psiquiatria pelo <strong>Hospital Israelita Albert Einstein</strong>, atualmente cursando pós-graduação em psiquiatria infantil pelo IBCMED.
+              Dr. Thyago Henrique é médico formado pela UNIFENAS, com pós-graduação em Psiquiatria pelo <strong>Hospital Israelita Albert Einstein</strong>, pós-graduação em Psiquiatria da Infância e Adolescência pelo IBCMED e mestrado em Neurociências em andamento.
             </motion.p>
 
             <motion.p
@@ -88,7 +88,7 @@ const Doctor = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              Sua atuação combina urgência, ensino e prática clínica: trabalha na <strong>UTI do Hospital Municipal de Morrinhos-GO</strong>, no setor de urgência e emergência do Hospital Municipal de Goiatuba-GO, e é preceptor do internato do curso de medicina da UNICERRADO.
+              Sua trajetória passa por consultório, docência médica, palestras, treinamentos corporativos e formação complementar em medicina de emergência e transporte aeromédico. Essa combinação traz uma leitura objetiva para pessoas que vivem em ambientes de cobrança, exposição e decisões críticas.
             </motion.p>
 
             <motion.dl
@@ -99,12 +99,12 @@ const Doctor = () => {
               viewport={{ once: true }}
             >
               {[
-                { label: 'Registro', val: <strong>CRM-GO 30.392</strong>, meta: ' · Atuação ativa' },
-                { label: 'Formação', val: <span>Medicina · <strong>UNIFENAS</strong></span> },
-                { label: 'Pós · Adulto', val: <span>Psiquiatria · <strong>Hospital Einstein</strong></span> },
-                { label: 'Pós · Infantil', val: <span>Psiquiatria infantil · <strong>IBCMED</strong></span> },
-                { label: 'Atuação', val: <span>UTI · Urgência · Internato · Coordenador</span> },
-                { label: 'Publicação', val: <span>Autor · <em>Genética Médica</em> · <strong>ISBN</strong></span> }
+                { label: 'Registro', val: <strong>CRM-GO 30.392</strong>, meta: ' · Médico' },
+                { label: 'Formação médica', val: <span>Medicina · <strong>UNIFENAS</strong></span> },
+                { label: 'Pós-graduação', val: <span>Psiquiatria · <strong>Hospital Israelita Albert Einstein</strong></span> },
+                { label: 'Neurociências', val: <span>Mestrado em andamento · <strong>neurobiologia e performance cognitiva</strong></span> },
+                { label: 'Infância e adolescência', val: <span>Pós-graduação · <strong>IBCMED</strong></span> },
+                { label: 'Atuação', val: <span>Professor Universitário · Palestrante · Treinamentos em alta exigência</span> }
               ].map((c, i) => (
                 <motion.div key={i} className="cred-row" variants={itemVariants}>
                   <dt>{c.label}</dt>
@@ -123,9 +123,9 @@ const Doctor = () => {
           viewport={{ once: true }}
         >
           {[
-            { num: '14', s: '+', label: 'Anos · Prática clínica' },
-            { num: '3.4', s: 'k', label: 'Atendimentos realizados' },
-            { num: '29', s: '', label: 'Capítulos publicados · ISBN' }
+            { num: '01', s: '', label: 'CRM-GO 30.392 · Registro médico' },
+            { num: '02', s: '', label: 'Pós-graduação em Psiquiatria · Einstein' },
+            { num: '03', s: '', label: 'Mestrado em Neurociências em andamento' }
           ].map((s, i) => (
             <motion.div key={i} variants={itemVariants}>
               <div className="doc-stat-num">{s.num}<em>{s.s}</em></div>
