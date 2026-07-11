@@ -40,7 +40,14 @@ const Doctor = () => {
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <img src="/assets/dr-thyago.png" alt="Dr. Thyago Henrique" />
+            <img
+              src="/assets/dr-thyago.png"
+              alt="Retrato do Dr. Thyago Henrique"
+              width="1024"
+              height="1024"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="doc-photo-cap">
               <div>
                 <strong>Dr. Thyago Henrique</strong>
@@ -115,24 +122,24 @@ const Doctor = () => {
           </div>
         </div>
 
-        <motion.div
-          className="doc-stats"
+        <motion.ul
+          className="doc-timeline"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           {[
-            { num: '01', s: '', label: 'CRM-GO 30.392 · Registro médico' },
-            { num: '02', s: '', label: 'Pós-graduação em Psiquiatria · Einstein' },
-            { num: '03', s: '', label: 'Mestrado em Neurociências em andamento' }
-          ].map((s, i) => (
-            <motion.div key={i} variants={itemVariants}>
-              <div className="doc-stat-num">{s.num}<em>{s.s}</em></div>
-              <div className="doc-stat-label">{s.label}</div>
-            </motion.div>
+            'CRM-GO 30.392 · Registro médico',
+            'Pós-graduação em Psiquiatria · Einstein',
+            'Mestrado em Neurociências em andamento'
+          ].map((label, i) => (
+            <motion.li key={i} variants={itemVariants}>
+              <span className="doc-tl-dot" aria-hidden="true" />
+              <span className="doc-tl-label">{label}</span>
+            </motion.li>
           ))}
-        </motion.div>
+        </motion.ul>
       </div>
     </section>
   );

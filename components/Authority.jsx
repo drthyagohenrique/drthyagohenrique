@@ -16,8 +16,9 @@ const Authority = () => {
       <div className="auth-track">
         {list.map((it, i) => (
           <React.Fragment key={i}>
-            <span><strong>{it.split(' · ')[0]}</strong>{it.includes(' · ') ? ' · ' + it.split(' · ').slice(1).join(' · ') : ''}</span>
-            <span className="dot"></span>
+            {/* A segunda metade é um clone visual; escondida de leitores de tela. */}
+            <span aria-hidden={i >= items.length || undefined}><strong>{it.split(' · ')[0]}</strong>{it.includes(' · ') ? ' · ' + it.split(' · ').slice(1).join(' · ') : ''}</span>
+            <span className="dot" aria-hidden="true"></span>
           </React.Fragment>
         ))}
       </div>

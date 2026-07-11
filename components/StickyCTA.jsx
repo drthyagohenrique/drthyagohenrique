@@ -7,16 +7,17 @@ const StickyCTA = () => {
     const onScroll = () => {
       const y = window.scrollY;
       const h = window.innerHeight;
-      const foot = document.querySelector('footer.foot');
-      const inFoot = foot && y + h > foot.offsetTop;
-      setShow(y > h * 0.8 && !inFoot);
+      // Some quando o CTA de encerramento (ou o rodapé) entra na tela.
+      const end = document.querySelector('.closing') || document.querySelector('footer.foot');
+      const atEnd = end && y + h > end.offsetTop;
+      setShow(y > h * 0.8 && !atEnd);
     };
     window.addEventListener('scroll', onScroll);
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <div className={`sticky-cta ${show ? 'show' : ''}`}>
+    <div className={`sticky-cta ${show ? 'show' : ''}`} inert={!show || undefined}>
       <span className="sticky-cta-text">
         <span>Saúde mental · <em>alta pressão</em></span>
         <strong>Marcar consulta pelo WhatsApp</strong>

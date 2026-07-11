@@ -14,9 +14,14 @@ export const Nav = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+          // Detecta seções claras pela luminância do fundo (independente da paleta).
           const bg = window.getComputedStyle(entry.target).backgroundColor;
-          const isBone = bg.includes('245, 243, 238') || bg.includes('234, 230, 220') || bg.includes('221, 215, 199');
-          setIsLight(isBone);
+          const rgb = bg.match(/\d+/g);
+          if (rgb) {
+            const [r, g, b] = rgb.map(Number);
+            const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            setIsLight(luminance > 160);
+          }
         }
       });
     }, { threshold: [0.1, 0.5, 0.8] });
@@ -30,7 +35,7 @@ export const Nav = () => {
   }, []);
 
   return (
-    <nav className={`nav ${scrolled ? 'scrolled' : ''} ${isLight ? 'is-light' : ''}`}>
+    <nav className={`nav ${scrolled ? 'scrolled' : ''} ${isLight ? 'is-light' : ''}`} aria-label="Principal">
       <a href="#top" className="nav-logo">
         <div className="nav-logo-name">Thyago <em>Henrique</em></div>
         <div className="nav-logo-status">Médico · CRM-GO 30.392</div>
@@ -49,9 +54,9 @@ export const Hero = () => {
 
   return (
     <section className="hero" id="top">
-      <div className="hero-particles" />
-      <div className="hero-grain" />
-      <div className="hero-shadow" />
+      <div className="hero-particles" aria-hidden="true" />
+      <div className="hero-grain" aria-hidden="true" />
+      <div className="hero-shadow" aria-hidden="true" />
 
       <div className="hero-grid">
         <motion.div
@@ -67,7 +72,7 @@ export const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 1.2 }}
           >
-            MÉDICO · NEUROCIÊNCIAS · PERFORMANCE HUMANA
+            Medicina, neurociências e compreensão do contexto humano
           </motion.div>
 
           <motion.h1
@@ -84,7 +89,7 @@ export const Hero = () => {
             animate={{ opacity: 0.8, y: 0 }}
             transition={{ delay: 0.5, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Atendimento médico para empresários, líderes, profissionais liberais, artistas, atletas, comunicadores e pessoas que precisam decidir, sustentar desempenho e preservar clareza mental em ambientes de alta exigência.
+            Para quem continua entregando, decidindo e sustentando responsabilidades — mesmo quando o sono, a atenção e a capacidade de recuperação começam a mudar.
           </motion.p>
 
           <motion.div
@@ -95,12 +100,21 @@ export const Hero = () => {
           >
             <button className="btn-primary" onClick={openWhatsApp}>
               Marcar consulta pelo WhatsApp
-              <span style={{ fontSize: 14, letterSpacing: 0 }}>→</span>
+              <span style={{ fontSize: 14, letterSpacing: 0 }} aria-hidden="true">→</span>
             </button>
             <button className="btn-ghost" onClick={() => document.getElementById('perfil').scrollIntoView({ behavior: 'smooth' })}>
               Ver se faz sentido
             </button>
           </motion.div>
+
+          <motion.p
+            className="cta-note"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1, duration: 1.2 }}
+          >
+            Contato reservado com a equipe · informações de agendamento tratadas com discrição
+          </motion.p>
         </motion.div>
       </div>
 

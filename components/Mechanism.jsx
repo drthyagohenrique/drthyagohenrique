@@ -133,8 +133,18 @@ const NeuralSaturation = () => {
               key={i}
               variants={itemVariants}
               className={`stage ${active === i ? 'active' : ''}`}
+              tabIndex={0}
+              role="button"
+              aria-pressed={active === i}
               onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
               onClick={() => setActive(i)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setActive(i);
+                }
+              }}
             >
               <div>
                 <div className="stage-num">Observação {s.num}</div>

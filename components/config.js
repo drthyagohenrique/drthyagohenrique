@@ -10,10 +10,13 @@ export const CONTACT = {
 };
 
 // Mensagem normalizada enviada ao clicar em qualquer CTA de agendamento.
-export const WHATSAPP_MESSAGE = 'Vim do site e quero marcar a minha consulta.';
+// Termina em "Meu nome é" para o paciente completar — facilita a triagem da equipe.
+export const WHATSAPP_MESSAGE =
+  'Olá, vim pelo site do Dr. Thyago Henrique e gostaria de receber informações para agendar uma consulta. Meu nome é ';
 
 // Número no formato solicitado para o CTA institucional.
-export const WHATSAPP_URL = `https://wa.me/+556234136085?text=${encodeURIComponent(
+// wa.me exige o número sem "+", só dígitos com DDI (formato oficial).
+export const WHATSAPP_URL = `https://wa.me/556234136085?text=${encodeURIComponent(
   WHATSAPP_MESSAGE
 )}`;
 

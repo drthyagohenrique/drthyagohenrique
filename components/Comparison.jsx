@@ -14,8 +14,8 @@ const Audience = () => {
       <div className="wrap">
         <div className="section-num">02 · Para quem faz sentido</div>
         <h2 className="title">Nem toda pressão aparece como colapso.</h2>
-        <p className="lede">Muitas pessoas chegam à consulta ainda produtivas, mas pagando um custo alto: sono não reparador, mente acelerada, irritabilidade, queda de clareza e dificuldade real de recuperação.</p>
-        <div className="compare-table">
+        <p className="lede">Você pode chegar à consulta ainda produtivo — mas pagando um custo alto: sono não reparador, mente acelerada, irritabilidade, queda de clareza e dificuldade real de recuperação.</p>
+        <div className="compare-table" role="region" aria-label="Perfis atendidos e o que a consulta busca compreender" tabIndex={0}>
           <div className="compare-row head">
             <div className="compare-cell feature">Perfil</div>
             <div className="compare-cell">O que costuma aparecer</div>
@@ -29,7 +29,7 @@ const Audience = () => {
             </div>
           ))}
         </div>
-        <div className="compare-hint">Deslize para comparar →</div>
+        <div className="compare-hint" aria-hidden="true">Deslize para comparar →</div>
       </div>
     </section>
   );

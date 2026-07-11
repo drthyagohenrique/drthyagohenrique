@@ -7,8 +7,8 @@ const PROOF = [
     stage: 'O Globo · SBT · TV Globo',
     quote: 'Participações e citações em veículos de grande alcance reforçam a presença pública do Dr. Thyago em temas de saúde mental, burnout, qualidade de vida e trabalho.',
     stats: [
-      { v: 'O Globo', l: 'Burnout' },
-      { v: 'SBT', l: 'Saúde' },
+      { v: 'O Globo', l: 'Burnout · jun 2025' },
+      { v: 'SBT', l: 'Saúde e qualidade de vida' },
       { v: 'TV Globo', l: 'Entrevista' },
     ],
   },
@@ -76,7 +76,6 @@ const Proof = () => (
           </div>
         ))}
       </div>
-      <p className="case-disclaimer">Informações institucionais extraídas dos documentos profissionais do Dr. Thyago Henrique · Sem promessa de resultado.</p>
     </div>
   </section>
 );
