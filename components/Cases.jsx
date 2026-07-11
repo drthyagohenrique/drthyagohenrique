@@ -16,11 +16,11 @@ const PROOF = [
     name: 'Alta exposição',
     meta: 'Entretenimento · audiovisual',
     stage: 'Elencos e equipes',
-    quote: 'Experiência com profissionais ligados a produções de Globo, Record, Netflix e Globoplay, em contextos de pressão, agenda intensa e exposição pública.',
+    quote: 'Experiência de atendimento a profissionais que atuam em ambientes de produção audiovisual, entretenimento e alta exposição, em contextos de pressão, agenda intensa e escrutínio público.',
     stats: [
-      { v: 'Globo', l: 'Produções' },
-      { v: 'Record', l: 'Audiovisual' },
-      { v: 'Netflix', l: 'Elencos' },
+      { v: 'Audiovisual', l: 'Produções' },
+      { v: 'Elencos', l: 'Treinamento' },
+      { v: 'Exposição', l: 'Confidencialidade' },
     ],
   },
   {

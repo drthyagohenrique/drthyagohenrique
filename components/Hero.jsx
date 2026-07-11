@@ -103,7 +103,7 @@ export const Hero = () => {
               <span style={{ fontSize: 14, letterSpacing: 0 }} aria-hidden="true">→</span>
             </button>
             <button className="btn-ghost" onClick={() => document.getElementById('perfil').scrollIntoView({ behavior: 'smooth' })}>
-              Ver se faz sentido
+              Entender para quem é
             </button>
           </motion.div>
 

@@ -32,7 +32,7 @@ const CareModel = () => (
         <div className="prod-card">
           <div>
             <div className="prod-eyebrow">Emergência · Decisão crítica</div>
-            <h3 className="prod-name">Pressão<br/><em>real</em></h3>
+            <h3 className="prod-name">Decisão<br/><em>sob pressão</em></h3>
             <p className="prod-desc">
               A formação complementar em emergência e transporte aeromédico trouxe familiaridade com contextos em que lucidez, tempo e decisão importam. Essa lente ajuda a avaliar pessoas que operam sob cobrança constante.
             </p>
@@ -48,7 +48,7 @@ const CareModel = () => (
         <div className="prod-card">
           <div>
             <div className="prod-eyebrow">Neurociências · Estilo de vida</div>
-            <h3 className="prod-name">Desempenho<br/><em>sustentável</em></h3>
+            <h3 className="prod-name">Recuperação<br/><em>e funcionamento</em></h3>
             <p className="prod-desc">
               Sono, ritmo, recuperação, foco, regulação emocional e hábitos deixam de ser temas periféricos. Para quem sustenta grandes responsabilidades, eles podem definir a diferença entre desempenho e desgaste.
             </p>

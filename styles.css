@@ -475,23 +475,30 @@ section {
 /* ============= AUTHORITY BAR ============= */
 .authority {
   background: var(--bone-2);
-  padding: 32px 56px;
+  padding: 32px 0;
   border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
 
+/* A trilha é duplicada no JSX; -50% completa um ciclo sem emenda visível. */
 .auth-track {
-  max-width: 1320px;
-  margin: 0 auto;
+  width: max-content;
   display: flex;
   align-items: center;
   gap: 64px;
+  padding-right: 64px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--stone);
-  overflow: hidden;
   white-space: nowrap;
+  animation: auth-marquee 55s linear infinite;
+}
+
+@keyframes auth-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .auth-track strong {
@@ -535,7 +542,7 @@ section {
 }
 
 .mech-tm::before {
-  content: 'MECANISMO PROPRIETÁRIO';
+  content: 'CONCEITO EM PESQUISA';
   position: absolute;
   top: -12px;
   left: 32px;

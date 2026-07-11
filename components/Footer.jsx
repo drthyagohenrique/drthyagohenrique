@@ -38,7 +38,7 @@ const Footer = () => (
       </div>
     </div>
     <p className="foot-disclaimer">
-      Este conteúdo possui caráter institucional e informativo, não substituindo consulta médica. Saturação Neural é apresentada apenas como conceito de estudo e linha de pensamento clínico, não constituindo diagnóstico, doença, tratamento ou promessa de resultado. Em situações de urgência, procure atendimento imediato.
+      Este conteúdo possui caráter institucional e informativo, não substituindo consulta médica. Saturação Neural é apresentada exclusivamente como conceito de estudo e linha de pesquisa sobre estados de sobrecarga mental crônica, não constituindo diagnóstico, doença, tratamento, protocolo ou promessa de resultado. Em situações de urgência, procure um serviço de emergência da sua região.
     </p>
     <div className="foot-bottom">
       <span>© 2026 · Dr. Thyago Henrique · CRM-GO 30.392</span>

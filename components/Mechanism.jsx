@@ -84,7 +84,7 @@ const NeuralSaturation = () => {
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          07 · Linha de pensamento clínico
+          07 · Linha de pesquisa e observação clínica
         </motion.div>
         
         <div className="mech-head">
@@ -95,7 +95,7 @@ const NeuralSaturation = () => {
             viewport={{ once: true }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            Saturação Neural ajuda a pensar a sobrecarga antes que ela vire ruptura.
+            Saturação Neural ajuda a compreender a sobrecarga antes que ela se transforme em ruptura.
           </motion.h2>
           <motion.p 
             className="lede"
@@ -104,7 +104,7 @@ const NeuralSaturation = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            Ao longo da prática clínica, Dr. Thyago passou a observar padrões recorrentes em pessoas submetidas a pressão contínua: alerta persistente, sono ruim, fadiga cognitiva e perda gradual de recuperação.
+            Ao longo da prática médica, da docência e da investigação em neurociências, Dr. Thyago passou a organizar padrões recorrentes observados em pessoas submetidas a pressão contínua: alerta persistente, sono não reparador, fadiga cognitiva e perda gradual da capacidade de recuperação.
           </motion.p>
         </div>
 
@@ -117,7 +117,7 @@ const NeuralSaturation = () => {
         >
           <div className="mech-tm-grid">
             <h3 className="mech-tm-name">Saturação<br/><em>Neural</em></h3>
-            <p className="mech-tm-def">Neste site, o termo aparece apenas como <strong>conceito de estudo e linha de pensamento clínico</strong> sobre sobrecarga mental crônica. Não é diagnóstico, não é doença, não é tratamento, não é método comercial e não substitui avaliação médica individualizada.</p>
+            <p className="mech-tm-def">Neste site, Saturação Neural é apresentada exclusivamente como <strong>conceito de estudo e linha de pesquisa</strong> sobre estados de sobrecarga mental crônica. Não é diagnóstico, doença, tratamento, protocolo ou promessa de resultado. Sua utilização não substitui avaliação médica individualizada.</p>
           </div>
         </motion.div>
 
