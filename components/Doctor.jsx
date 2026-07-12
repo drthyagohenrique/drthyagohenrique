@@ -122,24 +122,6 @@ const Doctor = () => {
           </div>
         </div>
 
-        <motion.ul
-          className="doc-timeline"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {[
-            'CRM-GO 30.392 · Registro médico',
-            'Pós-graduação em Psiquiatria · Einstein',
-            'Mestrado em Neurociências em andamento'
-          ].map((label, i) => (
-            <motion.li key={i} variants={itemVariants}>
-              <span className="doc-tl-dot" aria-hidden="true" />
-              <span className="doc-tl-label">{label}</span>
-            </motion.li>
-          ))}
-        </motion.ul>
       </div>
     </section>
   );
