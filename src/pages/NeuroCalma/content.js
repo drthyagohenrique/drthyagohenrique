@@ -2,26 +2,30 @@ import { PRODUCTS } from '../../config/products.js';
 import { DOCTOR } from '../../data/doctor.js';
 import { SATURATION_NEURAL } from '../../data/saturation-neural.js';
 
+// Copy do NeuroCalma — Experiência Guiada.
+// Conceito narrativo: "do ruído ao silêncio" — a página começa densa
+// (ondas, camadas, luz violeta) e vai se limpando ao longo do scroll.
+// Compliance: sem "protocolo", sem promessa clínica, Saturação Neural™
+// sempre como conceito em pesquisa.
 export const neuroCalmaContent = {
   product: PRODUCTS.neurocalma,
   hero: {
-    eyebrow: 'NeuroCalma · Experiência guiada',
+    eyebrow: 'NeuroCalma · Experiência Guiada',
     headline: ['Seu dia termina.', 'Sua mente, não.'],
     subheadline:
-      'Uma experiência prática para compreender a sobrecarga mental, reduzir o excesso de estímulos e construir momentos reais de desaceleração.',
+      'Uma experiência prática para compreender a sobrecarga mental, reduzir o excesso de estímulos e começar a construir momentos reais de desaceleração.',
     cta: 'Começar o NeuroCalma',
-    secondaryCta: 'Conhecer o método',
+    priceLine: `${PRODUCTS.neurocalma.price} · ${PRODUCTS.neurocalma.priceNote}`,
+    secondaryCta: 'Conhecer a experiência',
     disclaimer:
-      'Conteúdo educativo. Não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
-    bridge:
-      'Criado para quem não precisa de mais informação — precisa de um caminho claro para começar a desacelerar.',
+      'Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
   },
   recognition: {
     label: '01 · Reconhecimento',
     title: 'A sobrecarga nem sempre parece uma crise.',
     paragraphs: [
       'Você encerra o expediente, mas continua revendo decisões. Deita, mas ainda responde conversas mentalmente. Tenta descansar, mas qualquer silêncio abre espaço para tudo o que ficou pendente.',
-      'Muitas vezes, a sobrecarga aparece de forma silenciosa: dificuldade para desacelerar, irritação sem motivo claro, sensação de urgência constante, sono pouco reparador, pensamentos fragmentados e cansaço que não desaparece depois de uma noite de descanso.',
+      'Muitas vezes, a sobrecarga aparece de forma silenciosa: dificuldade para desacelerar, irritação sem motivo claro, sensação de urgência constante, sono pouco reparador, pensamentos fragmentados e um cansaço que não desaparece depois de uma noite de descanso.',
     ],
     close: ['Você continua funcionando.', 'Mas funcionar não significa estar recuperado.'],
   },
@@ -35,25 +39,42 @@ export const neuroCalmaContent = {
       'Não é uma promessa de transformação instantânea.',
     ],
     differentiation:
-      'O NeuroCalma não foi criado apenas para distrair a mente por alguns minutos. Ele organiza uma sequência de compreensão e aplicação para ajudar você a perceber o que mantém seu estado de demanda e começar a criar transições mais conscientes entre exigência e recuperação.',
+      'O NeuroCalma não foi criado para distrair a mente por alguns minutos. Ele organiza uma sequência de compreensão e aplicação, para que você perceba o que mantém seu estado de demanda e comece a criar transições mais conscientes entre exigência e recuperação.',
   },
   journey: {
     label: '03 · O percurso',
     title: 'Quatro eixos para sair do piloto automático.',
     axes: [
       { title: 'Perceber', text: 'Reconhecer sinais e padrões antes que se transformem em ruído constante.' },
-      { title: 'Reduzir', text: 'Diminuir estímulos que prolongam o estado de demanda.' },
+      { title: 'Reduzir', text: 'Diminuir os estímulos que prolongam o estado de demanda.' },
       { title: 'Regular', text: 'Criar pausas guiadas para recuperar presença e espaço mental.' },
       { title: 'Sustentar', text: 'Levar pequenas práticas de recuperação para dentro da rotina real.' },
     ],
     close:
       'O NeuroCalma não exige que você abandone sua rotina. Ele ajuda a construir recuperação dentro dela.',
   },
-  method: {
-    label: '04 · Como funciona',
+  deliverables: {
+    label: '04 · O que você recebe',
     title: 'Menos informação solta. Mais direção.',
-    text: 'O NeuroCalma foi estruturado como uma experiência digital educativa, com conteúdos e práticas organizados para reduzir a distância entre compreender a sobrecarga e começar a agir sobre a rotina.',
-    pillars: ['Compreensão', 'Redução de estímulos', 'Práticas guiadas', 'Aplicação na rotina'],
+    text: 'O NeuroCalma é 100% digital: você acessa um ambiente on-line organizado como um percurso — não uma pilha de conteúdos soltos.',
+    items: [
+      {
+        title: 'Encontros guiados',
+        text: 'Conteúdos diretos, em linguagem clara, para compreender a sobrecarga sem jargão técnico.',
+      },
+      {
+        title: 'Práticas de desaceleração',
+        text: 'Exercícios guiados e curtos, pensados para caber em dias cheios — não em rotinas ideais.',
+      },
+      {
+        title: 'Percurso em quatro eixos',
+        text: 'Perceber, Reduzir, Regular e Sustentar: uma sequência com começo, direção e aplicação.',
+      },
+      {
+        title: 'Acesso imediato, no seu ritmo',
+        text: 'Ambiente digital disponível logo após a confirmação, em qualquer dispositivo.',
+      },
+    ],
   },
   saturation: {
     label: '05 · Conceito em pesquisa',
@@ -85,7 +106,7 @@ export const neuroCalmaContent = {
       'Acompanhamento profissional quando necessário',
     ],
     urgencyNotice:
-      'Em situações de risco imediato ou agravamento intenso, procure um serviço de urgência da sua região.',
+      'Em situações de risco imediato ou de agravamento intenso, procure um serviço de urgência da sua região.',
   },
   authority: {
     label: '07 · Origem médica',
@@ -95,16 +116,16 @@ export const neuroCalmaContent = {
     bio: DOCTOR.shortAuthority,
   },
   offer: {
-    label: '08 · NeuroCalma',
+    label: '08 · Oferta',
     title: 'Um primeiro passo para começar a desacelerar.',
     text: 'Uma experiência digital educativa para quem precisa começar a desacelerar sem abandonar a rotina.',
-    ctaActive: 'Quero começar o NeuroCalma',
+    ctaActive: 'Começar o NeuroCalma',
     guarantee: {
       badge: 'Garantia de 7 dias',
       text: 'Se a experiência não fizer sentido para você, devolvemos o valor integral — basta pedir dentro de 7 dias.',
     },
     disclaimer:
-      'Conteúdo educativo. Não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
+      'Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
   },
   faq: {
     label: '09 · Perguntas frequentes',
@@ -113,12 +134,17 @@ export const neuroCalmaContent = {
       {
         question: 'O NeuroCalma é uma consulta?',
         answer:
-          'Não. O NeuroCalma é um produto digital educativo e guiado. Não substitui avaliação médica ou psicológica.',
+          'Não. O NeuroCalma é um produto digital educativo e guiado. Ele não substitui avaliação médica ou psicológica.',
       },
       {
         question: 'O NeuroCalma é um tratamento para ansiedade?',
         answer:
           'Não. O NeuroCalma é uma experiência educativa sobre sobrecarga mental e desaceleração. Ele não é tratamento, não realiza diagnóstico e não substitui acompanhamento médico ou psicológico quando ele é necessário.',
+      },
+      {
+        question: 'O NeuroCalma é um produto físico?',
+        answer:
+          'Não. O NeuroCalma é 100% digital. Nada é enviado para sua casa: o acesso acontece em ambiente on-line, logo após a confirmação, e você pode usar de qualquer dispositivo.',
       },
       {
         question: 'Preciso ter algum diagnóstico para participar?',
@@ -141,19 +167,19 @@ export const neuroCalmaContent = {
           'Sim. Por ser um conteúdo educativo, o NeuroCalma pode ser usado em paralelo ao acompanhamento que você já realiza — e não substitui as orientações do seu médico ou psicólogo.',
       },
       {
+        question: 'Quais são as formas de pagamento?',
+        answer:
+          'O acesso custa R$97, e você pode pagar à vista ou parcelar em até 12x no cartão. A liberação acontece logo após a confirmação do pagamento.',
+      },
+      {
         question: 'O NeuroCalma tem garantia?',
         answer:
           'Sim. Você tem 7 dias de garantia: se a experiência não fizer sentido para você, devolvemos o valor integral — basta pedir dentro do prazo.',
       },
       {
-        question: 'O NeuroCalma já está disponível?',
-        answer:
-          'Sim. O NeuroCalma já está disponível como experiência digital educativa. Para começar, use o botão da seção de oferta desta página.',
-      },
-      {
         question: 'O que devo fazer se estiver em uma crise?',
         answer:
-          'O NeuroCalma não substitui atendimento de urgência. Em situações de risco imediato, agravamento intenso ou possibilidade de dano a si ou a terceiros, procure um serviço de urgência da sua região.',
+          'O NeuroCalma não substitui atendimento de urgência. Em situações de risco imediato, de agravamento intenso ou de possibilidade de dano a si ou a terceiros, procure um serviço de urgência da sua região.',
       },
     ],
   },
@@ -161,9 +187,8 @@ export const neuroCalmaContent = {
     label: '10 · Começar',
     title: 'Você não precisa esperar o colapso para começar a desacelerar.',
     text: 'O NeuroCalma é um primeiro passo para quem percebe que a mente está ocupada demais e recuperada de menos.',
-    ctaActive: 'Começar agora por R$97',
     disclaimer:
-      'Conteúdo educativo. Não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
+      'Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
   },
   footer: {
     ecosystem:

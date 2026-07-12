@@ -22,6 +22,7 @@ const RouteSEO = ({
   imageAlt = BRAND.siteName,
   robots = 'index, follow, max-image-preview:large',
   type = 'website',
+  favicon = '/favicon.svg',
   jsonLd,
 }) => {
   const canonical = absoluteUrl(path);
@@ -53,6 +54,10 @@ const RouteSEO = ({
     }
     canonicalNode.setAttribute('href', canonical);
 
+    // Favicon por rota (default institucional): produtos podem trocar o ícone.
+    const faviconNode = document.head.querySelector('link[rel="icon"][type="image/svg+xml"]');
+    if (faviconNode) faviconNode.setAttribute('href', favicon);
+
     document.head.querySelectorAll('script[data-route-jsonld="true"]').forEach((node) => node.remove());
     if (jsonLd) {
       const script = document.createElement('script');
@@ -61,7 +66,7 @@ const RouteSEO = ({
       script.text = JSON.stringify(jsonLd);
       document.head.appendChild(script);
     }
-  }, [canonical, description, imageAlt, imageUrl, jsonLd, robots, title, type]);
+  }, [canonical, description, favicon, imageAlt, imageUrl, jsonLd, robots, title, type]);
 
   return (
     <Helmet>
