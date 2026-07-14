@@ -1517,6 +1517,158 @@
   color: var(--nc-text-soft);
 }
 
+/* ---------- 06 · Feito para a sua rotina ---------- */
+.nc-routine__intro {
+  max-width: 680px;
+  margin-top: 28px;
+}
+
+.nc-routine__intro p,
+.nc-routine__usage > p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--nc-text-soft);
+}
+
+.nc-routine__intro p + p { margin-top: 18px; }
+
+.nc-routine__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  margin-top: 60px;
+}
+
+.nc-routine__recognition,
+.nc-routine__usage {
+  min-width: 0;
+}
+
+.nc-routine__recognition h3,
+.nc-routine__usage h3 {
+  margin: 0;
+  font-family: var(--nc-display);
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  color: var(--nc-white);
+}
+
+.nc-routine__list {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+}
+
+.nc-routine__list li {
+  position: relative;
+  padding: 18px 0 18px 22px;
+  border-top: 1px solid var(--nc-line);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--nc-text-soft);
+}
+
+.nc-routine__list li:last-child { border-bottom: 1px solid var(--nc-line); }
+
+.nc-routine__list li::before {
+  content: '';
+  position: absolute;
+  top: 1.05em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--nc-violet-bright);
+  box-shadow: 0 0 12px rgba(147, 107, 255, .65);
+}
+
+.nc-routine__usage > p { margin-top: 20px; }
+
+.nc-routine__steps {
+  list-style: none;
+  position: relative;
+  display: grid;
+  gap: 28px;
+  margin: 34px 0 0;
+  padding: 0;
+}
+
+.nc-routine__steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.nc-routine__steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 29px;
+  bottom: -28px;
+  left: 15px;
+  width: 1px;
+  background: linear-gradient(var(--nc-violet), rgba(147, 107, 255, .1));
+}
+
+.nc-routine__steps span {
+  position: relative;
+  z-index: 1;
+  margin-top: 3px;
+  font-family: var(--nc-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .12em;
+  color: var(--nc-violet-soft);
+}
+
+.nc-routine__steps h4 {
+  margin: 0;
+  font-family: var(--nc-display);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: var(--nc-white);
+}
+
+.nc-routine__steps p {
+  margin: 7px 0 0;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--nc-text-soft);
+}
+
+.nc-routine__close {
+  margin-top: 64px;
+  padding: 40px 44px;
+  border: 1px solid rgba(147, 107, 255, .28);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(123, 77, 255, .1), rgba(255, 255, 255, .025));
+}
+
+.nc-routine__close p {
+  max-width: 780px;
+  margin: 0;
+  font-family: var(--nc-display);
+  font-size: clamp(24px, 2.7vw, 36px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  color: var(--nc-white);
+}
+
+.nc-routine__close small {
+  display: block;
+  max-width: 680px;
+  margin-top: 16px;
+  font-family: var(--nc-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--nc-text-soft);
+}
+
 /* ---------- 06 · Saturação Neural ---------- */
 .nc-definition {
   max-width: 760px;
@@ -2112,6 +2264,7 @@
   .nc-timeline__dot { top: 4px; }
 
   .nc-deliverables { grid-template-columns: 1fr; }
+  .nc-routine__grid { grid-template-columns: 1fr; gap: 48px; }
   .nc-checklist { grid-template-columns: 1fr; }
 
   .nc-layers { width: 50%; opacity: .5; }
@@ -2129,6 +2282,7 @@
   .nc-checkout-mock__frame { transform: none; }
   .nc-mock__device { transform: none; }
   .nc-offer-panel, .nc-definition { padding: 26px 22px; }
+  .nc-routine__close { padding: 30px 24px; }
   .nc-layers { display: none; }
 }
 

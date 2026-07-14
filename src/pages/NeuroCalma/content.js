@@ -112,6 +112,32 @@ export const neuroCalmaContent = {
     ],
   },
   // 06 · Quebra de objeções (fusão de "não é curso" + "cabe na rotina")
+  routine: {
+    label: '06 · Feito para a sua rotina',
+    title: 'Para quem termina o dia cansado, mas continua com a cabeça ligada.',
+    intro: [
+      'O NeuroCalma foi criado para quem não precisa de mais uma obrigação no fim do dia.',
+      'Foi pensado para o momento em que o corpo já parou, mas a mente continua repassando conversas, trabalho, decisões e pendências.',
+    ],
+    audienceTitle: 'Ele é para você que:',
+    audience: [
+      'deita cansado, mas não consegue desacelerar;',
+      'continua pensando no trabalho depois do expediente;',
+      'leva conversas e pendências para a cama;',
+      'pega o celular porque não consegue ficar em silêncio;',
+      'sente que dorme, mas não descansa de verdade;',
+      'quer saber o que fazer quando a mente não para.',
+    ],
+    transition: 'Você não precisa criar uma rotina perfeita antes de começar.',
+    transitionText: 'Não precisa reservar uma tarde inteira, assistir tudo de uma vez ou aprender uma sequência complicada.',
+    steps: [
+      { title: 'Você assiste a uma aula.', text: 'Entende o que está acontecendo naquele momento.' },
+      { title: 'Acompanha a orientação.', text: 'Sem precisar procurar entre dezenas de vídeos ou técnicas.' },
+      { title: 'Aplica no seu dia.', text: 'No seu ritmo, quando perceber que precisa desacelerar.' },
+    ],
+    close: 'Foi pensado para quem já está cansado demais para transformar o descanso em mais uma tarefa.',
+    closeNote: 'Você não precisa ter um diagnóstico para perceber que sua cabeça também precisa de uma pausa.',
+  },
   objections: {
     label: '06 · Feito para a rotina real',
     title: 'Não é mais um curso para deixar parado.',
@@ -150,7 +176,7 @@ export const neuroCalmaContent = {
   },
   // 08 · Oferta + garantia (fusão)
   offer: {
-    label: '08 · Comece agora',
+    label: '07 · Comece agora',
     title: 'Comece hoje a aprender a desligar.',
     text: 'Ao entrar no NeuroCalma, você recebe acesso às videoaulas e às técnicas práticas para entender o que está acontecendo, desacelerar e descansar melhor a cabeça.',
     stack: [
@@ -174,7 +200,7 @@ export const neuroCalmaContent = {
   },
   // 09 · FAQ + 10 · CTA final
   faq: {
-    label: '09 · Dúvidas frequentes',
+    label: '08 · Dúvidas frequentes',
     title: 'Tire suas dúvidas antes de começar.',
     items: [
       {
@@ -217,7 +243,7 @@ export const neuroCalmaContent = {
     ],
   },
   finalCta: {
-    label: '10 · Começar',
+    label: '09 · Começar',
     title: 'Sua cabeça não precisa continuar trabalhando depois que o dia acabou.',
     paragraphs: [
       'Você pode continuar tentando dormir com a mente ligada.',

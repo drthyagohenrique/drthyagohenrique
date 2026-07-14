@@ -12,17 +12,6 @@ import './neurocalma.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Instância ativa do Lenis (para âncoras usarem o mesmo smooth scroll).
-let activeLenis = null;
-
-const smoothScrollTo = (id) => (event) => {
-  event.preventDefault();
-  const target = document.getElementById(id);
-  if (!target) return;
-  if (activeLenis) activeLenis.scrollTo(target, { duration: 1.4 });
-  else target.scrollIntoView({ behavior: 'smooth' });
-};
-
 // A splash roda uma vez por sessão, nunca com prefers-reduced-motion.
 const SPLASH_SESSION_KEY = 'nc-splash-seen';
 
@@ -56,8 +45,6 @@ const useNeuroCalmaMotion = (mainRef, splashActive) => {
       touchMultiplier: 2,
       infinite: false,
     });
-    activeLenis = lenis;
-
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
@@ -143,7 +130,6 @@ const useNeuroCalmaMotion = (mainRef, splashActive) => {
       ctx.revert();
       gsap.ticker.remove(tick);
       lenis.destroy();
-      activeLenis = null;
     };
   }, [mainRef, splashActive]);
 };
@@ -513,17 +499,27 @@ const ProductMockPhoto = () => {
   );
 };
 
-// Regra de CTA (6 pontos): hero, apresentação do produto, transformação,
-// o que você recebe, oferta e fechamento final. Ponto transacional único: oferta.
-const CtaToOffer = ({ children }) => (
-  <a className="nc-button" href="#oferta" onClick={smoothScrollTo('oferta')}>
-    {children}
-  </a>
-);
+// Todo CTA comercial usa a mesma fonte de verdade para o checkout.
+const CheckoutCta = ({ children, className = 'nc-button', tabIndex }) => {
+  const product = neuroCalmaContent.product;
+  const saleActive = product.salesStatus === 'active' && product.checkoutUrl;
+
+  return (
+    <a
+      className={className}
+      href={saleActive ? product.checkoutUrl : '#'}
+      onClick={saleActive ? undefined : (event) => event.preventDefault()}
+      aria-disabled={saleActive ? undefined : true}
+      tabIndex={tabIndex}
+    >
+      {children}
+    </a>
+  );
+};
 
 const SectionCta = () => (
   <div className="nc-section-cta">
-    <CtaToOffer>{neuroCalmaContent.hero.cta}</CtaToOffer>
+    <CheckoutCta>{neuroCalmaContent.hero.cta}</CheckoutCta>
   </div>
 );
 
@@ -571,14 +567,9 @@ const StickyCta = () => {
       <p className="nc-sticky__note">
         <strong>R$97</strong> · Garantia de 7 dias
       </p>
-      <a
-        className="nc-button nc-sticky__button"
-        href="#oferta"
-        onClick={smoothScrollTo('oferta')}
-        tabIndex={visible ? 0 : -1}
-      >
+      <CheckoutCta className="nc-button nc-sticky__button" tabIndex={visible ? 0 : -1}>
         Começar Agora
-      </a>
+      </CheckoutCta>
     </div>
   );
 };
@@ -633,14 +624,9 @@ const OfferPanel = () => {
           </div>
           <p className="nc-offer-panel__name">{product.name}</p>
           <p className="nc-offer-panel__price">{product.price}</p>
-          <a
-            className="nc-button nc-button--offer"
-            href={saleActive ? product.checkoutUrl : '#'}
-            onClick={saleActive ? undefined : (event) => event.preventDefault()}
-            aria-disabled={saleActive ? undefined : true}
-          >
+          <CheckoutCta className="nc-button nc-button--offer">
             {content.offer.ctaActive}
-          </a>
+          </CheckoutCta>
           <p className="nc-offer-panel__security">{content.offer.security}</p>
           <ul className="nc-trust" aria-label="Segurança da compra">
           <li>
@@ -759,7 +745,7 @@ const NeuroCalmaPage = () => {
                 ))}
               </p>
               <div className="nc-hero__actions">
-                <CtaToOffer>{content.hero.cta}</CtaToOffer>
+                <CheckoutCta>{content.hero.cta}</CheckoutCta>
                 <p className="nc-hero__price">{content.hero.microcopy}</p>
               </div>
             </div>
@@ -869,58 +855,46 @@ const NeuroCalmaPage = () => {
           </div>
         </section>
 
-        {/* 7 · QUEBRA DE OBJEÇÕES */}
-        <Section id="rotina-real" label={content.objections.label} title={content.objections.title} noise={1}>
-          {content.objections.paragraphs.map((paragraph) => (
-            <p className="nc-lede" key={paragraph}>{paragraph}</p>
-          ))}
-          <div className="nc-lines nc-lines--display">
-            {content.objections.lines2.map((line) => <p key={line}>{line}</p>)}
-          </div>
-          <p className="nc-statement">{content.objections.close}</p>
-        </Section>
-
-        {/* 8 · PARA QUEM É + ORIGEM MÉDICA + SATURAÇÃO NEURAL™ */}
-        <section className="nc-section nc-section--noise-1" id="publico" aria-labelledby="publico-title">
-          <div className="nc-layers" aria-hidden="true">
-            <span /><span /><span /><span /><span /><span />
-          </div>
+        {/* 06 · RECONHECIMENTO + USO NA ROTINA */}
+        <section className="nc-section nc-section--noise-1" id="rotina-real" aria-labelledby="rotina-real-title">
           <div className="nc-wrap">
             <Reveal>
-              <Label>{content.audience.label}</Label>
-              <h2 id="publico-title">{content.audience.title}</h2>
-              <ul className="nc-checklist">
-                {content.audience.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <p className="nc-statement">{content.audience.close}</p>
-
-              {/* Saturação Neural™ primeiro; a seção termina na autoridade
-                  (rosto + credenciais), aquecendo a entrada da oferta. */}
-              <div className="nc-subblock">
-                <h3>{content.audience.saturation.title}</h3>
-                <p className="nc-lede">{content.audience.saturation.text}</p>
-                <p className="nc-disclaimer">{content.audience.saturation.disclaimer}</p>
+              <Label>{content.routine.label}</Label>
+              <h2 id="rotina-real-title">{content.routine.title}</h2>
+              <div className="nc-routine__intro">
+                {content.routine.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
+            </Reveal>
 
-              <div className="nc-subblock">
-                <h3>{content.audience.authority.title}</h3>
-                <div className="nc-doctor">
-                  <div className="nc-doctor__frame">
-                    <img
-                      src="/assets/dr-thyago.png"
-                      alt="Retrato do Dr. Thyago Henrique"
-                      width="1024"
-                      height="1024"
-                      loading="eager"
-                      decoding="async"
-                    />
-                  </div>
-                  <div>
-                    <p className="nc-lede">{content.audience.authority.bio}</p>
-                    <p className="nc-lede">{content.audience.authority.text}</p>
-                    <span className="nc-badge nc-badge--mono">{CONTACT.crm}</span>
-                  </div>
-                </div>
+            <div className="nc-routine__grid">
+              <Reveal className="nc-routine__recognition">
+                <h3>{content.routine.audienceTitle}</h3>
+                <ul className="nc-routine__list">
+                  {content.routine.audience.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </Reveal>
+
+              <Reveal className="nc-routine__usage">
+                <h3>{content.routine.transition}</h3>
+                <p>{content.routine.transitionText}</p>
+                <ol className="nc-routine__steps">
+                  {content.routine.steps.map((step, index) => (
+                    <li key={step.title}>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h4>{step.title}</h4>
+                        <p>{step.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </Reveal>
+            </div>
+
+            <Reveal>
+              <div className="nc-routine__close">
+                <p>{content.routine.close}</p>
+                <small>{content.routine.closeNote}</small>
               </div>
             </Reveal>
           </div>
@@ -946,7 +920,7 @@ const NeuroCalmaPage = () => {
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <div className="nc-final__actions">
-                <CtaToOffer>{content.finalCta.cta}</CtaToOffer>
+                <CheckoutCta>{content.finalCta.cta}</CheckoutCta>
               </div>
               <p className="nc-final__close">
                 {content.finalCta.close[0]}
