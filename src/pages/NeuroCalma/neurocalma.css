@@ -753,6 +753,41 @@
   border-radius: 999px;
   color: var(--nc-text-muted);
   font-size: 16px;
+  animation: nc-scroll-bob 2.2s ease-in-out infinite;
+}
+
+/* Bob suave apontando a rolagem para baixo. */
+@keyframes nc-scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Versão mobile: elemento próprio entre as dobras (fora do overflow do hero),
+   sobreposto às duas com fundo sólido e halo. */
+.nc-scroll-cue {
+  position: relative;
+  z-index: 5;
+  height: 0;
+  display: none;
+  justify-content: center;
+}
+
+.nc-scroll-cue__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border: 1px solid var(--nc-line-violet);
+  border-radius: 999px;
+  background: var(--nc-graphite);
+  box-shadow:
+    0 0 0 6px rgba(5, 5, 9, .45),
+    0 10px 26px rgba(0, 0, 0, .5);
+  color: var(--nc-violet-soft);
+  font-size: 17px;
+  animation: nc-scroll-bob 2.2s ease-in-out infinite;
 }
 
 .nc-hero__visual {
@@ -1913,14 +1948,14 @@
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
-  .nc-hero { min-height: auto; padding: 112px 0 72px; }
+  .nc-hero { min-height: auto; padding: 112px 0 96px; }
   .nc-hero__grid { grid-template-columns: 1fr; gap: 48px; }
   /* Mobile: o CTA flutuante assume o meio da página. */
   .nc-section-cta { display: none; }
 
-  /* Mobile: conteúdo primeiro, card depois, setinha fechando o hero. */
+  /* Mobile: conteúdo primeiro, card depois, setinha entre as dobras. */
   .nc-hero__content .nc-hero__scroll-hint { display: none; }
-  .nc-hero__scroll-hint--mobile { display: inline-flex; margin-top: 30px; }
+  .nc-scroll-cue { display: flex; }
   .nc-cover { width: min(100%, 320px); }
   .nc-section, .nc-final { padding: 92px 0; }
 
@@ -2001,4 +2036,7 @@
 
   .neurocalma-page .nc-button:hover { transform: none; filter: none; }
   .neurocalma-page .nc-button:hover::after { left: -70%; }
+
+  .nc-hero__scroll-hint,
+  .nc-scroll-cue__circle { animation: none; }
 }

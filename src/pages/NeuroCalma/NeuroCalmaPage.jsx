@@ -802,11 +802,15 @@ const NeuroCalmaPage = () => {
             </div>
             <div className="nc-hero__visual">
               <VideoCard interactive />
-              {/* Indicador de scroll fechando o hero — visível apenas no mobile. */}
-              <span className="nc-hero__scroll-hint nc-hero__scroll-hint--mobile" aria-hidden="true">↓</span>
             </div>
           </div>
         </section>
+
+        {/* Indicador de scroll (mobile): cavalga a divisa entre o hero e a
+            dobra seguinte, com bob suave apontando a rolagem. */}
+        <div className="nc-scroll-cue" aria-hidden="true">
+          <span className="nc-scroll-cue__circle">↓</span>
+        </div>
 
         {/* 2 · DOR + CICLO */}
         <section className="nc-section nc-section--noise-3" id="reconhecimento" aria-labelledby="reconhecimento-title">

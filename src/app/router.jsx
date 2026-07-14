@@ -5,6 +5,8 @@ import { routeConfig } from './route-config.js';
 import RouteSEO from '../components/seo/RouteSEO.jsx';
 import TechnicalPlaceholderPage from '../pages/TechnicalPlaceholder/TechnicalPlaceholderPage.jsx';
 import NotFoundPage from '../pages/NotFound/NotFoundPage.jsx';
+import LegalPage from '../pages/Legal/LegalPage.jsx';
+import { ROUTES } from '../config/routes.js';
 
 const InstitutionalPage = lazy(() => import('../pages/Institutional/InstitutionalPage.jsx'));
 const NeuroCalmaPage = lazy(() => import('../pages/NeuroCalma/NeuroCalmaPage.jsx'));
@@ -42,6 +44,8 @@ const AppRoutes = () => (
       <Routes>
         <Route path={routeConfig.home.path} element={<InstitutionalPage />} />
         <Route path={routeConfig.neurocalma.path} element={<NeuroCalmaPage />} />
+        <Route path={ROUTES.privacy} element={<LegalPage page="privacy" />} />
+        <Route path={ROUTES.terms} element={<LegalPage page="terms" />} />
         {routeConfig.future.map((route) => (
           <Route key={route.path} path={route.path} element={<FutureRoute label={route.label} />} />
         ))}

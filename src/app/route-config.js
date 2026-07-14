@@ -9,8 +9,7 @@ export const routeConfig = {
     path: ROUTES.neurocalma,
     status: 'pre-launch',
   },
-  future: FUTURE_ROUTES.map((route) => ({
-    ...route,
-    status: 'technical-placeholder',
-  })),
+  future: FUTURE_ROUTES
+    .filter((route) => ![ROUTES.privacy, ROUTES.terms].includes(route.path))
+    .map((route) => ({ ...route, status: 'technical-placeholder' })),
 };
