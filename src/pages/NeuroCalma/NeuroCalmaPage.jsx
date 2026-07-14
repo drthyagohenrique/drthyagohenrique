@@ -954,7 +954,7 @@ const NeuroCalmaPage = () => {
               <div className="nc-subblock">
                 <h3>{content.audience.saturation.title}</h3>
                 <p className="nc-lede">{content.audience.saturation.text}</p>
-                <p className="nc-definition">{content.audience.saturation.disclaimer}</p>
+                <p className="nc-disclaimer">{content.audience.saturation.disclaimer}</p>
               </div>
 
               <div className="nc-subblock">

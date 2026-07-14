@@ -18,7 +18,7 @@ export const neuroCalmaContent = {
     microcopy: 'Acesso imediato · R$97 · Garantia de 7 dias',
     support: 'Assista. Entenda. Aplique.',
     disclaimer:
-      'Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
+      '*Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
   },
   // 01 · Dor + ciclo (fusão de "Isso acontece com você?" + "O ciclo")
   pain: {
@@ -139,7 +139,7 @@ export const neuroCalmaContent = {
     saturation: {
       title: 'Quando a cabeça passa tempo demais sem desligar.',
       text: 'Saturação Neural™ é um conceito em pesquisa utilizado pelo Dr. Thyago Henrique para compreender estados em que a mente passa tempo demais sob pressão, estímulos e decisões.',
-      disclaimer: 'Saturação Neural™ não é diagnóstico, doença, tratamento ou protocolo.',
+      disclaimer: '*Saturação Neural™ não é diagnóstico, doença, tratamento ou protocolo.',
     },
   },
   // 08 · Oferta + garantia (fusão)
@@ -164,7 +164,7 @@ export const neuroCalmaContent = {
       close: 'Você não precisa decidir no escuro.',
     },
     disclaimer:
-      'Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
+      '*Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
   },
   // 09 · FAQ + 10 · CTA final
   faq: {
@@ -220,7 +220,7 @@ export const neuroCalmaContent = {
     cta: 'Começar o NeuroCalma por R$97',
     close: ['Assista. Entenda. Aplique.', 'Comece hoje.'],
     disclaimer:
-      'Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
+      '*Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
   },
   footer: {
     ecosystem:
