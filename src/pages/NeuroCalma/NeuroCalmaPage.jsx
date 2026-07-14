@@ -256,20 +256,6 @@ const WaveField = ({ variant = 'dense', className = '' }) => (
   </svg>
 );
 
-// Assinatura de onda curta (eco do wordmark do checkout).
-const WaveSignature = () => (
-  <svg className="nc-wave-signature" viewBox="0 0 120 24" aria-hidden="true" focusable="false">
-    <path
-      d="M2 12 C 12 12, 16 4, 26 6 S 44 22, 56 12 S 76 2, 90 10 S 112 14, 118 12"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-    <circle cx="118" cy="12" r="2.4" fill="currentColor" />
-  </svg>
-);
-
 // Tilt 3D seguindo o ponteiro: inclinação de base + resposta ao mouse (só em
 // dispositivos com hover fino e sem prefers-reduced-motion).
 const useTilt = (rootRef, cardRef, enabled) => {
@@ -1016,10 +1002,16 @@ const NeuroCalmaPage = () => {
         {/* FOOTER */}
         <footer className="nc-footer">
           <div className="nc-wrap">
-            <p className="nc-footer__brand">
-              <WaveSignature />
-              Dr. Thyago Henrique · {CONTACT.crm}
-            </p>
+            <div className="nc-footer__top">
+              <div>
+                <p className="nc-footer__name">Dr. Thyago Henrique</p>
+                <p className="nc-footer__crm">{CONTACT.crm}</p>
+              </div>
+              <p className="nc-footer__logo" aria-label="NeuroCalma">
+                <strong>Neuro</strong>
+                <em>Calma</em>
+              </p>
+            </div>
             <p>{content.footer.ecosystem}</p>
             <nav aria-label="Links do ecossistema">
               <Link to="/">Ecossistema</Link>
