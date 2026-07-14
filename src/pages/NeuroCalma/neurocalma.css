@@ -1864,6 +1864,9 @@
 @media (max-width: 900px) {
   .nc-hero { min-height: auto; padding: 112px 0 72px; }
   .nc-hero__grid { grid-template-columns: 1fr; gap: 48px; }
+  /* Mobile: o CTA flutuante assume o meio da página. */
+  .nc-section-cta { display: none; }
+
   /* Mobile: conteúdo primeiro, card depois, setinha fechando o hero. */
   .nc-hero__content .nc-hero__scroll-hint { display: none; }
   .nc-hero__scroll-hint--mobile { display: inline-flex; margin-top: 30px; }

@@ -861,7 +861,6 @@ const NeuroCalmaPage = () => {
                 {content.explanation.boundaries.map((item) => <li key={item}>{item}</li>)}
               </ul>
               <p className="nc-statement">{content.explanation.close}</p>
-              <SectionCta />
             </Reveal>
             <div className="nc-split__visual nc-split__visual--stack" aria-hidden="true">
               <ProductMock />
@@ -901,7 +900,6 @@ const NeuroCalmaPage = () => {
             <br />
             {content.transformation.close[1]}
           </p>
-          <SectionCta />
         </Section>
 
         {/* 6 · O QUE VOCÊ RECEBE — quatro itens + mockup de videoaula + CTA */}
