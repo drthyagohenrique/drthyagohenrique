@@ -897,6 +897,19 @@ const NeuroCalmaPage = () => {
                 <small>{content.routine.closeNote}</small>
               </div>
             </Reveal>
+
+            <Reveal>
+              <div className="nc-routine__authority">
+                <Label>{content.routine.authority.label}</Label>
+                <h3>{content.routine.authority.title}</h3>
+                <p>{content.routine.authority.text}</p>
+                <p>{content.routine.authority.productText}</p>
+                <div className="nc-routine__safety">
+                  <strong>{content.routine.authority.safetyTitle}</strong>
+                  <p>{content.routine.authority.safetyText}</p>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 

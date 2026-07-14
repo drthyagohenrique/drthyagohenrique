@@ -3,9 +3,9 @@ import React from 'react';
 const Authority = () => {
   const items = [
     'Médico · CRM-GO 30.392',
-    'Pós-graduação em Psiquiatria · Hospital Israelita Albert Einstein',
     'Mestrando em Neurociências',
     'Professor Universitário',
+    'Comunicador',
     'Palestras e treinamentos · Ambientes de alta exigência',
     'Mídia · O Globo · SBT · TV Globo',
     'Atuação · Artistas · Empresários · Atletas · Lideranças',

@@ -4,7 +4,7 @@ import { openWhatsApp } from './config.js';
 const CareModel = () => (
   <section className="products" id="atuacao">
     <div className="wrap">
-      <div className="section-num">04 · Como penso a saúde mental</div>
+      <div className="section-num">04 · Mente, comportamento e contexto</div>
       <div className="prod-head">
         <h2 className="title">A mente não adoece fora da vida que a pessoa sustenta.</h2>
         <p className="lede">Na prática clínica, sintomas importam. Mas agenda, exposição, sono, decisões críticas, rotina, cobrança e recuperação também entram na avaliação. Esse é o ponto de partida do trabalho do Dr. Thyago.</p>

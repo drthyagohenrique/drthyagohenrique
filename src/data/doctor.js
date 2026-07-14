@@ -4,10 +4,9 @@ export const DOCTOR = {
   name: CONTACT.doctorName,
   crm: CONTACT.crm,
   shortAuthority:
-    'Dr. Thyago Henrique é médico, CRM-GO 30.392, com pós-graduação em Psiquiatria pelo Hospital Israelita Albert Einstein, mestrado em Neurociências em andamento e atuação em docência universitária, pesquisa e palestras.',
+    'Dr. Thyago Henrique é médico, professor e comunicador. Seu trabalho é dedicado a tornar temas relacionados à mente, ao comportamento e à pressão do dia a dia mais compreensíveis e aplicáveis à vida real.',
   roles: [
     'Médico',
-    'Médico com pós-graduação em Psiquiatria pelo Hospital Israelita Albert Einstein',
     'Mestrando em Neurociências',
     'Professor universitário',
     'Pesquisador',

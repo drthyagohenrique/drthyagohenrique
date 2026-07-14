@@ -4,7 +4,7 @@ const Audience = () => {
   const rows = [
     ['Executivos e empresários', 'Agenda intensa, decisões de alto impacto e dificuldade para desligar depois do expediente.', 'Avaliar sono, estresse, clareza mental, rotina e sinais de desgaste antes que a queda de desempenho vire crise.'],
     ['Médicos, advogados e profissionais liberais', 'Responsabilidade constante, fadiga cognitiva, irritabilidade e sensação de permanecer em alerta.', 'Organizar uma leitura clínica do desgaste e definir uma conduta compatível com a realidade profissional.'],
-    ['Artistas, atletas e comunicadores', 'Exposição pública, cobrança por performance, oscilação emocional e dificuldade de recuperação entre ciclos.', 'Construir cuidado médico com privacidade, precisão e atenção ao impacto da exposição na saúde mental.'],
+    ['Artistas, atletas e comunicadores', 'Exposição pública, cobrança por performance, oscilação emocional e dificuldade de recuperação entre ciclos.', 'Construir cuidado médico com privacidade, precisão e atenção ao impacto da exposição no bem-estar e no funcionamento cotidiano.'],
     ['Líderes e figuras públicas', 'Pressão por estabilidade, decisões sob escrutínio e pouco espaço para demonstrar vulnerabilidade.', 'Oferecer avaliação reservada, personalizada e orientada à preservação de clareza, sono e funcionamento.'],
     ['Pessoas que continuam funcionando', 'Por fora tudo segue. Por dentro há cansaço, mente acelerada, sono leve e menos paciência do que antes.', 'Identificar o que está se acumulando antes que o corpo obrigue uma pausa que a agenda não planejou.'],
   ];

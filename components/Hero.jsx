@@ -42,7 +42,7 @@ export const Nav = () => {
       </a>
       <div className="nav-actions">
         <a href={WHATSAPP_URL} className="nav-cta" target="_blank" rel="noreferrer">Marcar consulta →</a>
-        <div className="nav-brand-right">Saúde mental sob pressão</div>
+        <div className="nav-brand-right">Mente e comportamento sob pressão</div>
       </div>
     </nav>
   );
@@ -80,7 +80,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            Saúde mental para pessoas que vivem sob alta pressão.
+            Clareza para pessoas que vivem sob alta pressão.
           </motion.h1>
 
           <motion.p

@@ -75,7 +75,7 @@ const Doctor = () => {
               viewport={{ once: true }}
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              Um médico formado para olhar saúde mental onde pressão, desempenho e vida real se encontram.
+              Um médico que transforma temas sobre mente, comportamento e pressão cotidiana em orientação clara para a vida real.
             </motion.h3>
 
             <motion.p
@@ -85,7 +85,7 @@ const Doctor = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              Dr. Thyago Henrique é médico formado pela UNIFENAS, com pós-graduação em Psiquiatria pelo <strong>Hospital Israelita Albert Einstein</strong>, pós-graduação em Psiquiatria da Infância e Adolescência pelo IBCMED e mestrado em Neurociências em andamento.
+              Dr. Thyago Henrique é médico formado pela UNIFENAS, professor e comunicador, com mestrado em Neurociências em andamento.
             </motion.p>
 
             <motion.p
@@ -108,9 +108,7 @@ const Doctor = () => {
               {[
                 { label: 'Registro', val: <strong>CRM-GO 30.392</strong>, meta: ' · Médico' },
                 { label: 'Formação médica', val: <span>Medicina · <strong>UNIFENAS</strong></span> },
-                { label: 'Pós-graduação', val: <span>Psiquiatria · <strong>Hospital Israelita Albert Einstein</strong></span> },
                 { label: 'Neurociências', val: <span>Mestrado em andamento · <strong>neurobiologia e performance cognitiva</strong></span> },
-                { label: 'Infância e adolescência', val: <span>Pós-graduação · <strong>IBCMED</strong></span> },
                 { label: 'Atuação', val: <span>Professor Universitário · Palestrante · Treinamentos em alta exigência</span> }
               ].map((c, i) => (
                 <motion.div key={i} className="cred-row" variants={itemVariants}>

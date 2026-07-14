@@ -7,7 +7,7 @@ const Footer = () => (
       <div className="foot-brand">
         <h3>Thyago <em>Henrique</em></h3>
         <div className="foot-status">Médico · CRM-GO 30.392</div>
-        <p>Atendimento médico em saúde mental, neurociências e performance humana para pessoas que vivem sob alta pressão e precisam preservar clareza, sono, funcionamento e privacidade.</p>
+        <p>Conteúdos e experiências educacionais sobre mente, comportamento e pressão cotidiana para quem busca mais clareza e ritmo na vida real.</p>
       </div>
       <div className="foot-col">
         <h4>Navegação</h4>
@@ -42,7 +42,7 @@ const Footer = () => (
     </p>
     <div className="foot-bottom">
       <span>© 2026 · Dr. Thyago Henrique · CRM-GO 30.392</span>
-      <span>Saúde mental para pessoas sob alta pressão</span>
+      <span>Mente, comportamento e alta pressão</span>
     </div>
   </footer>
 );

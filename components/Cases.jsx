@@ -5,7 +5,7 @@ const PROOF = [
     name: 'Mídia',
     meta: 'Reconhecimento público',
     stage: 'O Globo · SBT · TV Globo',
-    quote: 'Participações e citações em veículos de grande alcance reforçam a presença pública do Dr. Thyago em temas de saúde mental, burnout, qualidade de vida e trabalho.',
+    quote: 'Participações e citações em veículos de grande alcance reforçam a presença pública do Dr. Thyago em temas de mente, comportamento, qualidade de vida e trabalho.',
     stats: [
       { v: 'O Globo', l: 'Burnout · jun 2025' },
       { v: 'SBT', l: 'Saúde e qualidade de vida' },

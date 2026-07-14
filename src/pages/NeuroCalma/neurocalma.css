@@ -1669,6 +1669,54 @@
   color: var(--nc-text-soft);
 }
 
+.nc-routine__authority {
+  max-width: 860px;
+  margin-top: 72px;
+}
+
+.nc-routine__authority h3 {
+  max-width: 760px;
+  margin: 18px 0 22px;
+  font-family: var(--nc-display);
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  color: var(--nc-white);
+}
+
+.nc-routine__authority > p {
+  max-width: 720px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--nc-text-soft);
+}
+
+.nc-routine__authority > p + p { margin-top: 14px; }
+
+.nc-routine__safety {
+  max-width: 760px;
+  margin-top: 30px;
+  padding: 24px 28px;
+  border: 1px solid rgba(147, 107, 255, .24);
+  border-radius: 18px;
+  background: rgba(123, 77, 255, .06);
+}
+
+.nc-routine__safety strong {
+  display: block;
+  color: var(--nc-white);
+  font-size: 17px;
+}
+
+.nc-routine__safety p {
+  margin: 9px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--nc-text-soft);
+}
+
 /* ---------- 06 · Saturação Neural ---------- */
 .nc-definition {
   max-width: 760px;

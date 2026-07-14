@@ -1,5 +1,5 @@
 export const BRAND = {
   siteName: 'Dr. Thyago Henrique',
-  territory: 'Saúde mental para pessoas sob alta pressão',
+  territory: 'Mente, comportamento e alta pressão',
   baseUrl: 'https://drthyagohenrique.com',
 };

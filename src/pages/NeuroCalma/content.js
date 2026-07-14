@@ -6,7 +6,7 @@ import { DOCTOR } from '../../data/doctor.js';
 // desconectar a cabeça depois de um dia pesado. Linguagem de vida real,
 // sem jargão. Funil: reconhecimento → incômodo → explicação → solução →
 // facilidade → transformação → tangibilidade → segurança → compra.
-// Compliance: sem "protocolo", sem "psiquiatra", Saturação Neural™ curta e
+// Compliance: sem "protocolo", Saturação Neural™ curta e
 // sempre como conceito em pesquisa; sem números, módulos ou resultados inventados.
 export const neuroCalmaContent = {
   product: PRODUCTS.neurocalma,
@@ -137,6 +137,14 @@ export const neuroCalmaContent = {
     ],
     close: 'Foi pensado para quem já está cansado demais para transformar o descanso em mais uma tarefa.',
     closeNote: 'Você não precisa ter um diagnóstico para perceber que sua cabeça também precisa de uma pausa.',
+    authority: {
+      label: 'Desenvolvido pelo Dr. Thyago Henrique',
+      title: 'Uma experiência criada por um médico que estuda o impacto da alta pressão na vida cotidiana.',
+      text: 'Dr. Thyago Henrique é médico, professor e comunicador. Seu trabalho é dedicado a tornar temas relacionados à mente, ao comportamento e à pressão do dia a dia mais compreensíveis e aplicáveis à vida real.',
+      productText: 'O NeuroCalma nasceu dessa proposta: transformar conhecimento em orientações simples para pessoas que terminam o dia cansadas, mas continuam mentalmente ligadas.',
+      safetyTitle: 'O NeuroCalma é uma experiência educacional.',
+      safetyText: 'Ele não é consulta médica, psicoterapia ou tratamento. Não realiza diagnóstico e não substitui avaliação ou acompanhamento individual com profissionais de saúde.',
+    },
   },
   objections: {
     label: '06 · Feito para a rotina real',
@@ -164,7 +172,7 @@ export const neuroCalmaContent = {
     ],
     close: 'Você não precisa ter um diagnóstico para perceber que precisa descansar melhor a cabeça.',
     authority: {
-      title: 'Desenvolvido por um médico que estuda sobrecarga e saúde mental.',
+      title: 'Desenvolvido pelo Dr. Thyago Henrique.',
       bio: DOCTOR.shortAuthority,
       text: 'O NeuroCalma foi criado para transformar esse conhecimento em videoaulas e técnicas simples, que possam ser aplicadas na rotina real.',
     },

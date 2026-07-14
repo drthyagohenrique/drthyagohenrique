@@ -23,7 +23,7 @@ const institutionalJsonLd = {
   name: 'Dr. Thyago Henrique',
   url: 'https://drthyagohenrique.com/',
   image: 'https://drthyagohenrique.com/assets/dr-thyago.png',
-  description: 'Atendimento médico em saúde mental, neurociências e performance humana para pessoas que vivem sob alta pressão.',
+  description: 'Médico, professor e comunicador com conteúdos sobre mente, comportamento e pressão cotidiana.',
   telephone: '+55-62-3413-6085',
   email: 'dr.thyago.henrique@gmail.com',
   identifier: {
@@ -32,7 +32,7 @@ const institutionalJsonLd = {
     value: '30.392',
   },
   sameAs: ['https://instagram.com/drthyagohenrique'],
-  knowsAbout: ['Saúde mental', 'Neurociências', 'Performance humana', 'Medicina do estilo de vida'],
+  knowsAbout: ['Mente e comportamento', 'Neurociências', 'Performance humana', 'Medicina do estilo de vida'],
   alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Universidade José do Rosário Vellano (UNIFENAS)' }],
 };
 const InstitutionalPage = () => {
@@ -63,11 +63,11 @@ const InstitutionalPage = () => {
   return (
     <MotionConfig reducedMotion="user">
       <RouteSEO
-        title="Dr. Thyago Henrique — Saúde Mental para Pessoas sob Alta Pressão"
-        description="Atendimento médico em saúde mental, neurociências e performance humana para quem vive sob alta pressão. Dr. Thyago Henrique · Médico · CRM-GO 30.392."
+        title="Dr. Thyago Henrique — Mente, Comportamento e Alta Pressão"
+        description="Dr. Thyago Henrique · Médico, professor e comunicador · CRM-GO 30.392. Conteúdos sobre mente, comportamento e pressão cotidiana."
         path="/"
         image="/assets/og-image.jpg"
-        imageAlt="Dr. Thyago Henrique — Saúde mental para pessoas que vivem sob alta pressão"
+        imageAlt="Dr. Thyago Henrique — mente, comportamento e alta pressão"
         jsonLd={institutionalJsonLd}
       />
       <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>

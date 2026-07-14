@@ -19,7 +19,7 @@ const StickyCTA = () => {
   return (
     <div className={`sticky-cta ${show ? 'show' : ''}`} inert={!show || undefined}>
       <span className="sticky-cta-text">
-        <span>Saúde mental · <em>alta pressão</em></span>
+        <span>Mente e comportamento · <em>alta pressão</em></span>
         <strong>Marcar consulta pelo WhatsApp</strong>
       </span>
       <button className="sticky-cta-btn" onClick={openWhatsApp}>
