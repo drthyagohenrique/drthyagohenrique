@@ -13,25 +13,31 @@ export const neuroCalmaContent = {
   hero: {
     eyebrow: 'NeuroCalma · Videoaulas práticas',
     headline: ['Seu dia termina.', 'Sua mente, não.'],
-    subheadline: 'Conteúdos e práticas para desacelerar quando a mente não para.',
+    subheadline: [
+      'O corpo está cansado.',
+      'Mas a cabeça ainda está processando o dia.',
+      'E quanto mais você tenta se distrair para desligar, mais estímulo coloca dentro dela.',
+    ],
     cta: 'Começar o NeuroCalma',
     microcopy: 'Acesso imediato · R$97 · Garantia de 7 dias',
     support: 'Assista. Entenda. Aplique.',
     disclaimer:
       '*Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
   },
-  // 01 · Dor + ciclo (fusão de "Isso acontece com você?" + "O ciclo")
+  // 01 · Apresentação da experiência
+  intro: {
+    label: 'Uma experiência para o fim do dia',
+    title: 'Quando o corpo para, mas a cabeça continua',
+    text: 'Videoaulas e práticas guiadas para ajudar você a sair do ritmo do dia e começar a desacelerar — sem precisar procurar técnicas, escolher entre dezenas de vídeos ou montar uma rotina sozinho.',
+    close: 'Assista. Entenda. Aplique.',
+  },
   pain: {
-    label: '01 · Isso acontece com você?',
-    title: ['Você deita.', 'Mas a cabeça continua acordada.'],
+    label: 'Uma experiência para o fim do dia',
+    title: ['Quando o corpo para,', 'mas a cabeça continua'],
     paragraphs: [
-      'O trabalho acabou. As mensagens diminuíram. A casa ficou em silêncio.',
-      'Mas sua cabeça continua repassando conversas, lembrando pendências, pensando no dia seguinte e tentando resolver coisas que já deveriam ter ficado para amanhã.',
-      'Você pega o celular para se distrair. Tenta assistir alguma coisa. Fecha os olhos. E, mesmo cansado, continua ligado.',
-      'Quando finalmente dorme, o descanso já começou tarde. Você acorda cansado, fica mais irritado, perde a concentração e chega à noite pronto para repetir o mesmo ciclo.',
-      'Não é só a hora de dormir que está sendo afetada.',
+      'Videoaulas e práticas guiadas para ajudar você a sair do ritmo do dia e começar a desacelerar — sem precisar procurar técnicas, escolher entre dezenas de vídeos ou montar uma rotina sozinho.',
     ],
-    close: ['Seu corpo parou.', 'Sua cabeça ainda não.'],
+    close: ['Assista. Entenda. Aplique.'],
   },
   // 02 · Explicação + solução (fusão de "Por que isso acontece" + "O que é o NeuroCalma")
   explanation: {

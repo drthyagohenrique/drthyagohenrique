@@ -628,8 +628,7 @@
 /* Camadas do hero animadas por parallax (GSAP). */
 .nc-hero__atmosphere,
 .nc-hero__particles,
-.nc-hero__content,
-.nc-hero__visual { will-change: transform; }
+.nc-hero__content { will-change: transform; }
 
 /* ---------- 01 · HERO ---------- */
 .nc-hero {
@@ -637,7 +636,7 @@
   min-height: 94svh;
   display: grid;
   align-items: center;
-  padding: 130px 0 96px;
+  padding: 130px 0 120px;
   overflow: hidden;
   background: var(--nc-black);
   color: var(--nc-text);
@@ -654,21 +653,28 @@
   pointer-events: none;
 }
 
-/* Partículas: pontos fixos de luz, densidade sem movimento. */
+/* Partículas individuais: todas flutuam em ritmos próprios. */
 .nc-hero__particles {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle 1.5px at 12% 24%, rgba(183, 162, 255, .5) 99%, transparent),
-    radial-gradient(circle 1px at 28% 68%, rgba(142, 154, 255, .42) 99%, transparent),
-    radial-gradient(circle 2px at 44% 18%, rgba(123, 77, 255, .38) 99%, transparent),
-    radial-gradient(circle 1px at 58% 82%, rgba(183, 162, 255, .34) 99%, transparent),
-    radial-gradient(circle 1.5px at 70% 34%, rgba(142, 154, 255, .45) 99%, transparent),
-    radial-gradient(circle 1px at 82% 74%, rgba(183, 162, 255, .4) 99%, transparent),
-    radial-gradient(circle 2px at 90% 22%, rgba(123, 77, 255, .3) 99%, transparent),
-    radial-gradient(circle 1px at 36% 46%, rgba(245, 243, 250, .22) 99%, transparent),
-    radial-gradient(circle 1px at 64% 58%, rgba(245, 243, 250, .18) 99%, transparent);
   pointer-events: none;
+}
+
+.nc-hero__particle {
+  position: absolute;
+  left: var(--particle-x);
+  top: var(--particle-y);
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border-radius: 50%;
+  background: var(--nc-violet-soft);
+  box-shadow: 0 0 12px rgba(147, 107, 255, .85);
+  animation: nc-particle-float var(--particle-duration) ease-in-out var(--particle-delay) infinite alternate;
+}
+
+@keyframes nc-particle-float {
+  from { transform: translate3d(-30px, 20px, 0) scale(.8); opacity: .28; }
+  to { transform: translate3d(34px, -26px, 0) scale(1.2); opacity: .92; }
 }
 
 .nc-hero__waves {
@@ -680,11 +686,44 @@
   pointer-events: none;
 }
 
+/* Linhas flutuam em velocidades diferentes, sem alterar a leitura da copy. */
+.nc-hero__waves path {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nc-wave-drift 10s ease-in-out infinite alternate;
+}
+
+.nc-hero__waves path:nth-of-type(2) { animation-duration: 13s; animation-delay: -4s; }
+.nc-hero__waves path:nth-of-type(3) { animation-duration: 16s; animation-delay: -8s; }
+
+@keyframes nc-wave-drift {
+  from { transform: translate3d(-16px, 9px, 0); opacity: .66; }
+  to { transform: translate3d(18px, -11px, 0); opacity: 1; }
+}
+
 .nc-hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
   gap: 64px;
   align-items: center;
+}
+
+.nc-hero__content { max-width: 720px; }
+
+.nc-hero__visual {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.nc-hero__disclaimer {
+  max-width: 380px;
+  margin: 0;
+  font-family: var(--nc-sans);
+  font-size: 10.5px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--nc-text-muted);
 }
 
 .nc-hero h1 {
@@ -714,10 +753,11 @@
 }
 
 .nc-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: inline-flex;
+  width: fit-content;
+  flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: 10px;
   margin-top: 40px;
 }
 
@@ -726,34 +766,34 @@
   margin: 0;
   font-family: var(--nc-sans);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: .02em;
+  text-align: center;
   color: var(--nc-text-soft);
-}
-
-/* Mecanismo simples: "Assista. Entenda. Aplique." */
-.nc-hero__support {
-  margin: 28px 0 0;
-  font-family: var(--nc-display);
-  font-weight: 500;
-  font-size: clamp(18px, 1.8vw, 21px);
-  letter-spacing: -.015em;
-  color: var(--nc-violet-soft);
 }
 
 /* Indicador de scroll: apenas visual, sem função de CTA. */
 .nc-hero__scroll-hint {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 42px;
   height: 42px;
-  margin-top: 30px;
   border: 1px solid var(--nc-line);
   border-radius: 999px;
   color: var(--nc-text-muted);
   font-size: 16px;
-  animation: nc-scroll-bob 2.2s ease-in-out infinite;
+  animation: nc-hero-scroll-bob 2.2s ease-in-out infinite;
+}
+
+@keyframes nc-hero-scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
 }
 
 /* Bob suave apontando a rolagem para baixo. */
@@ -788,11 +828,6 @@
   color: var(--nc-violet-soft);
   font-size: 17px;
   animation: nc-scroll-bob 2.2s ease-in-out infinite;
-}
-
-.nc-hero__visual {
-  display: grid;
-  justify-items: center;
 }
 
 /* Indicador de scroll no fim do hero — só existe no mobile. */
@@ -896,6 +931,56 @@
 /* Tilt interativo (hero): o GSAP assume o transform via inline style;
    o transform estático acima segue como fallback sem hover/motion. */
 .nc-cover--interactive .nc-cover__card { will-change: transform; }
+
+/* Mockup real do acesso: uma peça visual de produto, sem controles clicáveis. */
+.nc-checkout-mock {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 450px);
+  padding: 10px;
+}
+
+.nc-checkout-mock::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 2% -7% -4%;
+  border-radius: 34px;
+  background:
+    radial-gradient(ellipse 58% 52% at 48% 82%, rgba(123, 77, 255, .34), transparent 72%),
+    radial-gradient(ellipse 48% 38% at 92% 28%, rgba(93, 108, 255, .2), transparent 72%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.nc-checkout-mock__glow {
+  position: absolute;
+  z-index: -1;
+  inset: 14% 0 0;
+  border: 1px solid rgba(147, 107, 255, .2);
+  border-radius: 28px;
+  transform: perspective(1100px) rotateY(-7deg) rotateX(2deg) translateY(10px);
+  pointer-events: none;
+}
+
+.nc-checkout-mock__frame {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 25px;
+  background: var(--nc-black);
+  box-shadow:
+    0 34px 74px rgba(0, 0, 0, .6),
+    0 0 0 1px rgba(123, 77, 255, .13),
+    inset 0 1px 0 rgba(255, 255, 255, .09);
+  transform: perspective(1100px) rotateY(-7deg) rotateX(2deg);
+  will-change: transform;
+}
+
+.nc-checkout-mock__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 /* ---------- Card de vídeo ilustrativo (o produto é digital) ---------- */
 .nc-video-wrap {
@@ -1050,6 +1135,30 @@
     0 0 0 1px rgba(123, 77, 255, .07),
     inset 0 1px 0 rgba(255, 255, 255, .09);
   transform: perspective(1200px) rotateY(6deg) rotateX(1.5deg);
+}
+
+.nc-mock__video-frame {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 16px;
+  background: var(--nc-black);
+  aspect-ratio: 16 / 9;
+}
+
+.nc-mock__video-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nc-mock__disclaimer {
+  margin: 14px 0 0;
+  font-family: var(--nc-sans);
+  font-size: 10.5px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--nc-text-muted);
 }
 
 .nc-mock__screen {
@@ -1708,6 +1817,7 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px 22px;
   margin: 18px 0 0;
   padding: 0;
@@ -1948,13 +2058,13 @@
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
-  .nc-hero { min-height: auto; padding: 112px 0 96px; }
+  .nc-hero { min-height: auto; padding: 112px 0 120px; }
   .nc-hero__grid { grid-template-columns: 1fr; gap: 48px; }
   /* Mobile: o CTA flutuante assume o meio da página. */
   .nc-section-cta { display: none; }
 
   /* Mobile: conteúdo primeiro, card depois, setinha entre as dobras. */
-  .nc-hero__content .nc-hero__scroll-hint { display: none; }
+  .nc-hero__scroll-hint { display: none; }
   .nc-scroll-cue { display: flex; }
   .nc-cover { width: min(100%, 320px); }
   .nc-section, .nc-final { padding: 92px 0; }
@@ -2009,14 +2119,15 @@
 
 @media (max-width: 520px) {
   .nc-wrap { width: min(100% - 32px, 1140px); }
-  .nc-hero h1 { font-size: 46px; }
-  .nc-hero__actions, .nc-final__actions { align-items: flex-start; flex-direction: column; }
+  .nc-hero h1 { font-size: 52px; }
+  .nc-hero__actions { width: 100%; align-items: stretch; }
+  .nc-final__actions { align-items: flex-start; flex-direction: column; }
   .neurocalma-page .nc-button { width: 100%; }
   /* O botão do sticky divide espaço com a nota de preço — nunca 100%. */
   .neurocalma-page .nc-sticky__button { width: auto; }
   .nc-cover__card { transform: none; }
+  .nc-checkout-mock__frame { transform: none; }
   .nc-mock__device { transform: none; }
-  .nc-video-wrap--interactive .nc-video { transform: none; }
   .nc-offer-panel, .nc-definition { padding: 26px 22px; }
   .nc-layers { display: none; }
 }
@@ -2038,5 +2149,7 @@
   .neurocalma-page .nc-button:hover::after { left: -70%; }
 
   .nc-hero__scroll-hint,
-  .nc-scroll-cue__circle { animation: none; }
+  .nc-scroll-cue__circle,
+  .nc-hero__particle,
+  .nc-hero__waves path { animation: none; }
 }

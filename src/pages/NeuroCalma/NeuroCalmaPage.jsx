@@ -67,7 +67,7 @@ const useNeuroCalmaMotion = (mainRef, splashActive) => {
 
     const ctx = gsap.context(() => {
       // Entrada do hero, sincronizada com a abertura da splash (2.2s–3s):
-      // eyebrow → headline → sub → CTA/microcopy → apoio, e o visual por último.
+      // eyebrow → headline → sub → CTA/microcopy → apoio.
       gsap.from('.nc-hero__content > *', {
         opacity: 0,
         y: 34,
@@ -76,21 +76,12 @@ const useNeuroCalmaMotion = (mainRef, splashActive) => {
         stagger: 0.08,
         delay: heroDelay,
       });
-      gsap.from('.nc-hero__visual', {
-        opacity: 0,
-        y: 44,
-        duration: 1.1,
-        ease: 'power3.out',
-        delay: heroDelay + 0.2,
-      });
-
       // Parallax do hero: camadas em velocidades diferentes criam profundidade.
       const heroScrub = { trigger: '.nc-hero', start: 'top top', end: 'bottom top', scrub: true };
       gsap.to('.nc-hero__atmosphere', { yPercent: 14, ease: 'none', scrollTrigger: heroScrub });
       gsap.to('.nc-hero__waves', { yPercent: -16, ease: 'none', scrollTrigger: heroScrub });
       gsap.to('.nc-hero__particles', { yPercent: 28, ease: 'none', scrollTrigger: heroScrub });
       gsap.to('.nc-hero__content', { y: 46, ease: 'none', scrollTrigger: heroScrub });
-      gsap.to('.nc-hero__visual', { y: 96, ease: 'none', scrollTrigger: heroScrub });
 
       // Ondas internas: deslizam contra o scroll enquanto a seção cruza a viewport.
       gsap.utils.toArray('.nc-section__waves, .nc-final__wave').forEach((el) => {
@@ -233,6 +224,18 @@ const WAVE_PATHS = {
   ],
   sparse: ['M0 240 C 260 180, 520 300, 780 240 S 1240 190, 1440 240'],
 };
+
+const HERO_PARTICLES = [
+  { x: '12%', y: '24%', size: 3, duration: '8.5s', delay: '-2.4s' },
+  { x: '28%', y: '68%', size: 2, duration: '10.5s', delay: '-6.8s' },
+  { x: '44%', y: '18%', size: 4, duration: '9.2s', delay: '-1.3s' },
+  { x: '58%', y: '82%', size: 2, duration: '12s', delay: '-8.1s' },
+  { x: '70%', y: '34%', size: 3, duration: '9.8s', delay: '-4.5s' },
+  { x: '82%', y: '74%', size: 2, duration: '11.3s', delay: '-2.8s' },
+  { x: '90%', y: '22%', size: 4, duration: '8.9s', delay: '-6.1s' },
+  { x: '36%', y: '46%', size: 2, duration: '12.5s', delay: '-3.9s' },
+  { x: '64%', y: '58%', size: 2, duration: '10.1s', delay: '-7.2s' },
+];
 
 const WaveField = ({ variant = 'dense', className = '' }) => (
   <svg
@@ -441,40 +444,23 @@ const NeuroCalmaSplash = ({ enabled }) => {
 // Card de vídeo ilustrativo: tangibiliza o formato (videoaulas) usando o
 // frame oficial como poster — rosto + play = "tem conteúdo para assistir".
 // `interactive` (hero): inclinação de base + tilt 3D + glow violeta.
-const VideoCard = ({ interactive = false }) => {
+const CheckoutMockup = () => {
   const rootRef = React.useRef(null);
   const cardRef = React.useRef(null);
-  useTilt(rootRef, cardRef, interactive);
+  useTilt(rootRef, cardRef, true);
 
   return (
-    <div
-      ref={rootRef}
-      className={`nc-video-wrap ${interactive ? 'nc-video-wrap--interactive' : ''}`}
-      aria-hidden="true"
-    >
-      {interactive ? <div className="nc-video__glow" /> : null}
-      <div ref={cardRef} className="nc-video">
-        <div className="nc-video__frame">
-          <img
-            src="/assets/neurocalma-video-frame.jpg"
-            alt=""
-            width="1672"
-            height="941"
-            loading="eager"
-            decoding="async"
-          />
-          <span className="nc-video__scrim" />
-          <span className="nc-video__play">
-            <svg viewBox="0 0 12 14" focusable="false">
-              <path d="M1 1.5 L11 7 L1 12.5 Z" fill="currentColor" />
-            </svg>
-          </span>
-          <span className="nc-video__duration">08:30</span>
-        </div>
-        <div className="nc-video__meta">
-          <span className="nc-video__eyebrow">Videoaula</span>
-          <p className="nc-video__title">Desacelerando o fim do dia</p>
-        </div>
+    <div ref={rootRef} className="nc-checkout-mock" aria-hidden="true">
+      <div className="nc-checkout-mock__glow" />
+      <div ref={cardRef} className="nc-checkout-mock__frame">
+        <img
+          src="/assets/neurocalma-checkout.png"
+          alt=""
+          width="451"
+          height="470"
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </div>
   );
@@ -487,59 +473,18 @@ const ProductMock = () => (
   <div className="nc-mock" aria-hidden="true">
     <div className="nc-mock__glow" />
     <div className="nc-mock__device">
-      <div className="nc-mock__screen">
-        <div className="nc-mock__topbar">
-          <span className="nc-mock__brand">
-            <strong>Neuro</strong>
-            <em>Calma</em>
-          </span>
-          <span className="nc-mock__status">Experiência Guiada</span>
-        </div>
-        <div className="nc-mock__player">
-          <span className="nc-mock__eyebrow">Em andamento</span>
-          <p className="nc-mock__title">Aula 01 · Por que sua cabeça não desliga</p>
-          <svg className="nc-mock__bars" viewBox="0 0 160 32" preserveAspectRatio="none" focusable="false">
-            {MOCK_BARS.map((height, index) => (
-              <rect
-                key={index}
-                x={index * 8 + 2}
-                y={16 - height / 2}
-                width="3.5"
-                height={height}
-                rx="1.75"
-                fill={index < 8 ? '#936BFF' : 'rgba(245, 243, 250, .22)'}
-              />
-            ))}
-          </svg>
-          <div className="nc-mock__row">
-            <span className="nc-mock__play">
-              <svg viewBox="0 0 12 14" focusable="false">
-                <path d="M1 1.5 L11 7 L1 12.5 Z" fill="currentColor" />
-              </svg>
-            </span>
-            <span className="nc-mock__track">
-              <span className="nc-mock__progress" />
-            </span>
-            <span className="nc-mock__time">04:12</span>
-          </div>
-        </div>
-        <ul className="nc-mock__modules">
-          <li className="is-active">
-            <span className="nc-mock__num">01</span>
-            Assista
-            <em>em andamento</em>
-          </li>
-          <li>
-            <span className="nc-mock__num">02</span>
-            Entenda
-          </li>
-          <li>
-            <span className="nc-mock__num">03</span>
-            Aplique
-          </li>
-        </ul>
+      <div className="nc-mock__video-frame">
+        <img
+          src="/assets/neurocalma-box.jpg"
+          alt=""
+          width="1374"
+          height="1145"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
+    <p className="nc-mock__disclaimer">*Imagem meramente ilustrativa, produto 100% digital.</p>
   </div>
 );
 
@@ -555,10 +500,10 @@ const ProductMockPhoto = () => {
       <div className="nc-mock__glow" aria-hidden="true" />
       <img
         className="nc-mock__photo"
-        src="/assets/neurocalma-box.jpg"
-        alt="Box do NeuroCalma com tablet exibindo uma aula guiada e caderno de anotações"
-        width="1374"
-        height="1145"
+        src="/assets/neurocalma-video-frame.jpg"
+        alt="Frame de uma videoaula do NeuroCalma"
+        width="1672"
+        height="941"
         loading="eager"
         decoding="async"
         onError={() => setFailed(true)}
@@ -781,7 +726,21 @@ const NeuroCalmaPage = () => {
         {/* 1 · HERO — um único CTA; o indicador de scroll é apenas visual */}
         <section className="nc-hero" id="neurocalma-main" aria-labelledby="neurocalma-title">
           <div className="nc-hero__atmosphere" aria-hidden="true" />
-          <div className="nc-hero__particles" aria-hidden="true" />
+          <div className="nc-hero__particles" aria-hidden="true">
+            {HERO_PARTICLES.map((particle, index) => (
+              <span
+                className="nc-hero__particle"
+                key={index}
+                style={{
+                  '--particle-x': particle.x,
+                  '--particle-y': particle.y,
+                  '--particle-size': `${particle.size}px`,
+                  '--particle-duration': particle.duration,
+                  '--particle-delay': particle.delay,
+                }}
+              />
+            ))}
+          </div>
           <WaveField variant="dense" className="nc-hero__waves" />
           <div className="nc-wrap nc-hero__grid">
             <div className="nc-hero__content">
@@ -791,19 +750,25 @@ const NeuroCalmaPage = () => {
                 <br />
                 <em>{content.hero.headline[1]}</em>
               </h1>
-              <p className="nc-hero__sub">{content.hero.subheadline}</p>
+              <p className="nc-hero__sub">
+                {content.hero.subheadline.map((line, index) => (
+                  <React.Fragment key={line}>
+                    {line}
+                    {index < content.hero.subheadline.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </p>
               <div className="nc-hero__actions">
                 <CtaToOffer>{content.hero.cta}</CtaToOffer>
                 <p className="nc-hero__price">{content.hero.microcopy}</p>
               </div>
-              <p className="nc-hero__support">{content.hero.support}</p>
-              <p className="nc-disclaimer">{content.hero.disclaimer}</p>
-              <span className="nc-hero__scroll-hint" aria-hidden="true">↓</span>
             </div>
             <div className="nc-hero__visual">
-              <VideoCard interactive />
+              <CheckoutMockup />
+              <p className="nc-hero__disclaimer">*Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico. Imagem meramente ilustrativa, produto 100% digital.</p>
             </div>
           </div>
+          <span className="nc-hero__scroll-hint" aria-hidden="true">↓</span>
         </section>
 
         {/* Indicador de scroll (mobile): cavalga a divisa entre o hero e a
@@ -812,25 +777,15 @@ const NeuroCalmaPage = () => {
           <span className="nc-scroll-cue__circle">↓</span>
         </div>
 
-        {/* 2 · DOR + CICLO */}
+        {/* 2 · APRESENTAÇÃO DA EXPERIÊNCIA */}
         <section className="nc-section nc-section--noise-3" id="reconhecimento" aria-labelledby="reconhecimento-title">
           <WaveField variant="medium" className="nc-section__waves" />
           <div className="nc-wrap">
             <Reveal>
-              <Label>{content.pain.label}</Label>
-              <h2 id="reconhecimento-title">
-                {content.pain.title[0]}
-                <br />
-                {content.pain.title[1]}
-              </h2>
-              {content.pain.paragraphs.map((paragraph) => (
-                <p className="nc-lede" key={paragraph}>{paragraph}</p>
-              ))}
-              <p className="nc-statement nc-statement--accent">
-                {content.pain.close[0]}
-                <br />
-                {content.pain.close[1]}
-              </p>
+              <Label>{content.intro.label}</Label>
+              <h2 id="reconhecimento-title">{content.intro.title}</h2>
+              <p className="nc-lede">{content.intro.text}</p>
+              <p className="nc-statement nc-statement--accent">{content.intro.close}</p>
             </Reveal>
           </div>
         </section>
