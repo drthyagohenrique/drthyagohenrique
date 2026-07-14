@@ -900,6 +900,16 @@ const NeuroCalmaPage = () => {
 
             <Reveal>
               <div className="nc-routine__authority">
+                <figure className="nc-routine__authority-photo">
+                  <img
+                    src="/assets/dr-thyago.png"
+                    alt="Dr. Thyago Henrique"
+                    width="1024"
+                    height="1024"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
                 <Label>{content.routine.authority.label}</Label>
                 <h3>{content.routine.authority.title}</h3>
                 <p>{content.routine.authority.text}</p>
