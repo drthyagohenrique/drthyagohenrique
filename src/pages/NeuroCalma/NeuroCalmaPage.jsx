@@ -23,9 +23,26 @@ const smoothScrollTo = (id) => (event) => {
   else target.scrollIntoView({ behavior: 'smooth' });
 };
 
+// A splash roda uma vez por sessão, nunca com prefers-reduced-motion.
+const SPLASH_SESSION_KEY = 'nc-splash-seen';
+
+const shouldShowSplash = () => {
+  if (typeof window === 'undefined') return false;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  // Tráfego pago não espera: com utm/click id na URL, direto para a promessa.
+  if (/[?&](utm_|gclid|fbclid)/i.test(window.location.search)) return false;
+  try {
+    if (window.sessionStorage.getItem(SPLASH_SESSION_KEY) === '1') return false;
+  } catch {
+    // sem sessionStorage (modo privado restrito): splash roda normalmente
+  }
+  return true;
+};
+
 // Smooth scroll (Lenis) + parallax (GSAP ScrollTrigger).
 // Com prefers-reduced-motion nada disso roda: a página fica estática e legível.
-const useNeuroCalmaMotion = (mainRef) => {
+// `splashActive` sincroniza a entrada do hero com a abertura da splash.
+const useNeuroCalmaMotion = (mainRef, splashActive) => {
   React.useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
@@ -46,21 +63,25 @@ const useNeuroCalmaMotion = (mainRef) => {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    const heroDelay = splashActive ? 1.5 : 0.15;
+
     const ctx = gsap.context(() => {
-      // Entrada do hero: o único momento de animação não guiada por scroll.
+      // Entrada do hero, sincronizada com a abertura da splash (2.2s–3s):
+      // eyebrow → headline → sub → CTA/microcopy → apoio, e o visual por último.
       gsap.from('.nc-hero__content > *', {
         opacity: 0,
         y: 34,
-        duration: 1.1,
+        duration: 0.9,
         ease: 'power3.out',
-        stagger: 0.09,
+        stagger: 0.08,
+        delay: heroDelay,
       });
       gsap.from('.nc-hero__visual', {
         opacity: 0,
         y: 44,
-        duration: 1.3,
+        duration: 1.1,
         ease: 'power3.out',
-        delay: 0.25,
+        delay: heroDelay + 0.2,
       });
 
       // Parallax do hero: camadas em velocidades diferentes criam profundidade.
@@ -84,30 +105,40 @@ const useNeuroCalmaMotion = (mainRef) => {
         );
       });
 
-      // Anéis da apresentação: abrem conforme a seção passa.
+      // Mock do ambiente na apresentação: leve flutuação de profundidade.
       gsap.fromTo(
-        '.nc-rings',
-        { scale: 0.86, opacity: 0.65 },
+        '#apresentacao .nc-mock',
+        { y: 36 },
         {
-          scale: 1.08,
-          opacity: 1,
+          y: -20,
           ease: 'none',
           scrollTrigger: { trigger: '#apresentacao', start: 'top bottom', end: 'bottom top', scrub: true },
         }
       );
 
-      // Saturação Neural: as camadas se dispersam com o scroll (o ruído se organiza).
+      // Capa digital em "o que você recebe": mesma flutuação.
+      gsap.fromTo(
+        '#recebe .nc-cover',
+        { y: 36 },
+        {
+          y: -20,
+          ease: 'none',
+          scrollTrigger: { trigger: '#recebe', start: 'top bottom', end: 'bottom top', scrub: true },
+        }
+      );
+
+      // Camadas da Saturação Neural™: dispersam com o scroll.
       gsap.utils.toArray('.nc-layers span').forEach((el, index) => {
         gsap.to(el, {
           xPercent: -(6 + index * 7),
           ease: 'none',
-          scrollTrigger: { trigger: '#saturacao-neural', start: 'top bottom', end: 'bottom top', scrub: true },
+          scrollTrigger: { trigger: '#publico', start: 'top bottom', end: 'bottom top', scrub: true },
         });
       });
 
       // Mock do produto na oferta: flutuação sutil de profundidade.
       gsap.fromTo(
-        '.nc-mock',
+        '#oferta .nc-mock',
         { y: 44 },
         {
           y: -26,
@@ -123,7 +154,7 @@ const useNeuroCalmaMotion = (mainRef) => {
       lenis.destroy();
       activeLenis = null;
     };
-  }, [mainRef]);
+  }, [mainRef, splashActive]);
 };
 
 // Revela a seção com fade lento na primeira entrada em viewport.
@@ -239,16 +270,11 @@ const WaveSignature = () => (
   </svg>
 );
 
-// Capa digital do produto: substitui o mockup físico do checkout mantendo a
-// mesma leitura visual (preto, wordmark, tagline), mas lendo como interface.
-// `interactive`: inclinação de base + tilt 3D seguindo o ponteiro (só em
+// Tilt 3D seguindo o ponteiro: inclinação de base + resposta ao mouse (só em
 // dispositivos com hover fino e sem prefers-reduced-motion).
-const DigitalCover = ({ interactive = false }) => {
-  const rootRef = React.useRef(null);
-  const cardRef = React.useRef(null);
-
+const useTilt = (rootRef, cardRef, enabled) => {
   React.useEffect(() => {
-    if (!interactive) return undefined;
+    if (!enabled) return undefined;
     const root = rootRef.current;
     const card = cardRef.current;
     if (!root || !card) return undefined;
@@ -279,7 +305,14 @@ const DigitalCover = ({ interactive = false }) => {
       root.removeEventListener('pointermove', onMove);
       root.removeEventListener('pointerleave', onLeave);
     };
-  }, [interactive]);
+  }, [rootRef, cardRef, enabled]);
+};
+
+// Capa digital do produto: leitura de interface, alinhada ao checkout.
+const DigitalCover = ({ interactive = false }) => {
+  const rootRef = React.useRef(null);
+  const cardRef = React.useRef(null);
+  useTilt(rootRef, cardRef, interactive);
 
   return (
     <div ref={rootRef} className={`nc-cover ${interactive ? 'nc-cover--interactive' : ''}`} aria-hidden="true">
@@ -304,36 +337,164 @@ const DigitalCover = ({ interactive = false }) => {
   );
 };
 
-// Card de vídeo ilustrativo: tangibiliza o formato (aulas guiadas em vídeo)
-// usando o frame oficial como poster, deixando explícito que o produto é digital.
-const VideoCard = () => (
-  <div className="nc-video" aria-hidden="true">
-    <div className="nc-video__frame">
-      <img
-        src="/assets/neurocalma-video-frame.jpg"
-        alt=""
-        width="1672"
-        height="941"
-        loading="lazy"
-        decoding="async"
-      />
-      <span className="nc-video__scrim" />
-      <span className="nc-video__play">
-        <svg viewBox="0 0 12 14" focusable="false">
-          <path d="M1 1.5 L11 7 L1 12.5 Z" fill="currentColor" />
-        </svg>
-      </span>
-      <span className="nc-video__duration">08:30</span>
-    </div>
-    <div className="nc-video__meta">
-      <span className="nc-video__eyebrow">Prática guiada</span>
-      <p className="nc-video__title">Desacelerando o fim do dia</p>
-    </div>
-  </div>
-);
+// Splash cinematográfica de entrada (~3s): assinatura tipográfica com reveal
+// mascarado, onda que se desenha, pulso do logo, bloom central e abertura em
+// dois painéis revelando a Hero. Não simula carregamento — a página renderiza
+// por trás desde o primeiro frame. Roda uma vez por sessão, nunca com
+// prefers-reduced-motion, e tem timeout de segurança de 3.4s.
+const NeuroCalmaSplash = ({ enabled }) => {
+  const [done, setDone] = React.useState(!enabled);
+  const rootRef = React.useRef(null);
 
-// Mock do produto na oferta: dispositivo exibindo o ambiente de acesso
-// (encontro em andamento + percurso em quatro eixos). Leitura 100% digital.
+  React.useEffect(() => {
+    if (done) return undefined;
+    const root = rootRef.current;
+    if (!root) return undefined;
+
+    try {
+      window.sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+    } catch {
+      // sem sessionStorage: splash apenas repete na próxima visita
+    }
+
+    // Trava o scroll enquanto a splash está na tela.
+    document.body.style.overflow = 'hidden';
+
+    const q = (selector) => root.querySelector(selector);
+    const finish = () => setDone(true);
+    // Timeout de segurança: nada prende a página além de ~2.6s.
+    const safety = window.setTimeout(finish, 2600);
+
+    const tl = gsap.timeline({ onComplete: finish });
+    // 0–0.9s · assinatura de entrada: eyebrow abre o tracking, wordmark sobe
+    // mascarado, a onda se desenha e o microtexto assenta.
+    tl.fromTo(
+      q('.nc-splash__eyebrow'),
+      { opacity: 0, letterSpacing: '0.6em' },
+      { opacity: 1, letterSpacing: '0.34em', duration: 0.7, ease: 'power2.out' },
+      0.05
+    );
+    tl.from(
+      root.querySelectorAll('.nc-splash__reveal-inner'),
+      { yPercent: 112, duration: 0.75, ease: 'power4.out', stagger: 0.1 },
+      0.05
+    );
+    tl.fromTo(
+      q('.nc-splash__sig path'),
+      { strokeDashoffset: 1 },
+      { strokeDashoffset: 0, duration: 0.55, ease: 'power2.inOut' },
+      0.35
+    );
+    tl.fromTo(q('.nc-splash__sig circle'), { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.85);
+    tl.fromTo(q('.nc-splash__micro'), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.4);
+    tl.fromTo(q('.nc-splash__particles'), { opacity: 0 }, { opacity: 1, duration: 0.7 }, 0.15);
+    tl.to(q('.nc-splash__particles'), { y: -22, duration: 1.8, ease: 'none' }, 0.15);
+    // 0.7–1.3s · pulso discreto
+    tl.to(q('.nc-splash__logo'), { scale: 1.015, duration: 0.3, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 0.7);
+    // 1.0–1.4s · bloom central e linha de abertura
+    tl.fromTo(
+      q('.nc-splash__bloom'),
+      { opacity: 0, scale: 0.4 },
+      { opacity: 0.9, scale: 1.5, duration: 0.3, ease: 'power2.out' },
+      1.0
+    );
+    tl.to(q('.nc-splash__bloom'), { opacity: 0, scale: 2.1, duration: 0.35, ease: 'power2.in' }, 1.3);
+    tl.to(q('.nc-splash__line'), { scaleX: 1, opacity: 1, duration: 0.28, ease: 'power3.out' }, 1.05);
+    // saída do logo: sobe de leve, desfoca e some
+    tl.to(q('.nc-splash__logo'), { opacity: 0, y: -16, scale: 1.04, filter: 'blur(8px)', duration: 0.35, ease: 'power2.in' }, 1.12);
+    tl.to(q('.nc-splash__micro'), { opacity: 0, duration: 0.25 }, 1.2);
+    // 1.3–2.05s · abertura cinematográfica dos painéis
+    tl.to(q('.nc-splash__panel--top'), { yPercent: -100, duration: 0.75, ease: 'power4.inOut' }, 1.3);
+    tl.to(q('.nc-splash__panel--bottom'), { yPercent: 100, duration: 0.75, ease: 'power4.inOut' }, 1.3);
+    tl.to(q('.nc-splash__line'), { opacity: 0, duration: 0.35, ease: 'power1.out' }, 1.55);
+    tl.to(q('.nc-splash__particles'), { opacity: 0, duration: 0.35 }, 1.45);
+
+    return () => {
+      window.clearTimeout(safety);
+      tl.kill();
+      document.body.style.overflow = '';
+    };
+  }, [done]);
+
+  if (done) return null;
+
+  return (
+    <div className="nc-splash" ref={rootRef} aria-hidden="true">
+      <div className="nc-splash__panel nc-splash__panel--top" />
+      <div className="nc-splash__panel nc-splash__panel--bottom" />
+      <div className="nc-splash__particles" />
+      <span className="nc-splash__bloom" />
+      <div className="nc-splash__logo">
+        <span className="nc-splash__eyebrow">Experiência Guiada</span>
+        <p className="nc-splash__wordmark">
+          <span className="nc-splash__reveal">
+            <span className="nc-splash__reveal-inner"><strong>Neuro</strong></span>
+          </span>
+          <span className="nc-splash__reveal">
+            <span className="nc-splash__reveal-inner"><em>Calma</em></span>
+          </span>
+        </p>
+        <svg className="nc-splash__sig" viewBox="0 0 120 24" focusable="false">
+          <path
+            d="M2 12 C 12 12, 16 4, 26 6 S 44 22, 56 12 S 76 2, 90 10 S 112 14, 118 12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            pathLength="1"
+          />
+          <circle cx="118" cy="12" r="2.4" fill="currentColor" />
+        </svg>
+      </div>
+      <span className="nc-splash__line" />
+      <p className="nc-splash__micro">Dr. Thyago Henrique · CRM-GO 30.392</p>
+    </div>
+  );
+};
+
+// Card de vídeo ilustrativo: tangibiliza o formato (videoaulas) usando o
+// frame oficial como poster — rosto + play = "tem conteúdo para assistir".
+// `interactive` (hero): inclinação de base + tilt 3D + glow violeta.
+const VideoCard = ({ interactive = false }) => {
+  const rootRef = React.useRef(null);
+  const cardRef = React.useRef(null);
+  useTilt(rootRef, cardRef, interactive);
+
+  return (
+    <div
+      ref={rootRef}
+      className={`nc-video-wrap ${interactive ? 'nc-video-wrap--interactive' : ''}`}
+      aria-hidden="true"
+    >
+      {interactive ? <div className="nc-video__glow" /> : null}
+      <div ref={cardRef} className="nc-video">
+        <div className="nc-video__frame">
+          <img
+            src="/assets/neurocalma-video-frame.jpg"
+            alt=""
+            width="1672"
+            height="941"
+            loading="eager"
+            decoding="async"
+          />
+          <span className="nc-video__scrim" />
+          <span className="nc-video__play">
+            <svg viewBox="0 0 12 14" focusable="false">
+              <path d="M1 1.5 L11 7 L1 12.5 Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span className="nc-video__duration">08:30</span>
+        </div>
+        <div className="nc-video__meta">
+          <span className="nc-video__eyebrow">Videoaula</span>
+          <p className="nc-video__title">Desacelerando o fim do dia</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Mock em código do ambiente de acesso (plataforma com aula e etapas).
 const MOCK_BARS = [8, 14, 10, 18, 12, 22, 16, 26, 14, 20, 10, 24, 18, 12, 22, 8, 16, 12, 18, 10];
 
 const ProductMock = () => (
@@ -350,7 +511,7 @@ const ProductMock = () => (
         </div>
         <div className="nc-mock__player">
           <span className="nc-mock__eyebrow">Em andamento</span>
-          <p className="nc-mock__title">Encontro 01 · Entendendo a sobrecarga</p>
+          <p className="nc-mock__title">Aula 01 · Por que sua cabeça não desliga</p>
           <svg className="nc-mock__bars" viewBox="0 0 160 32" preserveAspectRatio="none" focusable="false">
             {MOCK_BARS.map((height, index) => (
               <rect
@@ -379,25 +540,20 @@ const ProductMock = () => (
         <ul className="nc-mock__modules">
           <li className="is-active">
             <span className="nc-mock__num">01</span>
-            Perceber
+            Assista
             <em>em andamento</em>
           </li>
           <li>
             <span className="nc-mock__num">02</span>
-            Reduzir
+            Entenda
           </li>
           <li>
             <span className="nc-mock__num">03</span>
-            Regular
-          </li>
-          <li>
-            <span className="nc-mock__num">04</span>
-            Sustentar
+            Aplique
           </li>
         </ul>
       </div>
     </div>
-    <p className="nc-visual-caption">Representação ilustrativa do ambiente digital.</p>
   </div>
 );
 
@@ -417,7 +573,7 @@ const ProductMockPhoto = () => {
         alt="Box do NeuroCalma com tablet exibindo uma aula guiada e caderno de anotações"
         width="1374"
         height="1145"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         onError={() => setFailed(true)}
       />
@@ -426,14 +582,75 @@ const ProductMockPhoto = () => {
   );
 };
 
-// Regra de CTA: hero, percurso e encerramento levam ao painel de oferta (âncora real).
-// O ponto transacional é único: dentro da oferta. Com venda ativa ele vira o link
-// de checkout; sem URL de checkout a oferta segue apresentável, sem botão falso.
+// Regra de CTA (6 pontos): hero, apresentação do produto, transformação,
+// o que você recebe, oferta e fechamento final. Ponto transacional único: oferta.
 const CtaToOffer = ({ children }) => (
   <a className="nc-button" href="#oferta" onClick={smoothScrollTo('oferta')}>
     {children}
   </a>
 );
+
+const SectionCta = () => (
+  <div className="nc-section-cta">
+    <CtaToOffer>{neuroCalmaContent.hero.cta}</CtaToOffer>
+  </div>
+);
+
+// Atalho persistente no mobile: barra inferior que aparece depois do hero e
+// some quando a oferta ou o fechamento estão na tela (para não cobrir o botão real).
+const StickyCta = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const hero = document.querySelector('.nc-hero');
+    const offer = document.getElementById('oferta');
+    const final = document.querySelector('.nc-final');
+    if (!hero || !offer || typeof IntersectionObserver === 'undefined') return undefined;
+
+    let pastHero = false;
+    let nearOffer = false;
+    let nearFinal = false;
+    const update = () => setVisible(pastHero && !nearOffer && !nearFinal);
+
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      pastHero = !entry.isIntersecting;
+      update();
+    });
+    const offerObserver = new IntersectionObserver(([entry]) => {
+      nearOffer = entry.isIntersecting;
+      update();
+    });
+    const finalObserver = new IntersectionObserver(([entry]) => {
+      nearFinal = entry.isIntersecting;
+      update();
+    });
+
+    heroObserver.observe(hero);
+    offerObserver.observe(offer);
+    if (final) finalObserver.observe(final);
+    return () => {
+      heroObserver.disconnect();
+      offerObserver.disconnect();
+      finalObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className={`nc-sticky ${visible ? 'is-visible' : ''}`} aria-hidden={!visible}>
+      <p className="nc-sticky__note">
+        <strong>R$97</strong> · Garantia de 7 dias
+      </p>
+      <a
+        className="nc-button nc-sticky__button"
+        href="#oferta"
+        onClick={smoothScrollTo('oferta')}
+        tabIndex={visible ? 0 : -1}
+      >
+        Começar Agora
+      </a>
+    </div>
+  );
+};
 
 const NeuroCalmaFAQ = () => {
   const [open, setOpen] = React.useState(0);
@@ -467,7 +684,7 @@ const NeuroCalmaFAQ = () => {
 };
 
 // Painel de oferta: espelha o checkout (mesmo nome, mesmo preço, mesmo CTA)
-// para que o clique não pareça uma troca de ambiente.
+// e agora absorve a garantia — decisão e segurança no mesmo lugar.
 const OfferPanel = () => {
   const content = neuroCalmaContent;
   const product = content.product;
@@ -475,34 +692,61 @@ const OfferPanel = () => {
 
   return (
     <div className="nc-offer-panel">
+      {/* Coluna do produto: mock, preço, CTA e segurança no mesmo bloco de decisão. */}
       <div className="nc-offer-panel__cover">
         <ProductMockPhoto />
-      </div>
-      <div className="nc-offer-panel__info">
-        <div className="nc-badge-row">
-          <span className="nc-badge">{product.format}</span>
-          <span className="nc-badge">Garantia de 7 dias</span>
+        <div className="nc-offer-panel__pricing">
+          <div className="nc-badge-row">
+            <span className="nc-badge">{product.format}</span>
+            <span className="nc-badge">Garantia de 7 dias</span>
+          </div>
+          <p className="nc-offer-panel__name">{product.name}</p>
+          <p className="nc-offer-panel__price">{product.price}</p>
+          <a
+            className="nc-button nc-button--offer"
+            href={saleActive ? product.checkoutUrl : '#'}
+            onClick={saleActive ? undefined : (event) => event.preventDefault()}
+            aria-disabled={saleActive ? undefined : true}
+          >
+            {content.offer.ctaActive}
+          </a>
+          <p className="nc-offer-panel__security">{content.offer.security}</p>
+          <ul className="nc-trust" aria-label="Segurança da compra">
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M5.5 7 V5 a2.5 2.5 0 0 1 5 0 V7" fill="none" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
+            Compra segura
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M9 1.5 L3.5 9 H7.5 L7 14.5 L12.5 7 H8.5 Z" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+            </svg>
+            Acesso imediato
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M8 1.5 L13.5 3.5 V8 C13.5 11.5 11 13.8 8 14.8 C5 13.8 2.5 11.5 2.5 8 V3.5 Z" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+              <path d="M5.5 8 L7.3 9.8 L10.5 6.3" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            7 dias de garantia
+          </li>
+          </ul>
         </div>
-        <p className="nc-offer-panel__name">{product.name}</p>
-        <p className="nc-offer-panel__price">{product.price}</p>
-        <p className="nc-offer-panel__installments">{product.priceNote}</p>
+      </div>
+      {/* Coluna da proposta: texto, pilha de valor e garantia. */}
+      <div className="nc-offer-panel__info">
         <p className="nc-offer-panel__text">{content.offer.text}</p>
-        <p className="nc-offer-panel__meta">
-          Percurso em quatro eixos — Perceber · Reduzir · Regular · Sustentar
-        </p>
-        {/* PENDENTE: URL real do checkout em src/config/products.js.
-            Sem ela, o botão renderiza como placeholder (clique não navega). */}
-        <a
-          className="nc-button nc-button--offer"
-          href={saleActive ? product.checkoutUrl : '#'}
-          onClick={saleActive ? undefined : (event) => event.preventDefault()}
-          aria-disabled={saleActive ? undefined : true}
-        >
-          {content.offer.ctaActive}
-        </a>
+        <p className="nc-offer-panel__stack-title">Você recebe:</p>
+        <ul className="nc-stack">
+          {content.offer.stack.map((item) => <li key={item}>{item}</li>)}
+        </ul>
         <div className="nc-guarantee">
           <span className="nc-guarantee__badge">{content.offer.guarantee.badge}</span>
+          <h3>{content.offer.guarantee.title}</h3>
           <p>{content.offer.guarantee.text}</p>
+          <p className="nc-guarantee__close">{content.offer.guarantee.close}</p>
         </div>
         <p className="nc-disclaimer">{content.offer.disclaimer}</p>
       </div>
@@ -514,31 +758,41 @@ const NeuroCalmaPage = () => {
   const content = neuroCalmaContent;
   const product = content.product;
   const mainRef = React.useRef(null);
+  const showSplash = React.useMemo(shouldShowSplash, []);
 
-  useNeuroCalmaMotion(mainRef);
+  useNeuroCalmaMotion(mainRef, showSplash);
 
   return (
     <>
       <RouteSEO
         title="NeuroCalma — Experiência Guiada | Dr. Thyago Henrique"
-        description="Uma experiência digital educativa para compreender a sobrecarga mental, reduzir o excesso de estímulos e construir momentos de desaceleração."
+        description="Videoaulas com técnicas simples para ajudar você a desligar, descansar e desconectar a cabeça depois de um dia pesado. Acesso imediato."
         path={product.path}
         favicon="/favicon-neurocalma.svg"
         image="/assets/og-image.jpg"
-        imageAlt="NeuroCalma — Experiência Guiada de desaceleração, por Dr. Thyago Henrique"
+        imageAlt="NeuroCalma — videoaulas e técnicas práticas para desacelerar, por Dr. Thyago Henrique"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Product',
           name: product.name,
           brand: BRAND.siteName,
           description:
-            'Experiência digital educativa para compreender a sobrecarga mental, reduzir o excesso de estímulos e construir momentos de desaceleração.',
+            'Produto digital com videoaulas e técnicas práticas para ajudar a desacelerar, desligar e descansar a cabeça. Conteúdo educativo.',
+          offers: {
+            '@type': 'Offer',
+            price: '97.00',
+            priceCurrency: 'BRL',
+            availability: 'https://schema.org/InStock',
+            url: `${BRAND.baseUrl.replace(/\/$/, '')}${product.path}`,
+          },
         }}
       />
       <main className="neurocalma-page" id="conteudo" ref={mainRef}>
+        <NeuroCalmaSplash enabled={showSplash} />
+        <StickyCta />
         <a className="nc-skip-link" href="#neurocalma-main">Pular para o conteúdo</a>
 
-        {/* 01 · HERO — ponto de maior densidade: ondas, partículas, luz violeta */}
+        {/* 1 · HERO — um único CTA; o indicador de scroll é apenas visual */}
         <section className="nc-hero" id="neurocalma-main" aria-labelledby="neurocalma-title">
           <div className="nc-hero__atmosphere" aria-hidden="true" />
           <div className="nc-hero__particles" aria-hidden="true" />
@@ -554,82 +808,108 @@ const NeuroCalmaPage = () => {
               <p className="nc-hero__sub">{content.hero.subheadline}</p>
               <div className="nc-hero__actions">
                 <CtaToOffer>{content.hero.cta}</CtaToOffer>
-                <p className="nc-hero__price">{content.hero.priceLine}</p>
+                <p className="nc-hero__price">{content.hero.microcopy}</p>
               </div>
-              <a className="nc-hero__secondary" href="#apresentacao" onClick={smoothScrollTo('apresentacao')}>
-                {content.hero.secondaryCta}
-                <span aria-hidden="true">↓</span>
-              </a>
+              <p className="nc-hero__support">{content.hero.support}</p>
               <p className="nc-disclaimer">{content.hero.disclaimer}</p>
+              <span className="nc-hero__scroll-hint" aria-hidden="true">↓</span>
             </div>
             <div className="nc-hero__visual">
-              <DigitalCover interactive />
+              <VideoCard interactive />
+              {/* Indicador de scroll fechando o hero — visível apenas no mobile. */}
+              <span className="nc-hero__scroll-hint nc-hero__scroll-hint--mobile" aria-hidden="true">↓</span>
             </div>
           </div>
         </section>
 
-        {/* 02 · RECONHECIMENTO — ainda escuro, ondas já dispersas */}
+        {/* 2 · DOR + CICLO */}
         <section className="nc-section nc-section--noise-3" id="reconhecimento" aria-labelledby="reconhecimento-title">
           <WaveField variant="medium" className="nc-section__waves" />
           <div className="nc-wrap">
             <Reveal>
-              <Label>{content.recognition.label}</Label>
-              <h2 id="reconhecimento-title">{content.recognition.title}</h2>
-              {content.recognition.paragraphs.map((paragraph) => (
+              <Label>{content.pain.label}</Label>
+              <h2 id="reconhecimento-title">
+                {content.pain.title[0]}
+                <br />
+                {content.pain.title[1]}
+              </h2>
+              {content.pain.paragraphs.map((paragraph) => (
                 <p className="nc-lede" key={paragraph}>{paragraph}</p>
               ))}
               <p className="nc-statement nc-statement--accent">
-                {content.recognition.close[0]}
+                {content.pain.close[0]}
                 <br />
-                {content.recognition.close[1]}
+                {content.pain.close[1]}
               </p>
             </Reveal>
           </div>
         </section>
 
-        {/* 03 · A EXPERIÊNCIA — grafite, o produto ganha corpo */}
+        {/* 3 · EXPLICAÇÃO + SOLUÇÃO + CTA */}
         <section className="nc-section nc-section--noise-2" id="apresentacao" aria-labelledby="apresentacao-title">
           <div className="nc-wrap nc-split">
             <Reveal className="nc-split__text">
-              <Label>{content.productIntro.label}</Label>
-              <h2 id="apresentacao-title">{content.productIntro.title}</h2>
-              <p className="nc-lede">{content.productIntro.text}</p>
+              <Label>{content.explanation.label}</Label>
+              <h2 id="apresentacao-title">{content.explanation.title}</h2>
+              {content.explanation.paragraphs.map((paragraph) => (
+                <p className="nc-lede" key={paragraph}>{paragraph}</p>
+              ))}
+              <p className="nc-statement nc-statement--accent">{content.explanation.bridge}</p>
+              <h3 className="nc-product-title">{content.explanation.productTitle}</h3>
+              <p className="nc-lede">{content.explanation.productText}</p>
               <ul className="nc-boundaries">
-                {content.productIntro.boundaries.map((item) => <li key={item}>{item}</li>)}
+                {content.explanation.boundaries.map((item) => <li key={item}>{item}</li>)}
               </ul>
-              <p className="nc-lede">{content.productIntro.differentiation}</p>
+              <p className="nc-statement">{content.explanation.close}</p>
+              <SectionCta />
             </Reveal>
-            <div className="nc-split__visual" aria-hidden="true">
-              <div className="nc-rings" />
+            <div className="nc-split__visual nc-split__visual--stack" aria-hidden="true">
+              <ProductMock />
             </div>
           </div>
         </section>
 
-        {/* 04 · O PERCURSO — timeline que começa violeta e termina quase branca */}
-        <Section id="percurso" label={content.journey.label} title={content.journey.title} noise={2}>
-          <ol className="nc-timeline">
-            {content.journey.axes.map((axis, index) => (
-              <li className="nc-timeline__step" key={axis.title}>
+        {/* 4 · COMO FUNCIONA — três etapas na timeline */}
+        <Section id="como-funciona" label={content.how.label} title={content.how.title} noise={2}>
+          <ol className="nc-timeline nc-timeline--three">
+            {content.how.steps.map((step, index) => (
+              <li className="nc-timeline__step" key={step.title}>
                 <span className="nc-timeline__dot" aria-hidden="true" />
                 <span className="nc-timeline__num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{axis.title}</h3>
-                <p>{axis.text}</p>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
               </li>
             ))}
           </ol>
-          <p className="nc-statement">{content.journey.close}</p>
-          <div className="nc-section-cta">
-            <CtaToOffer>{content.hero.cta}</CtaToOffer>
-          </div>
+          <p className="nc-statement">{content.how.close}</p>
         </Section>
 
-        {/* 05 · O QUE VOCÊ RECEBE — o mockup ganha função: formato tangível, produto digital */}
+        {/* 5 · TRANSFORMAÇÃO + CTA */}
+        <Section id="transformacao" label={content.transformation.label} title={content.transformation.title} noise={1}>
+          <div className="nc-audience nc-audience--transform">
+            <div>
+              <h3>{content.transformation.before.title}</h3>
+              <ul>{content.transformation.before.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            </div>
+            <div>
+              <h3>{content.transformation.after.title}</h3>
+              <ul>{content.transformation.after.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            </div>
+          </div>
+          <p className="nc-statement nc-statement--accent">
+            {content.transformation.close[0]}
+            <br />
+            {content.transformation.close[1]}
+          </p>
+          <SectionCta />
+        </Section>
+
+        {/* 6 · O QUE VOCÊ RECEBE — quatro itens + mockup de videoaula + CTA */}
         <section className="nc-section nc-section--noise-2" id="recebe" aria-labelledby="recebe-title">
           <div className="nc-wrap nc-split nc-split--reverse">
             <Reveal className="nc-split__text">
               <Label>{content.deliverables.label}</Label>
               <h2 id="recebe-title">{content.deliverables.title}</h2>
-              <p className="nc-lede">{content.deliverables.text}</p>
               <div className="nc-deliverables">
                 {content.deliverables.items.map((item) => (
                   <div className="nc-deliverable" key={item.title}>
@@ -638,94 +918,98 @@ const NeuroCalmaPage = () => {
                   </div>
                 ))}
               </div>
+              <SectionCta />
             </Reveal>
             <div className="nc-split__visual nc-split__visual--stack" aria-hidden="true">
-              <VideoCard />
+              <DigitalCover />
             </div>
           </div>
         </section>
 
-        {/* 06 · SATURAÇÃO NEURAL™ — a seção mais intensa: camadas comprimidas que se dispersam */}
-        <section className="nc-section nc-section--noise-4" id="saturacao-neural" aria-labelledby="saturacao-neural-title">
+        {/* 7 · QUEBRA DE OBJEÇÕES */}
+        <Section id="rotina-real" label={content.objections.label} title={content.objections.title} noise={1}>
+          {content.objections.paragraphs.map((paragraph) => (
+            <p className="nc-lede" key={paragraph}>{paragraph}</p>
+          ))}
+          <div className="nc-lines nc-lines--display">
+            {content.objections.lines2.map((line) => <p key={line}>{line}</p>)}
+          </div>
+          <p className="nc-statement">{content.objections.close}</p>
+        </Section>
+
+        {/* 8 · PARA QUEM É + ORIGEM MÉDICA + SATURAÇÃO NEURAL™ */}
+        <section className="nc-section nc-section--noise-1" id="publico" aria-labelledby="publico-title">
           <div className="nc-layers" aria-hidden="true">
             <span /><span /><span /><span /><span /><span />
           </div>
           <div className="nc-wrap">
             <Reveal>
-              <Label signature>{content.saturation.label}</Label>
-              <h2 id="saturacao-neural-title">{content.saturation.title}</h2>
-              <p className="nc-definition">{content.saturation.definition}</p>
-              <p className="nc-body">{content.saturation.connection}</p>
-              <p className="nc-statement">{content.saturation.central}</p>
-              <p className="nc-note">{content.saturation.limit}</p>
-            </Reveal>
-          </div>
-        </section>
+              <Label>{content.audience.label}</Label>
+              <h2 id="publico-title">{content.audience.title}</h2>
+              <ul className="nc-checklist">
+                {content.audience.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+              <p className="nc-statement">{content.audience.close}</p>
 
-        {/* 07 · PARA QUEM É — visual mais limpo, quase sem efeitos */}
-        <Section id="publico" label={content.audience.label} title={content.audience.title} noise={1}>
-          <div className="nc-audience">
-            <div>
-              <h3>Faz sentido para</h3>
-              <ul>{content.audience.for.map((item) => <li key={item}>{item}</li>)}</ul>
-            </div>
-            <div>
-              <h3>O NeuroCalma não substitui</h3>
-              <ul>{content.audience.notReplace.map((item) => <li key={item}>{item}</li>)}</ul>
-            </div>
-          </div>
-          <p className="nc-note">{content.audience.urgencyNotice}</p>
-        </Section>
+              {/* Saturação Neural™ primeiro; a seção termina na autoridade
+                  (rosto + credenciais), aquecendo a entrada da oferta. */}
+              <div className="nc-subblock">
+                <h3>{content.audience.saturation.title}</h3>
+                <p className="nc-lede">{content.audience.saturation.text}</p>
+                <p className="nc-definition">{content.audience.saturation.disclaimer}</p>
+              </div>
 
-        {/* 08 · AUTORIDADE — foto com tratamento frio, luz violeta discreta */}
-        <section className="nc-section nc-section--noise-1" id="autoridade" aria-labelledby="autoridade-title">
-          <div className="nc-wrap">
-            <Reveal>
-              <Label>{content.authority.label}</Label>
-              <div className="nc-doctor">
-                <div className="nc-doctor__frame">
-                  <img
-                    src="/assets/dr-thyago.png"
-                    alt="Retrato do Dr. Thyago Henrique"
-                    width="1024"
-                    height="1024"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div>
-                  <h2 id="autoridade-title">{content.authority.title}</h2>
-                  <p className="nc-lede">{content.authority.intro}</p>
-                  <p className="nc-lede">{content.authority.bio}</p>
-                  <span className="nc-badge nc-badge--mono">{CONTACT.crm}</span>
+              <div className="nc-subblock">
+                <h3>{content.audience.authority.title}</h3>
+                <div className="nc-doctor">
+                  <div className="nc-doctor__frame">
+                    <img
+                      src="/assets/dr-thyago.png"
+                      alt="Retrato do Dr. Thyago Henrique"
+                      width="1024"
+                      height="1024"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                  <div>
+                    <p className="nc-lede">{content.audience.authority.bio}</p>
+                    <p className="nc-lede">{content.audience.authority.text}</p>
+                    <span className="nc-badge nc-badge--mono">{CONTACT.crm}</span>
+                  </div>
                 </div>
               </div>
             </Reveal>
           </div>
         </section>
 
-        {/* 09 · OFERTA — espelho do checkout: mesmo nome, preço e sensação */}
+        {/* 9 · OFERTA + GARANTIA */}
         <Section id="oferta" label={content.offer.label} title={content.offer.title} noise={1}>
           <OfferPanel />
         </Section>
 
-        {/* 10 · FAQ — grafite limpo, linhas finas, sem efeitos */}
+        {/* 10 · FAQ + CTA FINAL */}
         <Section id="faq" label={content.faq.label} title={content.faq.title} noise={0}>
           <NeuroCalmaFAQ />
         </Section>
 
-        {/* 11 · CTA FINAL — o silêncio: espaço máximo, uma onda apenas */}
         <section className="nc-final" aria-labelledby="nc-final-title">
           <WaveField variant="sparse" className="nc-final__wave" />
           <div className="nc-wrap">
             <Reveal>
               <Label>{content.finalCta.label}</Label>
               <h2 id="nc-final-title">{content.finalCta.title}</h2>
-              <p>{content.finalCta.text}</p>
+              {content.finalCta.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
               <div className="nc-final__actions">
-                <CtaToOffer>{content.hero.cta}</CtaToOffer>
-                <p className="nc-final__price">{content.hero.priceLine}</p>
+                <CtaToOffer>{content.finalCta.cta}</CtaToOffer>
               </div>
+              <p className="nc-final__close">
+                {content.finalCta.close[0]}
+                <br />
+                {content.finalCta.close[1]}
+              </p>
               <p className="nc-disclaimer">{content.finalCta.disclaimer}</p>
             </Reveal>
           </div>

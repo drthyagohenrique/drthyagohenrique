@@ -1,192 +1,224 @@
 import { PRODUCTS } from '../../config/products.js';
 import { DOCTOR } from '../../data/doctor.js';
-import { SATURATION_NEURAL } from '../../data/saturation-neural.js';
 
-// Copy do NeuroCalma — Experiência Guiada.
-// Conceito narrativo: "do ruído ao silêncio" — a página começa densa
-// (ondas, camadas, luz violeta) e vai se limpando ao longo do scroll.
-// Compliance: sem "protocolo", sem promessa clínica, Saturação Neural™
-// sempre como conceito em pesquisa.
+// Copy do NeuroCalma — Experiência Guiada · versão final low ticket (10 seções).
+// Princípio: videoaulas com técnicas simples para desligar, descansar e
+// desconectar a cabeça depois de um dia pesado. Linguagem de vida real,
+// sem jargão. Funil: reconhecimento → incômodo → explicação → solução →
+// facilidade → transformação → tangibilidade → segurança → compra.
+// Compliance: sem "protocolo", sem "psiquiatra", Saturação Neural™ curta e
+// sempre como conceito em pesquisa; sem números, módulos ou resultados inventados.
 export const neuroCalmaContent = {
   product: PRODUCTS.neurocalma,
   hero: {
-    eyebrow: 'NeuroCalma · Experiência Guiada',
+    eyebrow: 'NeuroCalma · Videoaulas práticas',
     headline: ['Seu dia termina.', 'Sua mente, não.'],
-    subheadline:
-      'Uma experiência prática para compreender a sobrecarga mental, reduzir o excesso de estímulos e começar a construir momentos reais de desaceleração.',
+    subheadline: 'Conteúdos e práticas para desacelerar quando a mente não para.',
     cta: 'Começar o NeuroCalma',
-    priceLine: `${PRODUCTS.neurocalma.price} · ${PRODUCTS.neurocalma.priceNote}`,
-    secondaryCta: 'Conhecer a experiência',
+    microcopy: 'Acesso imediato · R$97 · Garantia de 7 dias',
+    support: 'Assista. Entenda. Aplique.',
     disclaimer:
       'Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
   },
-  recognition: {
-    label: '01 · Reconhecimento',
-    title: 'A sobrecarga nem sempre parece uma crise.',
+  // 01 · Dor + ciclo (fusão de "Isso acontece com você?" + "O ciclo")
+  pain: {
+    label: '01 · Isso acontece com você?',
+    title: ['Você deita.', 'Mas a cabeça continua acordada.'],
     paragraphs: [
-      'Você encerra o expediente, mas continua revendo decisões. Deita, mas ainda responde conversas mentalmente. Tenta descansar, mas qualquer silêncio abre espaço para tudo o que ficou pendente.',
-      'Muitas vezes, a sobrecarga aparece de forma silenciosa: dificuldade para desacelerar, irritação sem motivo claro, sensação de urgência constante, sono pouco reparador, pensamentos fragmentados e um cansaço que não desaparece depois de uma noite de descanso.',
+      'O trabalho acabou. As mensagens diminuíram. A casa ficou em silêncio.',
+      'Mas sua cabeça continua repassando conversas, lembrando pendências, pensando no dia seguinte e tentando resolver coisas que já deveriam ter ficado para amanhã.',
+      'Você pega o celular para se distrair. Tenta assistir alguma coisa. Fecha os olhos. E, mesmo cansado, continua ligado.',
+      'Quando finalmente dorme, o descanso já começou tarde. Você acorda cansado, fica mais irritado, perde a concentração e chega à noite pronto para repetir o mesmo ciclo.',
+      'Não é só a hora de dormir que está sendo afetada.',
     ],
-    close: ['Você continua funcionando.', 'Mas funcionar não significa estar recuperado.'],
+    close: ['Seu corpo parou.', 'Sua cabeça ainda não.'],
   },
-  productIntro: {
-    label: '02 · A experiência',
-    title: 'Um ponto de interrupção no excesso.',
-    text: 'O NeuroCalma é uma experiência guiada criada para ajudar você a reconhecer padrões de sobrecarga, reduzir estímulos desnecessários e construir práticas simples de desaceleração dentro da rotina real.',
+  // 02 · Explicação + solução (fusão de "Por que isso acontece" + "O que é o NeuroCalma")
+  explanation: {
+    label: '02 · Por que isso acontece',
+    title: 'Sua cabeça não desliga só porque você deitou.',
+    paragraphs: [
+      'Durante o dia, ela recebeu mensagens, cobranças, decisões, telas, problemas e urgências. Depois, você espera que tudo pare de uma vez.',
+      'Mas, para muita gente, o corpo vai para a cama antes de a cabeça entender que o dia acabou.',
+    ],
+    bridge: 'Foi para ajudar nesse momento que o NeuroCalma foi criado.',
+    productTitle: 'Videoaulas com técnicas para ajudar você a desligar e descansar a cabeça.',
+    productText:
+      'O NeuroCalma é um produto digital com videoaulas diretas e práticas simples para você entender o que mantém sua mente ligada e aprender o que fazer para desacelerar.',
     boundaries: [
-      'Não é uma coleção de frases motivacionais.',
-      'Não é um desafio de produtividade.',
-      'Não é uma promessa de transformação instantânea.',
+      'Não é para estudar durante horas.',
+      'Não é para decorar termos difíceis.',
+      'Não é mais um curso para deixar parado.',
     ],
-    differentiation:
-      'O NeuroCalma não foi criado para distrair a mente por alguns minutos. Ele organiza uma sequência de compreensão e aplicação, para que você perceba o que mantém seu estado de demanda e comece a criar transições mais conscientes entre exigência e recuperação.',
+    close: 'Menos teoria. Mais clareza sobre o que fazer quando a cabeça não para.',
   },
-  journey: {
-    label: '03 · O percurso',
-    title: 'Quatro eixos para sair do piloto automático.',
-    axes: [
-      { title: 'Perceber', text: 'Reconhecer sinais e padrões antes que se transformem em ruído constante.' },
-      { title: 'Reduzir', text: 'Diminuir os estímulos que prolongam o estado de demanda.' },
-      { title: 'Regular', text: 'Criar pausas guiadas para recuperar presença e espaço mental.' },
-      { title: 'Sustentar', text: 'Levar pequenas práticas de recuperação para dentro da rotina real.' },
+  // 03 · Como funciona (reduzido para três etapas)
+  how: {
+    label: '03 · Como funciona',
+    title: 'É simples: assistir, entender e aplicar.',
+    steps: [
+      { title: 'Assista', text: 'Você entra na plataforma e assiste a uma videoaula curta e objetiva.' },
+      { title: 'Entenda', text: 'Você entende por que sua cabeça continua ligada e o que está dificultando o descanso.' },
+      { title: 'Aplique', text: 'Você executa a técnica ensinada e pode voltar ao conteúdo sempre que precisar.' },
     ],
-    close:
-      'O NeuroCalma não exige que você abandone sua rotina. Ele ajuda a construir recuperação dentro dela.',
+    close: 'Assista. Entenda. Aplique.',
   },
+  // 04 · Transformação (absorve "Para que serve")
+  transformation: {
+    label: '04 · O que pode mudar',
+    title: 'Em vez de apenas esperar o sono chegar, você aprende o que fazer.',
+    before: {
+      title: 'Antes',
+      items: [
+        'deita cansado e continua pensando',
+        'leva trabalho, decisões e pendências para a cama',
+        'pega o celular porque não consegue parar',
+        'tenta dormir sem conseguir desligar',
+        'acorda sentindo que não descansou',
+        'não sabe o que fazer quando a cabeça acelera',
+      ],
+    },
+    after: {
+      title: 'Depois de aprender e aplicar',
+      items: [
+        'reconhece quando precisa parar',
+        'entende o que mantém sua cabeça ligada',
+        'aprende técnicas simples para desacelerar',
+        'cria uma forma de encerrar o dia',
+        'consegue se desconectar com mais intenção',
+        'passa a ter algo concreto para fazer quando não consegue descansar',
+      ],
+    },
+    close: ['A promessa não é viver sem problemas.', 'É aprender a parar quando o dia já terminou.'],
+  },
+  // 05 · O que você recebe (condensado em quatro itens)
   deliverables: {
-    label: '04 · O que você recebe',
-    title: 'Menos informação solta. Mais direção.',
-    text: 'O NeuroCalma é 100% digital: você acessa um ambiente on-line organizado como um percurso — não uma pilha de conteúdos soltos.',
+    label: '05 · O que você recebe',
+    title: 'Tudo organizado para você assistir e aplicar.',
+    // PENDENTE: substituir por informações específicas quando confirmadas
+    // (quantidade de videoaulas, duração média, número de técnicas, prazo de
+    // acesso, materiais complementares, plataforma). Não inventar números.
     items: [
-      {
-        title: 'Encontros guiados',
-        text: 'Conteúdos diretos, em linguagem clara, para compreender a sobrecarga sem jargão técnico.',
-      },
-      {
-        title: 'Práticas de desaceleração',
-        text: 'Exercícios guiados e curtos, pensados para caber em dias cheios — não em rotinas ideais.',
-      },
-      {
-        title: 'Percurso em quatro eixos',
-        text: 'Perceber, Reduzir, Regular e Sustentar: uma sequência com começo, direção e aplicação.',
-      },
-      {
-        title: 'Acesso imediato, no seu ritmo',
-        text: 'Ambiente digital disponível logo após a confirmação, em qualquer dispositivo.',
-      },
+      { title: 'Videoaulas objetivas', text: 'Explicações claras e diretas, sem termos complicados.' },
+      { title: 'Técnicas práticas', text: 'Exercícios para ajudar você a desacelerar e descansar a cabeça.' },
+      { title: 'Percurso organizado', text: 'Uma sequência para você saber por onde começar.' },
+      { title: 'Acesso imediato', text: 'Assista pelo celular ou computador e volte às aulas quando precisar.' },
     ],
   },
-  saturation: {
-    label: '05 · Conceito em pesquisa',
-    title: 'Quando a mente permanece tempo demais em estado de demanda.',
-    definition: SATURATION_NEURAL.officialDefinition,
-    connection:
-      'O NeuroCalma atua na camada inicial da sobrecarga: percepção dos sinais, redução de estímulos e construção de momentos de regulação.',
-    central:
-      'O NeuroCalma não resolve toda a sobrecarga. Ele ajuda a interromper padrões cotidianos que podem alimentá-la.',
-    limit:
-      'Quando existem sintomas intensos, agravamento persistente ou necessidade clínica, uma experiência educativa não substitui avaliação profissional individualizada.',
+  // 06 · Quebra de objeções (fusão de "não é curso" + "cabe na rotina")
+  objections: {
+    label: '06 · Feito para a rotina real',
+    title: 'Não é mais um curso para deixar parado.',
+    paragraphs: [
+      'O NeuroCalma foi criado para ser usado, não acumulado.',
+      'Você não precisa reservar uma tarde inteira, terminar tudo de uma vez, criar uma rotina perfeita ou estar calmo antes de começar.',
+    ],
+    lines2: ['Você assiste a uma aula.', 'Entende a técnica.', 'Aplica no seu dia.'],
+    close: 'Foi pensado para quem já está cansado demais para lidar com algo complicado.',
   },
+  // 07 · Para quem é + origem médica + Saturação Neural™ (fusão)
   audience: {
-    label: '06 · Para quem é',
-    title: 'Para quem é. E o que ele não substitui.',
-    for: [
-      'Pessoas com a mente acelerada ao final do dia',
-      'Quem sente excesso de estímulos e dificuldade para desligar',
-      'Quem percebe que o descanso não está produzindo recuperação',
-      'Quem busca um primeiro passo educativo e prático',
-      'Quem deseja construir pequenas pausas dentro de uma rotina exigente',
+    label: '07 · Para quem é',
+    title: 'O NeuroCalma é para você que:',
+    items: [
+      'deita cansado, mas não consegue desligar',
+      'continua pensando no trabalho depois do expediente',
+      'leva conversas, decisões e pendências para a cama',
+      'pega o celular porque não consegue ficar em silêncio',
+      'sente que dorme, mas não descansa',
+      'vive com a cabeça cheia',
+      'sente dificuldade para se desconectar',
+      'quer aprender o que fazer quando a mente não para',
     ],
-    notReplace: [
-      'Atendimento de urgência',
-      'Avaliação médica ou psicológica',
-      'Psicoterapia',
-      'Diagnóstico',
-      'Tratamento',
-      'Acompanhamento profissional quando necessário',
-    ],
-    urgencyNotice:
-      'Em situações de risco imediato ou de agravamento intenso, procure um serviço de urgência da sua região.',
+    close: 'Você não precisa ter um diagnóstico para perceber que precisa descansar melhor a cabeça.',
+    authority: {
+      title: 'Desenvolvido por um médico que estuda sobrecarga e saúde mental.',
+      bio: DOCTOR.shortAuthority,
+      text: 'O NeuroCalma foi criado para transformar esse conhecimento em videoaulas e técnicas simples, que possam ser aplicadas na rotina real.',
+    },
+    saturation: {
+      title: 'Quando a cabeça passa tempo demais sem desligar.',
+      text: 'Saturação Neural™ é um conceito em pesquisa utilizado pelo Dr. Thyago Henrique para compreender estados em que a mente passa tempo demais sob pressão, estímulos e decisões.',
+      disclaimer: 'Saturação Neural™ não é diagnóstico, doença, tratamento ou protocolo.',
+    },
   },
-  authority: {
-    label: '07 · Origem médica',
-    title: 'Origem médica, linguagem clara.',
-    intro:
-      'O NeuroCalma foi desenvolvido dentro da linha de trabalho do Dr. Thyago Henrique sobre saúde mental, sobrecarga e recuperação em contextos de alta exigência.',
-    bio: DOCTOR.shortAuthority,
-  },
+  // 08 · Oferta + garantia (fusão)
   offer: {
-    label: '08 · Oferta',
-    title: 'Um primeiro passo para começar a desacelerar.',
-    text: 'Uma experiência digital educativa para quem precisa começar a desacelerar sem abandonar a rotina.',
-    ctaActive: 'Começar o NeuroCalma',
+    label: '08 · Comece agora',
+    title: 'Comece hoje a aprender a desligar.',
+    text: 'Ao entrar no NeuroCalma, você recebe acesso às videoaulas e às técnicas práticas para entender o que está acontecendo, desacelerar e descansar melhor a cabeça.',
+    stack: [
+      'Videoaulas objetivas',
+      'Técnicas simples de aplicação',
+      'Percurso organizado',
+      'Acesso digital imediato',
+      'Liberdade para assistir no seu ritmo',
+      'Garantia de 7 dias',
+    ],
+    ctaActive: 'Quero começar o NeuroCalma',
+    security: 'Pagamento seguro pela Kiwify · parcelamento disponível no checkout.',
     guarantee: {
       badge: 'Garantia de 7 dias',
-      text: 'Se a experiência não fizer sentido para você, devolvemos o valor integral — basta pedir dentro de 7 dias.',
+      title: '7 dias para conhecer o NeuroCalma',
+      text: 'Acesse, assista e veja se a proposta faz sentido para você. Caso não faça, solicite o reembolso dentro de 7 dias.',
+      close: 'Você não precisa decidir no escuro.',
     },
     disclaimer:
       'Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
   },
+  // 09 · FAQ + 10 · CTA final
   faq: {
-    label: '09 · Perguntas frequentes',
-    title: 'Informações práticas antes de começar.',
+    label: '09 · Dúvidas frequentes',
+    title: 'Tire suas dúvidas antes de começar.',
     items: [
       {
-        question: 'O NeuroCalma é uma consulta?',
+        question: 'O NeuroCalma é um curso?',
         answer:
-          'Não. O NeuroCalma é um produto digital educativo e guiado. Ele não substitui avaliação médica ou psicológica.',
+          'É um produto digital com videoaulas e técnicas práticas para ajudar você a desacelerar, desligar e descansar a cabeça.',
       },
       {
-        question: 'O NeuroCalma é um tratamento para ansiedade?',
+        question: 'Como eu uso o NeuroCalma?',
         answer:
-          'Não. O NeuroCalma é uma experiência educativa sobre sobrecarga mental e desaceleração. Ele não é tratamento, não realiza diagnóstico e não substitui acompanhamento médico ou psicológico quando ele é necessário.',
+          'Você entra na plataforma, assiste às videoaulas, entende a técnica ensinada e aplica. Tudo no seu ritmo: não precisa assistir de uma vez e pode voltar às aulas quando precisar.',
       },
       {
-        question: 'O NeuroCalma é um produto físico?',
-        answer:
-          'Não. O NeuroCalma é 100% digital. Nada é enviado para sua casa: o acesso acontece em ambiente on-line, logo após a confirmação, e você pode usar de qualquer dispositivo.',
+        question: 'Posso assistir pelo celular?',
+        answer: 'Sim. O acesso é digital: você pode assistir pelo celular ou pelo computador.',
       },
       {
-        question: 'Preciso ter algum diagnóstico para participar?',
-        answer:
-          'Não. O NeuroCalma foi pensado para quem percebe sinais de sobrecarga no dia a dia — mente acelerada, dificuldade para desligar, descanso pouco reparador. Ele não realiza triagem clínica nem exige qualquer diagnóstico.',
+        question: 'Preciso ter diagnóstico?',
+        answer: 'Não. O NeuroCalma é um conteúdo educativo e não exige diagnóstico.',
       },
       {
-        question: 'Saturação Neural é um diagnóstico?',
+        question: 'É tratamento para ansiedade?',
         answer:
-          'Não. Saturação Neural™ é apresentada como conceito em pesquisa sobre estados de sobrecarga mental crônica. Não constitui diagnóstico, doença ou tratamento.',
-      },
-      {
-        question: 'Preciso seguir uma ordem?',
-        answer:
-          'A experiência foi organizada como uma sequência de compreensão e aplicação, e a ordem proposta ajuda a aproveitar melhor o percurso. Você pode caminhar no seu ritmo.',
-      },
-      {
-        question: 'Posso utilizar se já faço acompanhamento profissional?',
-        answer:
-          'Sim. Por ser um conteúdo educativo, o NeuroCalma pode ser usado em paralelo ao acompanhamento que você já realiza — e não substitui as orientações do seu médico ou psicólogo.',
+          'Não. O NeuroCalma não é consulta, psicoterapia ou tratamento — e pode ser usado como conteúdo complementar, sem substituir o acompanhamento que você já realiza.',
       },
       {
         question: 'Quais são as formas de pagamento?',
         answer:
-          'O acesso custa R$97, e você pode pagar à vista ou parcelar em até 12x no cartão. A liberação acontece logo após a confirmação do pagamento.',
+          'Cartão, Pix e demais opções disponíveis no checkout da Kiwify. O acesso é liberado logo após a confirmação do pagamento.',
       },
       {
-        question: 'O NeuroCalma tem garantia?',
-        answer:
-          'Sim. Você tem 7 dias de garantia: se a experiência não fizer sentido para você, devolvemos o valor integral — basta pedir dentro do prazo.',
+        question: 'Como funciona a garantia?',
+        answer: 'Você tem 7 dias para conhecer o produto e solicitar o reembolso caso ele não faça sentido para você.',
       },
       {
         question: 'O que devo fazer se estiver em uma crise?',
         answer:
-          'O NeuroCalma não substitui atendimento de urgência. Em situações de risco imediato, de agravamento intenso ou de possibilidade de dano a si ou a terceiros, procure um serviço de urgência da sua região.',
+          'O NeuroCalma não substitui atendimento de urgência. Em situações de risco imediato ou de agravamento intenso, procure um serviço de urgência da sua região.',
       },
     ],
   },
   finalCta: {
     label: '10 · Começar',
-    title: 'Você não precisa esperar o colapso para começar a desacelerar.',
-    text: 'O NeuroCalma é um primeiro passo para quem percebe que a mente está ocupada demais e recuperada de menos.',
+    title: 'Sua cabeça não precisa continuar trabalhando depois que o dia acabou.',
+    paragraphs: [
+      'Você pode continuar tentando dormir com a mente ligada.',
+      'Ou pode aprender o que fazer para desacelerar, desligar e descansar melhor.',
+    ],
+    cta: 'Começar o NeuroCalma por R$97',
+    close: ['Assista. Entenda. Aplique.', 'Comece hoje.'],
     disclaimer:
       'Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',
   },
