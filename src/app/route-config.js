@@ -9,6 +9,10 @@ export const routeConfig = {
     path: ROUTES.neurocalma,
     status: 'pre-launch',
   },
+  mindup: {
+    path: ROUTES.mindup,
+    status: 'published',
+  },
   future: FUTURE_ROUTES
     .filter((route) => ![ROUTES.privacy, ROUTES.terms].includes(route.path))
     .map((route) => ({ ...route, status: 'technical-placeholder' })),

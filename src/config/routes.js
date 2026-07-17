@@ -16,7 +16,6 @@ export const ROUTES = {
 export const FUTURE_ROUTES = [
   { path: ROUTES.links, label: 'Links' },
   { path: ROUTES.codigosDaMente, label: 'Códigos da Mente' },
-  { path: ROUTES.mindup, label: 'MindUp' },
   { path: ROUTES.mentoria, label: 'Mentoria' },
   { path: ROUTES.comunidade, label: 'Comunidade' },
   { path: ROUTES.imersao, label: 'Imersão' },
