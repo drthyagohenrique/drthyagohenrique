@@ -2157,6 +2157,9 @@
 .mu-store-modal__dialog {
   position: relative;
   width: min(100%, 480px);
+  box-sizing: border-box;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
   padding: clamp(30px, 6vw, 48px);
   border: 1px solid rgb(255 255 255 / 0.28);
   border-radius: 24px;
@@ -2368,12 +2371,66 @@
 
   .mu-section,
   .mu-app-section {
-    padding-block: 72px;
+    padding-block: 56px;
   }
 
   .mu-header .mu-logo {
+    display: flex;
+    align-items: center;
+    width: 96px;
+    height: 44px;
+  }
+
+  .mu-header .mu-logo img {
     width: 82px;
     height: 29px;
+  }
+
+  .mu-header .mu-button--small,
+  .mu-hero__actions .mu-button,
+  .mu-hero__actions .mu-link {
+    min-height: 44px;
+  }
+
+  .mu-hero__actions .mu-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mu-hero {
+    padding: 104px 0 56px;
+  }
+
+  .mu-hero__mock {
+    width: min(100%, 230px);
+  }
+
+  .mu-hero__toasts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .mu-hero__toasts > small,
+  .mu-hero__toasts .mu-toast:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .mu-hero__toasts .mu-toast {
+    gap: 8px;
+    padding: 10px 11px;
+    border-radius: 14px;
+  }
+
+  .mu-hero__toasts .mu-toast b {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .mu-hero__toasts .mu-toast em {
+    font-size: 11px;
+    line-height: 1.3;
   }
 
   .mu-hero__actions {
@@ -2382,13 +2439,17 @@
   }
 
   .mu-flow {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     margin-top: var(--mu-space-3);
   }
 
   .mu-flow li {
     padding: 10px 12px;
+  }
+
+  .mu-flow li:last-child {
+    grid-column: 1 / -1;
   }
 
   .mu-example {
@@ -2517,6 +2578,18 @@
 
   .mu-store-modal {
     padding: 14px;
+  }
+
+  .mu-store-modal__dialog {
+    width: 100%;
+    max-height: calc(100dvh - 28px);
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  .mu-store-modal__close {
+    width: 44px;
+    height: 44px;
   }
 }
 
