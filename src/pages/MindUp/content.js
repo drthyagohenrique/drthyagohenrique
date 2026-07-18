@@ -2,7 +2,7 @@ import { PRODUCTS } from '../../config/products.js';
 
 export const mindUpContent = {
   product: PRODUCTS.mindup,
-  realScreenLabel: 'Mockup em HTML baseado na interface do MindUp',
+  realScreenLabel: 'Demonstração da interface do MindUp',
   hero: {
     eyebrow: 'MindUp · Evolução pessoal adaptativa',
     headline: ['Você não precisa melhorar', 'tudo ao mesmo tempo.'],
@@ -13,11 +13,10 @@ export const mindUpContent = {
     cta: 'Baixar o MindUp',
     ctaSecondary: 'Ver como funciona',
     microcopy: 'Disponível para iOS e Android · R$ 29,90/mês',
-    image: { src: '/assets/mindup/01-home.png', alt: 'Tela inicial real do aplicativo MindUp', width: 1080, height: 1920 },
+    image: { src: '/assets/mindup/01-home.png', alt: 'Demonstração da tela inicial do aplicativo MindUp', width: 1080, height: 1920 },
     toasts: [
       { icon: 'checkCircle', title: 'Missão concluída!', desc: '+120 XP · Energia +8', tone: 'success' },
       { icon: 'zap', title: 'Novo nível alcançado', desc: 'Seu avatar evoluiu', tone: 'xp' },
-      { icon: 'flame', title: 'Sequência de 7 dias!', desc: 'Você está em sequência', tone: 'streak' },
     ],
   },
   direction: {
@@ -56,8 +55,8 @@ export const mindUpContent = {
     title: 'Uma ação pequena. Um caminho que começa a aparecer.',
     text: 'Registros rápidos ajudam a anotar como você está. Uma missão organiza o próximo passo. Ao concluir, a ação entra no histórico e passa a fazer parte da sua jornada.',
     screens: [
-      { image: { src: '/assets/mindup/06-checkin.png', alt: 'Tela real de registro do MindUp', width: 1080, height: 1920 }, title: 'Registre o momento', text: 'Energia, recuperação, foco e estado percebido.' },
-      { image: { src: '/assets/mindup/02-mission-detail.png', alt: 'Tela real de missão do MindUp', width: 1080, height: 1920 }, title: 'Receba uma missão', text: 'Um próximo passo ligado ao seu contexto.' },
+      { image: { src: '/assets/mindup/06-checkin.png', alt: 'Demonstração da tela de registro do MindUp', width: 1080, height: 1920 }, title: 'Registre o momento', text: 'Energia, recuperação, foco e estado percebido.' },
+      { image: { src: '/assets/mindup/02-mission-detail.png', alt: 'Demonstração da tela de missão do MindUp', width: 1080, height: 1920 }, title: 'Receba uma missão', text: 'Um próximo passo ligado ao seu contexto.' },
     ],
   },
   evolution: {
@@ -65,7 +64,7 @@ export const mindUpContent = {
     tag: 'Evolução visível',
     title: 'Seu caminho ganha forma.',
     text: 'Consistência pode parecer invisível quando você olha apenas para um dia. No MindUp, cada registro, missão e escolha passa a fazer parte de uma história que você consegue acompanhar.',
-    image: { src: '/assets/mindup/04-avatar-growth.png', alt: 'Tela real de árvore e crescimento do MindUp', width: 1080, height: 1920 },
+    image: { src: '/assets/mindup/04-avatar-growth.png', alt: 'Demonstração da tela de árvore e crescimento do MindUp', width: 1080, height: 1920 },
     stages: ['Semente', 'Broto', 'Muda', 'Jovem', 'Florescente', 'Madura', 'Lendária'],
     close: 'A árvore evolui conforme sua jornada ganha consistência. XP, sequência, atributos, histórico e linha do tempo ajudam a acompanhar esse percurso.',
   },
@@ -94,7 +93,7 @@ export const mindUpContent = {
         { icon: 'wind', name: 'Recuperação ativa', desc: 'Respiração, descanso e desaceleração.' },
       ],
     },
-    image: { src: '/assets/mindup/05-attributes.png', alt: 'Tela real de atributos do MindUp', width: 1080, height: 1920 },
+    image: { src: '/assets/mindup/05-attributes.png', alt: 'Demonstração da tela de atributos do MindUp', width: 1080, height: 1920 },
   },
   tools: {
     id: 'ferramentas',
@@ -106,8 +105,8 @@ export const mindUpContent = {
       { title: 'Para compreender melhor', items: [{ icon: 'bookOpen', label: 'Biblioteca' }, { icon: 'edit', label: 'Diário e reflexões' }] },
       { title: 'Para acompanhar e compartilhar', items: [{ icon: 'trendingUp', label: 'Histórico' }, { icon: 'users', label: 'Comunidade' }] },
     ],
-    focusImage: { src: '/assets/mindup/03-focus.png', alt: 'Tela real do Modo Foco do MindUp', width: 1080, height: 1920 },
-    libraryImage: { src: '/assets/mindup/07-content.png', alt: 'Tela real da biblioteca de conteúdos do MindUp', width: 1080, height: 1920 },
+    focusImage: { src: '/assets/mindup/03-focus.png', alt: 'Demonstração da tela do Modo Foco do MindUp', width: 1080, height: 1920 },
+    libraryImage: { src: '/assets/mindup/07-content.png', alt: 'Demonstração da biblioteca de conteúdos do MindUp', width: 1080, height: 1920 },
   },
   premium: {
     tag: 'Assinatura MindUp',

@@ -39,7 +39,7 @@ const MissionScreen = () => (
     <div className="mu-phone__mission-hero"><span><Icon name="moon" size={20} /></span><small>SONO</small><b>Sem tela 1h antes de dormir</b><p>Crie uma transição mais calma para encerrar o dia.</p></div>
     <div className="mu-phone__detail-row"><span><Icon name="clock" size={13} />60 min</span><span><Icon name="zap" size={13} />+80 XP</span></div>
     <div className="mu-phone__prompt"><small>POR QUE ISSO IMPORTA</small><p>Uma pausa de estímulos pode abrir espaço para uma rotina mais tranquila.</p></div>
-    <button className="mu-phone__primary" type="button">Começar missão <Icon name="arrowUpRight" size={13} /></button>
+    <button className="mu-phone__primary" type="button" tabIndex={-1} aria-hidden={true}>Começar missão <Icon name="arrowUpRight" size={13} /></button>
     <div className="mu-phone__check"><span /><b>Registrar o que aconteceu ao concluir</b></div>
     <BottomNav active="mission" />
   </>
@@ -50,7 +50,7 @@ const FocusScreen = () => (
     <ScreenHeader title="Modo Foco" action="×" />
     <div className="mu-phone__focus-copy"><small>SESSÃO ATUAL</small><b>Um espaço para o que importa.</b></div>
     <div className="mu-phone__focus-orb"><span>25:00</span><small>FOCO</small></div>
-    <div className="mu-phone__focus-actions"><button type="button">Pausar</button><span>↻</span></div>
+    <div className="mu-phone__focus-actions"><button type="button" tabIndex={-1} aria-hidden={true}>Pausar</button><span>↻</span></div>
     <div className="mu-phone__focus-note"><Icon name="leaf" size={14} /><span>Permita-se uma pausa quando terminar.</span></div>
     <BottomNav active="mission" />
   </>
@@ -88,7 +88,7 @@ const CheckinScreen = () => (
     <div className="mu-phone__checkin-progress"><span className="is-done" /><span className="is-done" /><span /><span /></div>
     <div className="mu-phone__checkin-question"><small>ENERGIA</small><b>Como está sua energia agora?</b><p>Não existe resposta certa. Registre o que percebe.</p></div>
     <div className="mu-phone__scale"><span>Baixa</span><i><b>1</b><b>2</b><b className="is-selected">3</b><b>4</b><b>5</b></i><span>Alta</span></div>
-    <button className="mu-phone__primary" type="button">Continuar <Icon name="arrowUpRight" size={13} /></button>
+    <button className="mu-phone__primary" type="button" tabIndex={-1} aria-hidden={true}>Continuar <Icon name="arrowUpRight" size={13} /></button>
     <BottomNav active="home" />
   </>
 );
@@ -128,7 +128,7 @@ const kindFromImage = (image) => {
 export const MindUpMockup = ({ image }) => {
   const kind = kindFromImage(image);
   const Screen = screens[kind] || HomeScreen;
-  return <div className={'mu-phone mu-phone--' + kind} role="img" aria-label={image?.alt || 'Mockup da interface do MindUp'}><Screen /></div>;
+  return <div className={'mu-phone mu-phone--' + kind} role="img" aria-label={image?.alt || 'Demonstração da interface do MindUp'}><Screen /></div>;
 };
 
 export default MindUpMockup;

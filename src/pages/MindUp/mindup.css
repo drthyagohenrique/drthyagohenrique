@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap');
+
 /* MindUp — landing híbrida.
    Casca clara (identidade Fluence: vidro, pastel, gradiente lilás) +
    seções do app em dark usando o MindUp Design System v1.0
-   (surfaces #080818/#0F0F24, roxo #6C3BFF, teal #00C9A7, Syne, JetBrains Mono).
-   Componentes do app (missão, check-in, atributos, toasts, XP) são recriados
-   ao vivo em HTML — sempre com a nota "interface ilustrativa". */
+   (surfaces #080818/#0F0F24, roxo #6C3BFF, teal #00C9A7 e JetBrains Mono).
+   Componentes do app são recriados em HTML como demonstrações da interface. */
 
-.mindup-page {
+.mindup-download-scope {
   /* Casca clara (Fluence) */
   --mu-color-black: #000;
   --mu-color-white: #fff;
@@ -43,7 +45,7 @@
   --ds-glow-purple: 0 0 24px rgba(108, 59, 255, 0.35);
   --ds-glow-teal: 0 0 24px rgba(0, 201, 167, 0.35);
   --ds-glow-gold: 0 0 16px rgba(255, 215, 0, 0.3);
-  --ds-font-display: 'Syne', 'General Sans', sans-serif;
+  --ds-font-display: 'General Sans', 'Inter', Arial, sans-serif;
   --ds-font-mono: var(--mu-font-mono);
 
   /* Compartilhado */
@@ -65,6 +67,11 @@
   --mu-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --mu-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
+  color: var(--mu-text);
+  font-family: var(--mu-font-display);
+}
+
+.mindup-page {
   min-height: 100vh;
   background: var(--mu-color-page);
   color: var(--mu-text);
@@ -76,6 +83,17 @@
 
 .mindup-page * {
   box-sizing: border-box;
+}
+
+.mindup-page main > section[id] {
+  scroll-margin-top: 104px;
+}
+
+.mindup-download-scope a:focus-visible,
+.mindup-download-scope button:focus-visible,
+.mindup-download-scope summary:focus-visible {
+  outline: 3px solid rgb(118 89 232 / 0.5);
+  outline-offset: 4px;
 }
 
 /* Grain sutil sobre a página inteira (acabamento premium). */
@@ -329,23 +347,18 @@
 }
 
 .mu-logo {
-  position: relative;
   display: block;
   flex: 0 0 auto;
   width: 97px;
-  height: 32px;
-  overflow: hidden;
+  height: 34px;
   text-decoration: none;
 }
 
 .mu-logo img {
-  position: absolute;
-  top: -31px;
-  left: -31px;
   display: block;
-  width: 158px;
-  max-width: none;
-  height: 106px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Hero full-bleed com vídeo ----------------------------------------------- */
@@ -359,6 +372,7 @@
   overflow: hidden;
 }
 
+.mu-hero__poster,
 .mu-hero__video {
   position: absolute;
   inset: -6% 0;
@@ -366,6 +380,10 @@
   height: 112%;
   object-fit: cover;
   z-index: 0;
+}
+
+.mu-hero__poster {
+  display: block;
 }
 
 .mu-hero__scrim {
@@ -528,6 +546,11 @@
     #0b0b20;
   color: var(--ds-text);
   font-family: var(--mu-font-ui);
+}
+
+.mu-phone,
+.mu-phone button {
+  pointer-events: none;
 }
 
 .mu-phone__status,
@@ -928,8 +951,8 @@
 }
 
 .mu-flow {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--mu-space-2);
   padding: 0;
   margin-top: var(--mu-space-4);
@@ -996,18 +1019,39 @@
   margin-top: var(--mu-space-1);
 }
 
-/* Passos ------------------------------------------------------------------- */
+/* Exemplo do mecanismo ------------------------------------------------------ */
+
+.mu-example {
+  margin-top: var(--mu-space-3);
+  padding: 20px;
+  border: 1px solid rgb(255 255 255 / 0.86);
+  border-radius: var(--mu-radius-card);
+  background: rgb(255 255 255 / 0.48);
+  box-shadow: var(--mu-shadow-card);
+}
+
+.mu-example__label {
+  margin: 0;
+  color: var(--mu-accent);
+  font: 500 10px var(--mu-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 .mu-step-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--mu-space-3);
-  margin-top: var(--mu-space-4);
+  gap: var(--mu-space-2);
+  margin-top: var(--mu-space-2);
 }
 
 .mu-step-grid article {
-  padding: 30px 28px;
-  background: rgb(255 255 255 / 0.8);
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--mu-space-2);
+  padding: 16px;
+  background: rgb(255 255 255 / 0.7);
   border: 1px solid rgb(255 255 255 / 0.9);
   border-radius: var(--mu-radius-card);
   box-shadow: var(--mu-shadow-card);
@@ -1023,21 +1067,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
   color: var(--mu-accent);
   background: linear-gradient(135deg, rgb(211 123 255 / 0.18), rgb(128 169 252 / 0.16));
 }
 
 .mu-step-grid h3 {
-  font: 600 26px var(--mu-font-display);
-  margin: 14px 0 10px;
+  font: 600 18px var(--mu-font-display);
+  margin: 0 0 6px;
 }
 
 .mu-step-grid p {
   color: var(--mu-text-muted);
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -1551,16 +1596,36 @@
 /* Marquee de missões (strip full-bleed no topo da seção do app) ---------------- */
 
 .mu-marquee {
+  position: relative;
   overflow: hidden;
   margin-bottom: clamp(56px, 7vw, 88px);
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
+.mu-marquee__control {
+  position: absolute;
+  z-index: 2;
+  top: 54px;
+  right: 18px;
+  padding: 7px 10px;
+  border: 1px solid var(--ds-border);
+  border-radius: 999px;
+  background: rgb(15 15 36 / 0.88);
+  color: var(--ds-text-secondary);
+  font: 500 10px var(--mu-font-ui);
+  cursor: pointer;
+}
+
 .mu-marquee__track {
   display: flex;
   width: max-content;
   animation: mu-marquee 32s linear infinite;
+}
+
+.mu-marquee.is-paused .mu-marquee__track,
+.mu-marquee:focus-within .mu-marquee__track {
+  animation-play-state: paused;
 }
 
 .mu-marquee__set {
@@ -1692,7 +1757,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--mu-space-3);
-  margin: var(--mu-space-4) 0;
+  margin: 28px 0 0;
   text-align: left;
 }
 
@@ -1746,6 +1811,10 @@
   color: var(--ds-text-secondary);
 }
 
+.mu-premium__offer {
+  margin-top: var(--mu-space-3);
+}
+
 .mu-premium__price b {
   font: 600 clamp(22px, 3vw, 28px) var(--ds-font-mono);
   color: var(--ds-text);
@@ -1755,7 +1824,7 @@
 .mu-premium__note {
   display: block;
   margin-top: var(--mu-space-2);
-  color: var(--ds-text-muted);
+  color: var(--ds-text-secondary);
   font: 400 12px var(--mu-font-ui);
 }
 
@@ -1896,14 +1965,7 @@
 
 .mu-footer .mu-logo {
   width: 110px;
-  height: 36px;
-}
-
-.mu-footer .mu-logo img {
-  top: -35px;
-  left: -35px;
-  width: 180px;
-  height: 120px;
+  height: 39px;
 }
 
 /* Seções condensadas ------------------------------------------------------------ */
@@ -1986,6 +2048,71 @@
 
 .mu-pillar-groups {
   margin-top: var(--mu-space-4);
+}
+
+.mu-pillar-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--mu-space-3);
+  margin-top: var(--mu-space-3);
+}
+
+.mu-pillar-summary {
+  padding: 22px;
+  border: 1px solid rgb(255 255 255 / 0.88);
+  border-radius: var(--mu-radius-card);
+  background: rgb(255 255 255 / 0.72);
+  box-shadow: var(--mu-shadow-card);
+}
+
+.mu-pillar-summary .mu-pillar-group {
+  margin: 0 0 16px;
+}
+
+.mu-pillar-summary ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.mu-pillar-summary li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 9px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.58);
+}
+
+.mu-pillar-summary li .mu-pillar__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+}
+
+.mu-pillar-summary.is-body li .mu-pillar__icon {
+  color: #00775f;
+  background: rgba(0, 201, 167, 0.12);
+}
+
+.mu-pillar-summary li b,
+.mu-pillar-summary li small {
+  display: block;
+}
+
+.mu-pillar-summary li b {
+  font: 600 13px / 1.25 var(--mu-font-display);
+}
+
+.mu-pillar-summary li small {
+  margin-top: 3px;
+  color: var(--mu-text-muted);
+  font: 400 11px / 1.35 var(--mu-font-ui);
 }
 
 .mu-tools-layout {
@@ -2162,7 +2289,14 @@
     margin-top: var(--mu-space-3);
   }
 
-  .mu-step-grid,
+  .mu-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mu-step-grid {
+    grid-template-columns: 1fr;
+  }
+
   .mu-pillar-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2222,16 +2356,18 @@
 }
 
 @media (max-width: 560px) {
-  .mu-header .mu-logo {
-    width: 88px;
-    height: 29px;
+  .mindup-page main > section[id] {
+    scroll-margin-top: 88px;
   }
 
-  .mu-header .mu-logo img {
-    top: -29px;
-    left: -28px;
-    width: 145px;
-    height: 97px;
+  .mu-section,
+  .mu-app-section {
+    padding-block: 72px;
+  }
+
+  .mu-header .mu-logo {
+    width: 82px;
+    height: 29px;
   }
 
   .mu-hero__actions {
@@ -2239,10 +2375,125 @@
     gap: var(--mu-space-2);
   }
 
-  .mu-step-grid,
+  .mu-flow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: var(--mu-space-3);
+  }
+
+  .mu-flow li {
+    padding: 10px 12px;
+  }
+
+  .mu-example {
+    padding: 14px;
+    margin-top: 18px;
+  }
+
+  .mu-step-grid {
+    gap: 8px;
+  }
+
+  .mu-step-grid article {
+    grid-template-columns: 34px minmax(0, 1fr);
+    padding: 12px;
+  }
+
+  .mu-step-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mu-step-grid h3 {
+    font-size: 16px;
+  }
+
+  .mu-inline-cta {
+    padding: 16px;
+  }
+
   .mu-pillar-grid,
   .mu-milestones {
     grid-template-columns: 1fr;
+  }
+
+  .mu-pillar-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: var(--mu-space-3);
+  }
+
+  .mu-pillar-summary {
+    padding: 14px;
+  }
+
+  .mu-pillar-summary ul {
+    gap: 6px;
+  }
+
+  .mu-pillar-summary li {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 7px;
+    padding: 8px 6px;
+  }
+
+  .mu-pillar-summary li .mu-pillar__icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .mu-pillar-summary li small {
+    display: none;
+  }
+
+  .mu-pillar-summary li b {
+    font-size: 12px;
+  }
+
+  .mu-premium__card {
+    padding: 28px 18px;
+  }
+
+  .mu-premium__offer {
+    margin-top: 18px;
+  }
+
+  .mu-premium__price {
+    margin-bottom: 16px;
+  }
+
+  .mu-premium__price b {
+    display: block;
+    margin: 6px 0 0;
+  }
+
+  .mu-premium__columns {
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .mu-premium__columns > div {
+    padding: 13px 14px;
+  }
+
+  .mu-premium__columns b {
+    margin-bottom: 8px;
+  }
+
+  .mu-premium__columns ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .mu-premium__columns li {
+    align-items: flex-start;
+    font-size: 12px;
+  }
+
+  .mu-marquee__control {
+    top: 50px;
+    right: 8px;
   }
 
   .mu-cycle__screens {
@@ -2302,6 +2553,10 @@
   }
 
   .mu-marquee__set[aria-hidden='true'] {
+    display: none;
+  }
+
+  .mu-marquee__control {
     display: none;
   }
 }

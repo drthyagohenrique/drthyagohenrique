@@ -198,16 +198,19 @@ const XpBar = ({ xpBar }) => (
 
 /* ── Header / Hero ───────────────────────────────────────────────────── */
 
-const Logo = () => (
-  <Link to="/" className="mu-logo" aria-label="Voltar para a página inicial">
-    <img src="/assets/mindup/ChatGPT Image 17 de jul. de 2026, 20_22_46.png" alt="MindUp" />
-  </Link>
-);
+const Logo = ({ toTop = false }) => {
+  const image = <img src="/assets/mindup/mindup-logo.png" alt="MindUp" width="480" height="168" />;
+  return toTop ? (
+    <a href="#top" className="mu-logo" aria-label="Voltar ao início da página MindUp">{image}</a>
+  ) : (
+    <Link to="/" className="mu-logo" aria-label="Voltar para a página inicial">{image}</Link>
+  );
+};
 
 const Header = () => (
   <header className="mu-header">
     <div className="mu-header__bar">
-      <Logo />
+      <Logo toTop />
       <nav aria-label="Seções da página">
         <a href="#como">Como funciona</a>
         <a href="#missao">O app</a>
@@ -223,30 +226,57 @@ const Header = () => (
 
 const Hero = () => {
   const videoRef = React.useRef(null);
+  const [shouldPlayVideo, setShouldPlayVideo] = React.useState(false);
 
-  // Câmera lenta (0.5x): playbackRate não existe como atributo HTML.
+  React.useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = navigator.connection;
+    const updatePlaybackPreference = () => setShouldPlayVideo(window.innerWidth > 900 && !motionQuery.matches && !connection?.saveData);
+    updatePlaybackPreference();
+    motionQuery.addEventListener?.('change', updatePlaybackPreference);
+    connection?.addEventListener?.('change', updatePlaybackPreference);
+    window.addEventListener('resize', updatePlaybackPreference);
+    return () => {
+      motionQuery.removeEventListener?.('change', updatePlaybackPreference);
+      connection?.removeEventListener?.('change', updatePlaybackPreference);
+      window.removeEventListener('resize', updatePlaybackPreference);
+    };
+  }, []);
+
   React.useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     video.defaultPlaybackRate = 0.5;
     video.playbackRate = 0.5;
-  }, []);
+  }, [shouldPlayVideo]);
 
   return (
-    <section className="mu-hero">
-      <video
-        ref={videoRef}
-        className="mu-hero__video"
-        src="/assets/mindup/fundo-hero-mindup.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        tabIndex={-1}
+    <section className="mu-hero" id="top">
+      <img
+        className="mu-hero__poster"
+        src="/assets/mindup/mindup-hero-poster.jpg"
+        alt=""
+        width="1024"
+        height="500"
+        fetchPriority="high"
         aria-hidden={true}
       />
+      {shouldPlayVideo && (
+        <video
+          ref={videoRef}
+          className="mu-hero__video"
+          src="/assets/mindup/fundo-hero-mindup.mp4"
+          poster="/assets/mindup/mindup-hero-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          disablePictureInPicture
+          tabIndex={-1}
+          aria-hidden={true}
+        />
+      )}
       <div className="mu-hero__scrim" aria-hidden={true} />
       <div className="mu-container mu-hero__grid">
         <div className="mu-hero__content">
@@ -282,7 +312,7 @@ const Hero = () => {
 /* ── Seções claras ───────────────────────────────────────────────────── */
 
 const Direction = () => (
-  <section className="mu-section mu-orbs" id="como">
+  <section className="mu-section mu-orbs" id="problema">
     <div className="mu-container mu-reveal">
       <Tag>{content.direction.tag}</Tag>
       <h2>{content.direction.title}</h2>
@@ -292,7 +322,7 @@ const Direction = () => (
 );
 
 const Steps = () => (
-  <section className="mu-section mu-section--tint mu-orbs">
+  <section className="mu-section mu-section--tint mu-orbs" id="como">
     <div className="mu-container mu-reveal">
       <Tag>{content.steps.tag}</Tag>
       <h2>
@@ -305,16 +335,18 @@ const Steps = () => (
           <li key={step}>{step}</li>
         ))}
       </ol>
-      <div className="mu-step-grid">
-        {content.steps.items.map((item) => (
-          <article key={item.title}>
-            <span className="mu-step-icon" aria-hidden={true}>
-              <Icon name={item.icon} size={22} />
-            </span>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
+      <div className="mu-example">
+        <p className="mu-example__label">Exemplo de uso</p>
+        <div className="mu-step-grid">
+          {content.steps.items.map((item) => (
+            <article key={item.title}>
+              <span className="mu-step-icon" aria-hidden={true}>
+                <Icon name={item.icon} size={19} />
+              </span>
+              <div><h3>{item.title}</h3><p>{item.text}</p></div>
+            </article>
+          ))}
+        </div>
       </div>
       <div className="mu-inline-cta">
         <h3>{content.steps.ctaTitle}</h3>
@@ -326,24 +358,30 @@ const Steps = () => (
 
 /* ── Seções do app (dark, tokens do DS) ──────────────────────────────── */
 
-const MissionTicker = () => (
-  <div className="mu-marquee" aria-hidden={true}>
-    <div className="mu-marquee__track">
-      {[0, 1].map((copy) => (
-        <div className="mu-marquee__set" key={copy} aria-hidden={copy === 1}>
-          {content.missionTicker.map((item) => (
-            <span key={item.label}>
-              <Icon name={item.icon} size={14} /> {item.label}
-              <b>
-                <Icon name="zap" size={10} /> {item.xp}
-              </b>
-            </span>
-          ))}
-        </div>
-      ))}
+const MissionTicker = () => {
+  const [paused, setPaused] = React.useState(false);
+  return (
+    <div className={paused ? 'mu-marquee is-paused' : 'mu-marquee'} role="region" aria-label="Exemplos de missões do MindUp">
+      <button type="button" className="mu-marquee__control" aria-pressed={paused} onClick={() => setPaused((current) => !current)}>
+        {paused ? 'Retomar animação' : 'Pausar animação'}
+      </button>
+      <div className="mu-marquee__track">
+        {[0, 1].map((copy) => (
+          <div className="mu-marquee__set" key={copy} role={copy === 0 ? 'list' : undefined} aria-hidden={copy === 1 ? true : undefined}>
+            {content.missionTicker.map((item) => (
+              <span key={item.label} role={copy === 0 ? 'listitem' : undefined}>
+                <Icon name={item.icon} size={14} /> {item.label}
+                <b>
+                  <Icon name="zap" size={10} /> {item.xp}
+                </b>
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Mission = () => (
   <section className="mu-app-section" id={content.mission.id}>
@@ -570,18 +608,19 @@ const PillarsAndAttributes = () => (
         <div className="mu-feature__copy"><Tag>{content.pillars.tag}</Tag><h2>{content.pillars.title}</h2><p>{content.pillars.text}</p></div>
         <div className="mu-stage mu-stage--compact"><Device image={content.pillars.image} /><UiNote /></div>
       </div>
-      <div className="mu-pillar-groups">
+      <div className="mu-pillar-summary-grid">
         {[content.pillars.mind, content.pillars.body].map((group, groupIndex) => (
-          <div key={group.label}>
+          <section key={group.label} className={groupIndex === 1 ? 'mu-pillar-summary is-body' : 'mu-pillar-summary'}>
             <h3 className={groupIndex === 1 ? 'mu-pillar-group is-body' : 'mu-pillar-group'}><Icon name={group.icon} size={16} /> {group.label}</h3>
-            <div className="mu-pillar-grid">
+            <ul>
               {group.items.map((item) => (
-                <article key={item.name} className={groupIndex === 1 ? 'mu-pillar is-body' : 'mu-pillar'}>
-                  <span className="mu-pillar__icon" aria-hidden={true}><Icon name={item.icon} size={20} /></span><b>{item.name}</b><p>{item.desc}</p>
-                </article>
+                <li key={item.name}>
+                  <span className="mu-pillar__icon" aria-hidden={true}><Icon name={item.icon} size={17} /></span>
+                  <span><b>{item.name}</b><small>{item.desc}</small></span>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </section>
         ))}
       </div>
     </div>
@@ -618,6 +657,15 @@ const Premium = () => (
           <Icon name="sparkles" size={12} /> {content.premium.badge}
         </span>
         <h2>{content.premium.title}</h2>
+        <div className="mu-premium__offer">
+          <p className="mu-premium__price">
+            {content.premium.priceLine} <b>{content.premium.price}</b>
+          </p>
+          <MindUpDownloadCta source="premium" className="mu-button mu-button--light">
+            {content.premium.cta}
+          </MindUpDownloadCta>
+          <small className="mu-premium__note">{content.premium.microcopy}</small>
+        </div>
         <div className="mu-premium__columns">
           {content.premium.columns.map((column) => (
             <div key={column.title}>
@@ -635,13 +683,6 @@ const Premium = () => (
             </div>
           ))}
         </div>
-        <p className="mu-premium__price">
-          {content.premium.priceLine} <b>{content.premium.price}</b>
-        </p>
-        <MindUpDownloadCta source="premium" className="mu-button mu-button--light">
-          {content.premium.cta}
-        </MindUpDownloadCta>
-        <small className="mu-premium__note">{content.premium.microcopy}</small>
       </div>
     </div>
   </section>
@@ -734,7 +775,8 @@ const MindUpPage = () => {
         imageWidth={512}
         imageHeight={512}
         imageAlt="MindUp — aplicativo de evolução pessoal adaptativa, por Dr. Thyago Henrique"
-        favicon="/assets/mindup/logo-google.png"
+        favicon="/assets/mindup/mindup-favicon-64.png"
+        touchIcon="/assets/mindup/mindup-apple-touch-icon.png"
         faviconType="image/png"
         twitterCard="summary"
         jsonLd={{
