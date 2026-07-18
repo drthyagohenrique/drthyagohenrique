@@ -10,6 +10,7 @@ import LegalPage from '../pages/Legal/LegalPage.jsx';
 import { ROUTES } from '../config/routes.js';
 
 const InstitutionalPage = lazy(() => import('../pages/Institutional/InstitutionalPage.jsx'));
+const LinksPage = lazy(() => import('../pages/Links/LinksPage.jsx'));
 const NeuroCalmaPage = lazy(() => import('../pages/NeuroCalma/NeuroCalmaPage.jsx'));
 const MindUpPage = lazy(() => import('../pages/MindUp/MindUpPage.jsx'));
 
@@ -72,6 +73,7 @@ const AppRoutes = () => (
     <Suspense fallback={<div className="route-loading">Carregando...</div>}>
       <Routes>
         <Route path={routeConfig.home.path} element={<InstitutionalPage />} />
+        <Route path={routeConfig.links.path} element={<LinksPage />} />
         <Route path={routeConfig.neurocalma.path} element={<NeuroCalmaPage />} />
         <Route path={routeConfig.mindup.path} element={<MindUpPage />} />
         <Route path={ROUTES.privacy} element={<LegalPage page="privacy" />} />

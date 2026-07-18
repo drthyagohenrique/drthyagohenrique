@@ -5,6 +5,10 @@ export const routeConfig = {
     path: ROUTES.institutional,
     status: 'published',
   },
+  links: {
+    path: ROUTES.links,
+    status: 'published',
+  },
   neurocalma: {
     path: ROUTES.neurocalma,
     status: 'pre-launch',
@@ -14,6 +18,6 @@ export const routeConfig = {
     status: 'published',
   },
   future: FUTURE_ROUTES
-    .filter((route) => ![ROUTES.privacy, ROUTES.terms].includes(route.path))
+    .filter((route) => ![ROUTES.links, ROUTES.privacy, ROUTES.terms].includes(route.path))
     .map((route) => ({ ...route, status: 'technical-placeholder' })),
 };
