@@ -231,7 +231,7 @@ const Hero = () => {
   React.useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const connection = navigator.connection;
-    const updatePlaybackPreference = () => setShouldPlayVideo(window.innerWidth > 900 && !motionQuery.matches && !connection?.saveData);
+    const updatePlaybackPreference = () => setShouldPlayVideo(!motionQuery.matches && !connection?.saveData);
     updatePlaybackPreference();
     motionQuery.addEventListener?.('change', updatePlaybackPreference);
     connection?.addEventListener?.('change', updatePlaybackPreference);
