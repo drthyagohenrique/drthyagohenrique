@@ -17,6 +17,7 @@ export const mindUpContent = {
     toasts: [
       { icon: 'checkCircle', title: 'Missão concluída!', desc: '+120 XP · Energia +8', tone: 'success' },
       { icon: 'zap', title: 'Novo nível alcançado', desc: 'Seu avatar evoluiu', tone: 'xp' },
+      { icon: 'flame', title: 'Sequência de 7 dias!', desc: 'Você está indo bem.', tone: 'streak' },
     ],
   },
   direction: {
