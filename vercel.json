@@ -1,7 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/((?!assets/|favicon.svg|favicon-32.png|apple-touch-icon.png).*)",
+      "source": "/mindup",
+      "destination": "/mindup.html"
+    },
+    {
+      "source": "/mindup/",
+      "destination": "/mindup.html"
+    },
+    {
+      "source": "/((?!assets/|mindup.html|favicon.svg|favicon-32.png|apple-touch-icon.png).*)",
       "destination": "/index.html"
     }
   ]

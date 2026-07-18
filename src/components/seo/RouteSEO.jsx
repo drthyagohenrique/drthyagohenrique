@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BRAND } from '../../config/brand.js';
 
@@ -26,6 +26,7 @@ const RouteSEO = ({
   type = 'website',
   favicon = '/favicon.svg',
   faviconType = 'image/svg+xml',
+  touchIcon = favicon,
   twitterCard = 'summary_large_image',
   jsonLd,
 }) => {
@@ -79,7 +80,7 @@ const RouteSEO = ({
       touchIconNode.dataset.routeTouchIcon = 'true';
       document.head.appendChild(touchIconNode);
     }
-    touchIconNode.setAttribute('href', favicon);
+    touchIconNode.setAttribute('href', touchIcon);
 
     document.head.querySelectorAll('script[data-route-jsonld="true"]').forEach((node) => node.remove());
     if (jsonLd) {
@@ -89,7 +90,7 @@ const RouteSEO = ({
       script.text = JSON.stringify(jsonLd);
       document.head.appendChild(script);
     }
-  }, [canonical, description, favicon, faviconType, imageAlt, imageHeight, imageUrl, imageWidth, jsonLd, robots, title, twitterCard, type]);
+  }, [canonical, description, favicon, faviconType, imageAlt, imageHeight, imageUrl, imageWidth, jsonLd, robots, title, touchIcon, twitterCard, type]);
 
   return (
     <Helmet>
