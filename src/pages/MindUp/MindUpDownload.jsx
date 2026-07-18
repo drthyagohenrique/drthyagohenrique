@@ -1,4 +1,5 @@
 import React from 'react';
+import { track as trackVercel } from '@vercel/analytics';
 import { mindUpContent } from './content.js';
 
 const DownloadContext = React.createContext(null);
@@ -24,12 +25,15 @@ const detectStore = () => {
 const metadata = (source, store) => {
   const params = new URLSearchParams(window.location.search);
   const detectedStore = detectStore();
+  const width = window.innerWidth;
+  const viewportCategory = width < 640 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
   return {
     source,
     store: store || null,
     detected_os: detectedStore === 'appStore' ? 'ios' : detectedStore === 'googlePlay' ? 'android' : 'unknown',
-    device: navigator.userAgent || 'unknown',
-    viewport: String(window.innerWidth) + 'x' + String(window.innerHeight),
+    device: detectedStore ? 'mobile' : viewportCategory,
+    viewport_category: viewportCategory,
+    viewport: String(width) + 'x' + String(window.innerHeight),
     pathname: window.location.pathname,
     utm_source: params.get('utm_source') || undefined,
     utm_medium: params.get('utm_medium') || undefined,
@@ -39,6 +43,7 @@ const metadata = (source, store) => {
 
 const track = (event, properties) => {
   try {
+    trackVercel(event, properties);
     const payload = { event, ...properties };
     window.dataLayer?.push(payload);
     window.dispatchEvent(new CustomEvent('mindup:analytics', { detail: payload }));
@@ -54,7 +59,10 @@ const StoreModal = ({ state, onClose, onStoreClick }) => {
   React.useEffect(() => {
     if (!state) return undefined;
     const previousOverflow = document.body.style.overflow;
-    const focusTimer = window.setTimeout(() => closeRef.current?.focus(), 0);
+    const focusTimer = window.setTimeout(() => {
+      const firstStore = dialogRef.current?.querySelector('.mu-store-modal__store:not(:disabled)');
+      (firstStore || closeRef.current)?.focus();
+    }, 0);
     document.body.style.overflow = 'hidden';
 
     const onKeyDown = (event) => {
@@ -104,7 +112,7 @@ const StoreModal = ({ state, onClose, onStoreClick }) => {
           {stores.map((store) => {
             const available = Boolean(mindUpContent.product.storeUrls?.[store.key]);
             return (
-              <button key={store.key} type="button" className="mu-store-modal__store" onClick={() => onStoreClick(store.key)} disabled={!available}>
+              <button key={store.key} type="button" className="mu-store-modal__store" onClick={() => onStoreClick(store.key, state.source)} disabled={!available}>
                 {store.label} <span aria-hidden={true}>→</span>
                 {!available && <small>Link oficial pendente de configuração</small>}
               </button>
@@ -123,8 +131,13 @@ export const MindUpDownloadProvider = ({ children }) => {
 
   const closeModal = React.useCallback(() => {
     setModalState(null);
-    previousFocusRef.current?.focus?.();
   }, []);
+
+  React.useEffect(() => {
+    if (modalState || !previousFocusRef.current) return undefined;
+    const focusTimer = window.setTimeout(() => previousFocusRef.current?.focus?.(), 0);
+    return () => window.clearTimeout(focusTimer);
+  }, [modalState]);
 
   const openModal = React.useCallback((source, detectedStore) => {
     track('mindup_store_modal_open', metadata(source, detectedStore));
@@ -144,24 +157,28 @@ export const MindUpDownloadProvider = ({ children }) => {
     window.location.assign(url);
   }, [openModal]);
 
-  const selectStore = React.useCallback((store) => {
+  const selectStore = React.useCallback((store, source) => {
     const url = mindUpContent.product.storeUrls?.[store];
     if (!url) return;
-    track(storeEvent[store], metadata('modal', store));
+    track(storeEvent[store], { ...metadata(source, store), selection_method: 'manual' });
     window.location.assign(url);
   }, []);
 
   return (
     <DownloadContext.Provider value={{ startDownload }}>
-      {children}
-      <StoreModal state={modalState} onClose={closeModal} onStoreClick={selectStore} />
+      <div className="mindup-download-scope">
+        <div className="mindup-download-content" aria-hidden={modalState ? true : undefined} inert={modalState ? true : undefined}>
+          {children}
+        </div>
+        <StoreModal state={modalState} onClose={closeModal} onStoreClick={selectStore} />
+      </div>
     </DownloadContext.Provider>
   );
 };
 
 export const MindUpDownloadCta = ({ source, className = 'mu-button', children }) => {
   const { startDownload } = React.useContext(DownloadContext);
-  return <button type="button" className={className} onClick={(event) => startDownload(source, event)}>{children} <span aria-hidden={true}>→</span></button>;
+  return <button type="button" className={className} data-download-source={source} onClick={(event) => startDownload(source, event)}>{children} <span aria-hidden={true}>→</span></button>;
 };
 
 export { detectStore };

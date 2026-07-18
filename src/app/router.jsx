@@ -1,6 +1,7 @@
-﻿import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
 import { routeConfig } from './route-config.js';
 import RouteSEO from '../components/seo/RouteSEO.jsx';
 import TechnicalPlaceholderPage from '../pages/TechnicalPlaceholder/TechnicalPlaceholderPage.jsx';
@@ -16,11 +17,32 @@ const ScrollRestoration = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      document.querySelector(hash)?.scrollIntoView();
-      return;
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      return undefined;
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+    let frameId;
+    let attempts = 0;
+    let cancelled = false;
+    const targetId = decodeURIComponent(hash.slice(1));
+
+    const scrollToHash = () => {
+      if (cancelled) return;
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ block: 'start', behavior: 'auto' });
+        return;
+      }
+      attempts += 1;
+      if (attempts < 60) frameId = window.requestAnimationFrame(scrollToHash);
+    };
+
+    frameId = window.requestAnimationFrame(scrollToHash);
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frameId);
+    };
   }, [pathname, hash]);
 
   return null;
@@ -37,6 +59,12 @@ const FutureRoute = ({ label }) => (
     <TechnicalPlaceholderPage label={label} />
   </div>
 );
+
+const VercelAnalytics = () => {
+  const hostname = window.location.hostname;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') return null;
+  return <Analytics />;
+};
 
 const AppRoutes = () => (
   <>
@@ -62,6 +90,7 @@ const AppRouter = () => (
     <BrowserRouter>
       <AppRoutes />
     </BrowserRouter>
+    <VercelAnalytics />
   </HelmetProvider>
 );
 
