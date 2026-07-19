@@ -376,6 +376,50 @@
   filter: saturate(.9) brightness(.76);
 }
 
+.links-card--disabled {
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.links-card--disabled::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(8, 8, 13, .22);
+}
+
+.links-card--disabled:hover::after {
+  border-color: rgba(242, 244, 255, .16);
+}
+
+.links-card--disabled > img,
+.links-card--disabled:hover > img {
+  transform: none;
+  filter: grayscale(1) brightness(.46) contrast(1.06);
+}
+
+.links-card__coming-soon {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  padding: 14px 22px;
+  border: 1px solid rgba(242, 244, 255, .58);
+  border-radius: 999px;
+  background: rgba(8, 8, 13, .82);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .44);
+  color: var(--links-text);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(16px, 2.5vw, 24px);
+  font-weight: 800;
+  letter-spacing: .16em;
+  line-height: 1;
+  text-indent: .16em;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
 .links-card__veil {
   position: absolute;
   inset: 0;

@@ -98,6 +98,12 @@ const primaryLinks = [
     external: true,
   },
   {
+    label: 'Livro Domine o Jogo — em breve na Amazon',
+    image: '/assets/link-bio/livro-domine-o-jogo.webp',
+    imageAlt: 'Domine o Jogo — lançamento do primeiro livro do Dr. Thyago Henrique',
+    disabled: true,
+  },
+  {
     label: 'Saturação Neural',
     href: '/#saturacao-neural',
     image: '/assets/link-bio/saturacao-neural.webp',
@@ -123,14 +129,22 @@ const BioCard = ({ item, index }) => {
     <>
       <img src={item.image} alt={item.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
       <span className='links-visually-hidden'>{item.label}</span>
-      <span className='links-card__access' aria-hidden='true'><ArrowIcon /></span>
+      {item.disabled ? (
+        <span className='links-card__coming-soon' aria-hidden='true'>EM BREVE</span>
+      ) : (
+        <span className='links-card__access' aria-hidden='true'><ArrowIcon /></span>
+      )}
     </>
   );
   const sharedProps = {
-    className: 'links-card links-card--art',
+    className: `links-card links-card--art${item.disabled ? ' links-card--disabled' : ''}`,
     style: { '--card-order': index },
     'aria-label': item.label,
   };
+
+  if (item.disabled) {
+    return <article {...sharedProps} aria-disabled='true'>{content}</article>;
+  }
 
   if (item.external) {
     return <a {...sharedProps} href={item.href} target='_blank' rel='noreferrer'>{content}</a>;
@@ -162,7 +176,7 @@ const LinksPage = () => (
 
     <RouteSEO
       title='Links oficiais | Dr. Thyago Henrique'
-      description='Acesse consultas, NeuroCalma, MindUp, Códigos da Mente, Saturação Neural e palestras do Dr. Thyago Henrique.'
+      description='Acesse consultas, NeuroCalma, MindUp, Códigos da Mente, o próximo livro, Saturação Neural e palestras do Dr. Thyago Henrique.'
       path={ROUTES.links}
       image='/assets/og-image.jpg'
       imageAlt='Links oficiais do Dr. Thyago Henrique'
