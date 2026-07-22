@@ -22,18 +22,19 @@ export const mindUpContent = {
   direction: {
     tag: 'Pensado para você, não para todo mundo',
     title: 'Duas pessoas com o mesmo problema podem receber missões diferentes.',
-    text: 'A partir do seu perfil e dos sinais que você registra, o MindUp identifica prioridades e sugere missões possíveis para melhorar sono, foco, energia e regulação emocional — conectando mente e corpo em um único caminho.',
+    text: 'Dormir mal, perder o foco ou viver no automático não se resolve com a mesma receita para todas as pessoas. Por isso, o MindUp parte do seu perfil inicial e continua aprendendo com os seus registros. O sistema cruza esses sinais, identifica o que merece atenção agora e seleciona uma missão possível para o seu momento.',
   },
   steps: {
     tag: 'Um exemplo simples',
     title: ['Do seu momento', 'para um próximo passo.'],
+    // Numerado de 00 a 05: o passo zero acontece antes do ciclo diário começar.
     flow: [
-      'Você responde ao perfil inicial — o que te incomoda, sua rotina, seu momento',
-      'Você registra como está agora',
-      'O MindUp cruza o momento com o seu perfil',
-      'Uma prioridade pensada para você é identificada',
-      'Uma missão feita sob medida é sugerida',
-      'O progresso entra na sua jornada',
+      { title: 'O MindUp conhece o seu ponto de partida', text: 'Você responde ao perfil inicial e conta o que tem incomodado, como sono, foco, energia, estresse e rotina.' },
+      { title: 'Você registra como está agora', text: 'Um check-in rápido mostra como você dormiu, sua energia, seu foco e outros sinais do dia.' },
+      { title: 'O sistema cruza os sinais', text: 'O MindUp relaciona o seu registro atual ao perfil, ao histórico e às ações anteriores.' },
+      { title: 'Uma prioridade é identificada', text: 'Em vez de tratar tudo ao mesmo tempo, o sistema identifica o ponto que merece atenção primeiro.' },
+      { title: 'Uma missão é selecionada', text: 'Você recebe uma ação possível e coerente com o seu momento.' },
+      { title: 'A ação entra no seu progresso', text: 'Ao concluir a missão, o resultado entra no histórico e ajuda o MindUp a orientar os próximos passos.' },
     ],
     items: [
       { icon: 'userCheck', title: 'Perfil', text: 'No cadastro, você conta o que tem te incomodado: sono, foco, ansiedade, rotina. Isso vira a base que o MindUp usa para te entender.' },

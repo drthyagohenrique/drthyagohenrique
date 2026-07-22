@@ -982,7 +982,8 @@
   padding: 0;
   margin-top: var(--mu-space-4);
   list-style: none;
-  counter-reset: mu-flow;
+  /* -1 para o primeiro incremento cair em 00: o passo zero antecede o ciclo. */
+  counter-reset: mu-flow -1;
 }
 
 .mu-flow li,
@@ -996,13 +997,16 @@
   font-size: 14px;
 }
 
+/* Cada passo tem número, título e descrição: chip do número na primeira
+   coluna, texto empilhado na segunda. */
 .mu-flow li {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
-  align-items: center;
-  gap: 10px;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  row-gap: 6px;
+  padding: 18px;
   counter-increment: mu-flow;
-  font: 500 12px / 1.5 var(--mu-font-ui);
   transition: transform 380ms var(--mu-spring), box-shadow var(--mu-motion-fast) var(--mu-ease);
 }
 
@@ -1013,14 +1017,32 @@
 
 .mu-flow li::before {
   content: counter(mu-flow, decimal-leading-zero);
+  grid-row: 1;
+  grid-column: 1;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   font: 600 10px var(--ds-font-mono);
   color: var(--mu-color-white);
   background: var(--mu-gradient-brand);
+}
+
+.mu-flow li b {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: center;
+  font: 600 14px / 1.35 var(--mu-font-display);
+  letter-spacing: -0.01em;
+}
+
+.mu-flow li p {
+  grid-row: 2;
+  grid-column: 2;
+  margin: 0;
+  color: var(--mu-text-muted);
+  font: 400 13px / 1.6 var(--mu-font-ui);
 }
 
 .mu-chips {
@@ -2659,7 +2681,15 @@
   }
 
   .mu-flow li {
-    padding: 10px 12px;
+    padding: 14px;
+  }
+
+  .mu-flow li b {
+    font-size: 13px;
+  }
+
+  .mu-flow li p {
+    font-size: 12px;
   }
 
   .mu-example {

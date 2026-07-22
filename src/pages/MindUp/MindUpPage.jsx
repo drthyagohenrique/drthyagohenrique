@@ -336,7 +336,10 @@ const Steps = () => (
       </h2>
       <ol className="mu-flow">
         {content.steps.flow.map((step) => (
-          <li key={step}>{step}</li>
+          <li key={step.title}>
+            <b>{step.title}</b>
+            <p>{step.text}</p>
+          </li>
         ))}
       </ol>
       <div className="mu-example">
