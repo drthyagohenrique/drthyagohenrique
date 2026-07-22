@@ -22,7 +22,7 @@ export const mindUpContent = {
   direction: {
     tag: 'Pensado para você, não para todo mundo',
     title: 'Duas pessoas com o mesmo problema podem receber missões diferentes.',
-    text: 'Você já sabe que dormir mal, se distrair fácil ou viver no automático não se resolve com a mesma receita para todo mundo. Por isso o MindUp parte do seu perfil, respondido uma vez no cadastro, para interpretar o que você registra no dia a dia e decidir o que realmente merece virar uma missão para você.',
+    text: 'A partir do seu perfil e dos sinais que você registra, o MindUp identifica prioridades e sugere missões possíveis para melhorar sono, foco, energia e regulação emocional — conectando mente e corpo em um único caminho.',
   },
   steps: {
     tag: 'Um exemplo simples',
