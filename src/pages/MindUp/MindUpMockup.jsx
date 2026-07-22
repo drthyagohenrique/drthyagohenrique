@@ -125,7 +125,24 @@ const kindFromImage = (image) => {
   return 'home';
 };
 
-export const MindUpMockup = ({ image }) => {
+// `image.real` troca o mockup HTML pela captura de tela do aplicativo.
+// Telas cuja captura ainda tem defeito (conta de teste, acento faltando, estado vazio)
+// seguem no mockup até serem recapturadas — ver public/assets/mindup/PRINTS.md.
+export const MindUpMockup = ({ image, eager = false }) => {
+  if (image?.real && image.src) {
+    return (
+      <img
+        className="mu-phone__shot"
+        src={image.src}
+        alt={image.alt || 'Captura de tela do aplicativo MindUp'}
+        width={image.width}
+        height={image.height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    );
+  }
+
   const kind = kindFromImage(image);
   const Screen = screens[kind] || HomeScreen;
   return <div className={'mu-phone mu-phone--' + kind} role="img" aria-label={image?.alt || 'Demonstração da interface do MindUp'}><Screen /></div>;
