@@ -59,11 +59,9 @@ const useMindUpMotion = (rootRef) => {
         repeat: -1,
         delay: 1.8,
       });
-      gsap.to('.mu-hero__video', {
-        yPercent: 12,
-        ease: 'none',
-        scrollTrigger: { trigger: '.mu-hero', start: 'top top', end: 'bottom top', scrub: true },
-      });
+      // O parallax do fundo do hero não fica aqui: o <video> só é montado depois
+      // que o gate de reduced-motion/saveData resolve, e efeitos de filho rodam
+      // antes dos do pai — o seletor não encontraria nada. Ver useHeroParallax.
       gsap.utils.toArray('.mu-reveal').forEach((el) => {
         gsap.from(el, {
           opacity: 0,
@@ -81,6 +79,27 @@ const useMindUpMotion = (rootRef) => {
       lenis.destroy();
     };
   }, [rootRef]);
+};
+
+// Parallax das camadas de fundo do hero (poster e vídeo).
+// Precisa ser recriado quando `videoMounted` muda: o <video> entra no DOM só
+// depois do primeiro render, então um ScrollTrigger criado antes disso ficaria
+// preso apenas ao poster. O poster também entra no alvo porque é ele que fica
+// visível enquanto o vídeo carrega — e o único fundo quando o vídeo nem monta.
+const useHeroParallax = (heroRef, videoMounted) => {
+  React.useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.to('.mu-hero__poster, .mu-hero__video', {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: { trigger: '.mu-hero', start: 'top top', end: 'bottom top', scrub: true },
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, [heroRef, videoMounted]);
 };
 
 /* ── Peças compartilhadas ────────────────────────────────────────────── */
@@ -229,9 +248,12 @@ const Header = () => (
 );
 
 const Hero = () => {
+  const heroRef = React.useRef(null);
   const videoRef = React.useRef(null);
   const [shouldPlayVideo, setShouldPlayVideo] = React.useState(false);
   const [videoReady, setVideoReady] = React.useState(false);
+
+  useHeroParallax(heroRef, shouldPlayVideo);
 
   React.useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -256,7 +278,7 @@ const Hero = () => {
   }, [shouldPlayVideo]);
 
   return (
-    <section className="mu-hero" id="top">
+    <section className="mu-hero" id="top" ref={heroRef}>
       <img
         className="mu-hero__poster"
         src="/assets/mindup/mindup-hero-poster.jpg"
