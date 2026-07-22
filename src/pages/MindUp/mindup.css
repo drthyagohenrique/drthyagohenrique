@@ -982,8 +982,8 @@
   padding: 0;
   margin-top: var(--mu-space-4);
   list-style: none;
-  /* -1 para o primeiro incremento cair em 00: o passo zero antecede o ciclo. */
-  counter-reset: mu-flow -1;
+  /* Numeração de 01 a 06. */
+  counter-reset: mu-flow;
 }
 
 .mu-flow li,

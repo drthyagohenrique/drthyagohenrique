@@ -27,7 +27,7 @@ export const mindUpContent = {
   steps: {
     tag: 'Um exemplo simples',
     title: ['Do seu momento', 'para um próximo passo.'],
-    // Numerado de 00 a 05: o passo zero acontece antes do ciclo diário começar.
+    // Numerado de 01 a 06 (a numeração vem do contador em .mu-flow no CSS).
     flow: [
       { title: 'O MindUp conhece o seu ponto de partida', text: 'Você responde ao perfil inicial e conta o que tem incomodado, como sono, foco, energia, estresse e rotina.' },
       { title: 'Você registra como está agora', text: 'Um check-in rápido mostra como você dormiu, sua energia, seu foco e outros sinais do dia.' },
