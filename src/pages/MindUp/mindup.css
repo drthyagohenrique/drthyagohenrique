@@ -389,6 +389,17 @@
   display: block;
 }
 
+/* O vídeo entra por cima do poster (mesmo primeiro quadro). O fade evita o
+   salto quando ele termina de carregar. */
+.mu-hero__video {
+  opacity: 0;
+  transition: opacity 600ms var(--mu-ease);
+}
+
+.mu-hero__video.is-ready {
+  opacity: 1;
+}
+
 .mu-hero__scrim {
   position: absolute;
   inset: 0;

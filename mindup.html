@@ -31,6 +31,10 @@
   <link rel="icon" href="/assets/mindup/mindup-favicon-64.png" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="/assets/mindup/mindup-apple-touch-icon.png">
 
+  <!-- O fundo do hero. O vídeo só é montado depois que o React hidrata, então o
+       poster precisa pintar cedo para a dobra não abrir vazia. -->
+  <link rel="preload" href="/assets/mindup/mindup-hero-poster.jpg" as="image" fetchpriority="high">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.fontshare.com">

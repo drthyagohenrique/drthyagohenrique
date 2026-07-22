@@ -231,6 +231,7 @@ const Header = () => (
 const Hero = () => {
   const videoRef = React.useRef(null);
   const [shouldPlayVideo, setShouldPlayVideo] = React.useState(false);
+  const [videoReady, setVideoReady] = React.useState(false);
 
   React.useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -268,18 +269,21 @@ const Hero = () => {
       {shouldPlayVideo && (
         <video
           ref={videoRef}
-          className="mu-hero__video"
-          src="/assets/mindup/fundo-hero-mindup.mp4"
+          className={videoReady ? 'mu-hero__video is-ready' : 'mu-hero__video'}
           poster="/assets/mindup/mindup-hero-poster.jpg"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           disablePictureInPicture
           tabIndex={-1}
           aria-hidden={true}
-        />
+          onCanPlay={() => setVideoReady(true)}
+        >
+          <source src="/assets/mindup/fundo-hero-mindup.webm" type="video/webm" />
+          <source src="/assets/mindup/fundo-hero-mindup.mp4" type="video/mp4" />
+        </video>
       )}
       <div className="mu-hero__scrim" aria-hidden={true} />
       <div className="mu-container mu-hero__grid">
