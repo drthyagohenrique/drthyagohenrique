@@ -122,10 +122,13 @@
 
 /* Tipografia ------------------------------------------------------------ */
 
+/* O H1 do hero tem duas frases (~85 caracteres). O clamp é menor que o de um
+   título curto para o CTA continuar acima da dobra em telas de 13". */
 .mindup-page h1 {
-  font: var(--mu-weight-medium) clamp(40px, 6.5vw, 66px) / 1.06 var(--mu-font-display);
+  font: var(--mu-weight-medium) clamp(32px, 4.6vw, 54px) / 1.1 var(--mu-font-display);
   letter-spacing: -0.02em;
   margin: 18px 0;
+  text-wrap: balance;
 }
 
 .mindup-page h2 {
@@ -535,6 +538,20 @@
   background: var(--ds-bg);
   box-shadow: var(--mu-shadow-device), var(--ds-glow-purple);
   overflow: hidden;
+}
+
+/* Captura real: as telas são 1080×1920, então o quadro acompanha 9/16 para não
+   cortar as laterais do aplicativo. */
+.mu-device--shot {
+  aspect-ratio: 9 / 16;
+}
+
+.mu-phone__shot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 
 /* Mockups HTML do aplicativo ---------------------------------------------------- */
@@ -956,9 +973,11 @@
     radial-gradient(360px 260px at 70% 12%, rgb(255 130 225 / 0.1), transparent 70%);
 }
 
+/* Seis passos: 3×2 em desktop. Seis colunas deixariam o texto do passo 01
+   ("Você responde ao perfil inicial — ...") ilegível. */
 .mu-flow {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--mu-space-2);
   padding: 0;
   margin-top: var(--mu-space-4);
@@ -978,18 +997,30 @@
 }
 
 .mu-flow li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
   counter-increment: mu-flow;
-  font: 500 12px var(--mu-font-ui);
+  font: 500 12px / 1.5 var(--mu-font-ui);
+  transition: transform 380ms var(--mu-spring), box-shadow var(--mu-motion-fast) var(--mu-ease);
+}
+
+.mu-flow li:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ds-glow-purple);
 }
 
 .mu-flow li::before {
   content: counter(mu-flow, decimal-leading-zero);
-  margin-right: 10px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
   font: 600 10px var(--ds-font-mono);
+  color: var(--mu-color-white);
   background: var(--mu-gradient-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .mu-chips {
@@ -1044,9 +1075,11 @@
   text-transform: uppercase;
 }
 
+/* Quatro cards (Perfil · Registre · Organize · Continue) em 2×2. Cada card é
+   ícone + texto lado a lado, então quatro colunas espremeriam a coluna de texto. */
 .mu-step-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--mu-space-2);
   margin-top: var(--mu-space-2);
 }
@@ -2022,6 +2055,169 @@
   font-weight: 500;
 }
 
+/* Galeria de prints reais ------------------------------------------------------- */
+
+/* Cycle e Gallery são ambas escuras: sem isso, dois paddings de 136px se somam.
+   O separador em gradiente marca a passagem no lugar do respiro. */
+.mu-app-section + .mu-app-section {
+  padding-top: 0;
+}
+
+.mu-gallery__intro {
+  max-width: 620px;
+}
+
+.mu-gallery__intro > p {
+  max-width: 560px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--ds-text-secondary);
+}
+
+.mu-gallery__rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: var(--mu-space-4);
+}
+
+.mu-gallery__rail figure {
+  margin: 0;
+}
+
+/* Desalinhamento sutil dá ritmo à fileira sem tirar a leitura. */
+.mu-gallery__rail figure:nth-child(even) {
+  transform: translateY(28px);
+}
+
+.mu-gallery__rail .mu-device {
+  width: min(100%, 230px);
+  margin-inline: auto;
+  box-shadow: 0 26px 56px rgb(0 0 0 / 0.34), var(--ds-glow-purple);
+  transition: transform 420ms var(--mu-spring), box-shadow var(--mu-motion-fast) var(--mu-ease);
+}
+
+.mu-gallery__rail figure:hover .mu-device {
+  transform: translateY(-8px);
+  box-shadow: 0 34px 70px rgb(0 0 0 / 0.42), 0 0 34px rgb(108 59 255 / 0.5);
+}
+
+.mu-gallery__rail figcaption {
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+  text-align: center;
+  color: var(--ds-text-secondary);
+  font: 400 13px / 1.5 var(--mu-font-ui);
+}
+
+.mu-gallery__rail figcaption b {
+  color: var(--ds-text);
+  font-weight: 500;
+}
+
+/* Fotos reais de pessoas -------------------------------------------------------- */
+
+.mu-photos__devnote {
+  max-width: 640px;
+  padding: 12px 16px;
+  border: 1px dashed rgb(118 89 232 / 0.5);
+  border-radius: var(--mu-radius-badge);
+  color: var(--mu-accent);
+  font: 500 12px / 1.6 var(--mu-font-ui);
+}
+
+.mu-photo-band {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--mu-space-2);
+  margin-top: var(--mu-space-4);
+}
+
+.mu-photo {
+  margin: 0;
+}
+
+.mu-photo:nth-child(even) {
+  transform: translateY(24px);
+}
+
+.mu-photo__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.9);
+  border-radius: var(--mu-radius-card);
+  background: var(--mu-color-neutral);
+  box-shadow: var(--mu-shadow-card);
+  transition: transform 420ms var(--mu-spring), box-shadow var(--mu-motion-fast) var(--mu-ease);
+}
+
+.mu-photo:hover .mu-photo__frame {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 52px rgb(23 19 31 / 0.18);
+}
+
+.mu-photo__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mu-photo figcaption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--mu-text);
+  font: 500 13px / 1.45 var(--mu-font-ui);
+}
+
+.mu-photo__icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--mu-color-white);
+  background: var(--mu-gradient-brand);
+}
+
+/* Placeholder de produção — só aparece em desenvolvimento. */
+.mu-photo.is-pending .mu-photo__frame {
+  border: 1px dashed rgb(118 89 232 / 0.45);
+  background: rgb(255 255 255 / 0.45);
+  box-shadow: none;
+}
+
+.mu-photo__pending {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.mu-photo__pending b {
+  font: 600 14px var(--mu-font-display);
+}
+
+.mu-photo__pending em {
+  color: var(--mu-text-muted);
+  font: 400 12px / 1.55 var(--mu-font-ui);
+  font-style: normal;
+}
+
+.mu-photo__pending small {
+  color: var(--mu-accent);
+  font: 500 10px var(--mu-font-mono);
+  letter-spacing: 0.04em;
+}
+
 .mu-tree-stages {
   display: flex;
   flex-wrap: wrap;
@@ -2272,6 +2468,15 @@
     left: -140px;
     width: 210px;
   }
+
+  .mu-gallery__rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 4vw, 36px) clamp(20px, 3vw, 40px);
+  }
+
+  .mu-gallery__rail figure:nth-child(even) {
+    transform: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -2304,6 +2509,14 @@
 
   .mu-step-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mu-photo-band {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+
+  .mu-photo:nth-child(even) {
+    transform: none;
   }
 
   .mu-pillar-grid {
@@ -2438,18 +2651,15 @@
     gap: var(--mu-space-2);
   }
 
+  /* Uma coluna: os seis passos têm frases longas demais para meia largura aqui. */
   .mu-flow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 8px;
     margin-top: var(--mu-space-3);
   }
 
   .mu-flow li {
     padding: 10px 12px;
-  }
-
-  .mu-flow li:last-child {
-    grid-column: 1 / -1;
   }
 
   .mu-example {
@@ -2572,6 +2782,28 @@
     width: min(100%, 170px);
   }
 
+  .mu-gallery__rail {
+    gap: 22px 16px;
+  }
+
+  .mu-gallery__rail .mu-device {
+    width: min(100%, 150px);
+  }
+
+  .mu-gallery__rail figcaption {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+
+  .mu-photo-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mu-photo figcaption {
+    font-size: 12px;
+  }
+
   .mu-tree-stages {
     gap: 6px;
   }
@@ -2598,10 +2830,19 @@
 @media (prefers-reduced-motion: reduce) {
   .mu-button,
   .mu-step-grid article,
+  .mu-flow li,
+  .mu-photo__frame,
+  .mu-gallery__rail .mu-device,
   .mu-pillar,
   .mu-milestone,
   .mu-faq summary::after {
     transition: none;
+  }
+
+  /* Sem deslocamento decorativo: fileiras ficam alinhadas. */
+  .mu-gallery__rail figure:nth-child(even),
+  .mu-photo:nth-child(even) {
+    transform: none;
   }
 
   .mu-hero__video {

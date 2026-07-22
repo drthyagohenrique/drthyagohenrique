@@ -11,6 +11,7 @@ import { mindUpContent } from './content.js';
 import { Icon } from './icons.jsx';
 import { MindUpDownloadCta, MindUpDownloadProvider } from './MindUpDownload.jsx';
 import { MindUpMockup } from './MindUpMockup.jsx';
+import { MindUpPhotoBand } from './MindUpPhoto.jsx';
 import './mindup.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -93,9 +94,11 @@ const Tag = ({ children }) => (
   </p>
 );
 
-const Device = ({ image }) => (
-  <div className="mu-device">
-    <MindUpMockup image={image} />
+// Capturas reais são 9/16 (1080×1920); o mockup HTML usa o quadro 9/17 padrão.
+// O modificador evita corte lateral quando a tela é um print de verdade.
+const Device = ({ image, eager = false }) => (
+  <div className={image?.real ? 'mu-device mu-device--shot' : 'mu-device'}>
+    <MindUpMockup image={image} eager={eager} />
   </div>
 );
 
@@ -214,6 +217,7 @@ const Header = () => (
       <nav aria-label="Seções da página">
         <a href="#como">Como funciona</a>
         <a href="#missao">O app</a>
+        <a href="#telas">Telas</a>
         <a href="#premium">Assinatura</a>
         <a href="#faq">Perguntas</a>
       </nav>
@@ -582,6 +586,27 @@ const Cycle = () => (
   </section>
 );
 
+const Gallery = () => (
+  <section className="mu-app-section mu-gallery" id={content.gallery.id}>
+    <div className="mu-glow-sep" aria-hidden={true} />
+    <div className="mu-container mu-reveal">
+      <div className="mu-gallery__intro">
+        <Tag>{content.gallery.tag}</Tag>
+        <h2>{content.gallery.title}</h2>
+        <p>{content.gallery.text}</p>
+      </div>
+      <div className="mu-gallery__rail">
+        {content.gallery.screens.map((screen) => (
+          <figure key={screen.title}>
+            <Device image={screen.image} />
+            <figcaption><b>{screen.title}</b><span>{screen.text}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 const Evolution = () => (
   <section className="mu-section mu-orbs" id={content.evolution.id}>
     <div className="mu-container mu-feature mu-reveal">
@@ -801,7 +826,9 @@ const MindUpPage = () => {
         <Hero />
         <Direction />
         <Steps />
+        <MindUpPhotoBand photos={content.photos} />
         <Cycle />
+        <Gallery />
         <Evolution />
         <PillarsAndAttributes />
         <SupportTools />
