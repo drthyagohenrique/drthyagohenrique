@@ -1,5 +1,6 @@
 import React from 'react';
 import { track as trackVercel } from '@vercel/analytics';
+import { trackEvent as trackMeta } from '../../lib/meta-pixel.js';
 import { mindUpContent } from './content.js';
 
 const DownloadContext = React.createContext(null);
@@ -39,6 +40,20 @@ const metadata = (source, store) => {
     utm_medium: params.get('utm_medium') || undefined,
     utm_campaign: params.get('utm_campaign') || undefined,
   };
+};
+
+// Conversão para a Meta (Pixel + CAPI deduplicados). Disparada só quando o
+// usuário de fato vai para a loja — não em aberturas de modal. 'Lead' é evento
+// padrão da Meta; troque por 'CompleteRegistration'/custom se a estratégia mudar.
+const trackDownloadConversion = (store, source) => {
+  trackMeta('Lead', {
+    customData: {
+      content_name: 'MindUp',
+      content_category: 'app_download',
+      store: store || 'unknown',
+      source,
+    },
+  });
 };
 
 const track = (event, properties) => {
@@ -154,6 +169,7 @@ export const MindUpDownloadProvider = ({ children }) => {
       return;
     }
     track(storeEvent[store], metadata(source, store));
+    trackDownloadConversion(store, source);
     window.location.assign(url);
   }, [openModal]);
 
@@ -161,6 +177,7 @@ export const MindUpDownloadProvider = ({ children }) => {
     const url = mindUpContent.product.storeUrls?.[store];
     if (!url) return;
     track(storeEvent[store], { ...metadata(source, store), selection_method: 'manual' });
+    trackDownloadConversion(store, source);
     window.location.assign(url);
   }, []);
 

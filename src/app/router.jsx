@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import { routeConfig } from './route-config.js';
 import RouteSEO from '../components/seo/RouteSEO.jsx';
+import MetaPixel from '../components/analytics/MetaPixel.jsx';
 import TechnicalPlaceholderPage from '../pages/TechnicalPlaceholder/TechnicalPlaceholderPage.jsx';
 import NotFoundPage from '../pages/NotFound/NotFoundPage.jsx';
 import LegalPage from '../pages/Legal/LegalPage.jsx';
@@ -72,6 +73,7 @@ const VercelAnalytics = () => {
 const AppRoutes = () => (
   <>
     <ScrollRestoration />
+    <MetaPixel />
     <Suspense fallback={<div className="route-loading">Carregando...</div>}>
       <Routes>
         <Route path={routeConfig.home.path} element={<Navigate to={ROUTES.links} replace />} />
