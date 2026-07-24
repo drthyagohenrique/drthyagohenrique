@@ -105,7 +105,7 @@ const primaryLinks = [
   },
   {
     label: 'Saturação Neural',
-    href: `${ROUTES.saturacaoNeural}#saturacao-neural`,
+    href: ROUTES.saturacaoNeural,
     image: '/assets/link-bio/saturacao-neural.webp',
     imageAlt: 'Saturação Neural — um novo olhar sobre cansaço e sobrecarga mental',
   },
