@@ -16,12 +16,13 @@ import ClosingCTA from '../../../components/ClosingCTA.jsx';
 import Footer from '../../../components/Footer.jsx';
 import StickyCTA from '../../../components/StickyCTA.jsx';
 import RouteSEO from '../../components/seo/RouteSEO.jsx';
+import { ROUTES } from '../../config/routes.js';
 
 const institutionalJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Physician',
   name: 'Dr. Thyago Henrique',
-  url: 'https://drthyagohenrique.com/',
+  url: 'https://drthyagohenrique.com/saturacao-neural',
   image: 'https://drthyagohenrique.com/assets/dr-thyago.png',
   description: 'Médico, professor e comunicador com conteúdos sobre mente, comportamento e pressão cotidiana.',
   telephone: '+55-62-3413-6085',
@@ -65,7 +66,7 @@ const InstitutionalPage = () => {
       <RouteSEO
         title="Dr. Thyago Henrique — Mente, Comportamento e Alta Pressão"
         description="Dr. Thyago Henrique · Médico, professor e comunicador · CRM-GO 30.392. Conteúdos sobre mente, comportamento e pressão cotidiana."
-        path="/"
+        path={ROUTES.saturacaoNeural}
         image="/assets/og-image.jpg"
         imageAlt="Dr. Thyago Henrique — mente, comportamento e alta pressão"
         jsonLd={institutionalJsonLd}

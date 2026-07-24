@@ -4,6 +4,7 @@ export const ROUTES = {
   neurocalma: '/neurocalma',
   codigosDaMente: '/codigos-da-mente',
   mindup: '/mindup',
+  saturacaoNeural: '/saturacao-neural',
   mentoria: '/mentoria',
   comunidade: '/comunidade',
   imersao: '/imersao',
