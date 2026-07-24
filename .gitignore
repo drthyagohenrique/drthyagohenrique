@@ -7,3 +7,6 @@ dist
 
 # Unoptimized source media kept locally
 public/assets/links-da-bio/
+
+.vercel
+.env*

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import { routeConfig } from './route-config.js';
@@ -9,7 +9,10 @@ import NotFoundPage from '../pages/NotFound/NotFoundPage.jsx';
 import LegalPage from '../pages/Legal/LegalPage.jsx';
 import { ROUTES } from '../config/routes.js';
 
-const InstitutionalPage = lazy(() => import('../pages/Institutional/InstitutionalPage.jsx'));
+// Institucional aposentada por ora: o apex redireciona para /links (edge, no vercel.json)
+// e a rota "/" faz Navigate para /links no lado SPA. Para reativar, restaure este import
+// e troque o element da rota "/" de volta para <InstitutionalPage />.
+// const InstitutionalPage = lazy(() => import('../pages/Institutional/InstitutionalPage.jsx'));
 const LinksPage = lazy(() => import('../pages/Links/LinksPage.jsx'));
 const NeuroCalmaPage = lazy(() => import('../pages/NeuroCalma/NeuroCalmaPage.jsx'));
 const MindUpPage = lazy(() => import('../pages/MindUp/MindUpPage.jsx'));
@@ -72,7 +75,7 @@ const AppRoutes = () => (
     <ScrollRestoration />
     <Suspense fallback={<div className="route-loading">Carregando...</div>}>
       <Routes>
-        <Route path={routeConfig.home.path} element={<InstitutionalPage />} />
+        <Route path={routeConfig.home.path} element={<Navigate to={ROUTES.links} replace />} />
         <Route path={routeConfig.links.path} element={<LinksPage />} />
         <Route path={routeConfig.neurocalma.path} element={<NeuroCalmaPage />} />
         <Route path={routeConfig.mindup.path} element={<MindUpPage />} />
