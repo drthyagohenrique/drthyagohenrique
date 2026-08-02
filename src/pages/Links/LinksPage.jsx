@@ -72,23 +72,16 @@ const contactUrl = (message) =>
 
 const primaryLinks = [
   {
-    label: 'Agende sua consulta',
-    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de informações para agendar uma consulta. Meu nome é '),
-    image: '/assets/link-bio/consulta.webp',
-    imageAlt: 'Agende sua consulta com o Dr. Thyago Henrique',
-    external: true,
-  },
-  {
     label: 'NeuroCalma',
     href: ROUTES.neurocalma,
     image: '/assets/link-bio/neurocalma.webp',
     imageAlt: 'NeuroCalma — videoaulas e práticas guiadas',
   },
   {
-    label: 'MindUp',
-    href: ROUTES.mindup,
-    image: '/assets/link-bio/mindup.webp',
-    imageAlt: 'MindUp — seu bem-estar todos os dias, no seu ritmo',
+    label: 'Saturação Neural',
+    href: ROUTES.saturacaoNeural,
+    image: '/assets/link-bio/saturacao-neural.webp',
+    imageAlt: 'Saturação Neural — um novo olhar sobre cansaço e sobrecarga mental',
   },
   {
     label: 'Códigos da Mente',
@@ -98,16 +91,23 @@ const primaryLinks = [
     external: true,
   },
   {
+    label: 'Agende sua consulta',
+    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de informações para agendar uma consulta. Meu nome é '),
+    image: '/assets/link-bio/consulta.webp',
+    imageAlt: 'Agende sua consulta com o Dr. Thyago Henrique',
+    external: true,
+  },
+  {
+    label: 'MindUp',
+    image: '/assets/link-bio/mindup.webp',
+    imageAlt: 'MindUp — seu bem-estar todos os dias, no seu ritmo',
+    disabled: true,
+  },
+  {
     label: 'Livro Domine o Jogo — em breve na Amazon',
     image: '/assets/link-bio/livro-domine-o-jogo.webp',
     imageAlt: 'Domine o Jogo — lançamento do primeiro livro do Dr. Thyago Henrique',
     disabled: true,
-  },
-  {
-    label: 'Saturação Neural',
-    href: ROUTES.saturacaoNeural,
-    image: '/assets/link-bio/saturacao-neural.webp',
-    imageAlt: 'Saturação Neural — um novo olhar sobre cansaço e sobrecarga mental',
   },
   {
     label: 'Palestras',
