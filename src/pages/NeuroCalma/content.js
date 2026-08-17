@@ -19,7 +19,7 @@ export const neuroCalmaContent = {
       'E quanto mais você tenta se distrair para desligar, mais estímulo coloca dentro dela.',
     ],
     cta: 'Começar o NeuroCalma',
-    microcopy: 'Acesso imediato · R$97 · Garantia de 7 dias',
+    microcopy: 'Acesso imediato · Garantia de 7 dias',
     support: 'Assista. Entenda. Aplique.',
     disclaimer:
       '*Este conteúdo não substitui avaliação, acompanhamento ou tratamento médico ou psicológico.',
@@ -257,7 +257,7 @@ export const neuroCalmaContent = {
       'Você pode continuar tentando dormir com a mente ligada.',
       'Ou pode aprender o que fazer para desacelerar, desligar e descansar melhor.',
     ],
-    cta: 'Começar o NeuroCalma por R$97',
+    cta: 'Começar o NeuroCalma',
     close: ['Assista. Entenda. Aplique.', 'Comece hoje.'],
     disclaimer:
       '*Este conteúdo não substitui consulta, avaliação, diagnóstico ou tratamento médico ou psicológico.',

@@ -565,7 +565,7 @@ const StickyCta = () => {
   return (
     <div className={`nc-sticky ${visible ? 'is-visible' : ''}`} aria-hidden={!visible}>
       <p className="nc-sticky__note">
-        <strong>R$97</strong> · Garantia de 7 dias
+        Garantia de 7 dias
       </p>
       <CheckoutCta className="nc-button nc-sticky__button" tabIndex={visible ? 0 : -1}>
         Começar Agora
@@ -605,8 +605,7 @@ const NeuroCalmaFAQ = () => {
   );
 };
 
-// Painel de oferta: espelha o checkout (mesmo nome, mesmo preço, mesmo CTA)
-// e agora absorve a garantia — decisão e segurança no mesmo lugar.
+// Painel de oferta: apresenta produto, CTA e garantia no mesmo lugar.
 const OfferPanel = () => {
   const content = neuroCalmaContent;
   const product = content.product;
@@ -614,7 +613,7 @@ const OfferPanel = () => {
 
   return (
     <div className="nc-offer-panel">
-      {/* Coluna do produto: mock, preço, CTA e segurança no mesmo bloco de decisão. */}
+      {/* Coluna do produto: mock, CTA e segurança no mesmo bloco de decisão. */}
       <div className="nc-offer-panel__cover">
         <ProductMockPhoto />
         <div className="nc-offer-panel__pricing">
@@ -623,7 +622,6 @@ const OfferPanel = () => {
             <span className="nc-badge">Garantia de 7 dias</span>
           </div>
           <p className="nc-offer-panel__name">{product.name}</p>
-          <p className="nc-offer-panel__price">{product.price}</p>
           <CheckoutCta className="nc-button nc-button--offer">
             {content.offer.ctaActive}
           </CheckoutCta>
@@ -695,13 +693,6 @@ const NeuroCalmaPage = () => {
           brand: BRAND.siteName,
           description:
             'Produto digital com videoaulas e técnicas práticas para ajudar a desacelerar, desligar e descansar a cabeça. Conteúdo educativo.',
-          offers: {
-            '@type': 'Offer',
-            price: '97.00',
-            priceCurrency: 'BRL',
-            availability: 'https://schema.org/InStock',
-            url: `${BRAND.baseUrl.replace(/\/$/, '')}${product.path}`,
-          },
         }}
       />
       <main className="neurocalma-page" id="conteudo" ref={mainRef}>
@@ -746,7 +737,7 @@ const NeuroCalmaPage = () => {
               </p>
               <div className="nc-hero__actions">
                 <CheckoutCta>{content.hero.cta}</CheckoutCta>
-                <p className="nc-hero__price">{content.hero.microcopy}</p>
+                <p className="nc-hero__microcopy">{content.hero.microcopy}</p>
               </div>
             </div>
             <div className="nc-hero__visual">

@@ -425,13 +425,6 @@
   text-overflow: ellipsis;
 }
 
-.nc-sticky__note strong {
-  font-family: var(--nc-display);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--nc-white);
-}
-
 .neurocalma-page .nc-sticky__button {
   min-height: 44px;
   padding: 0 18px;
@@ -763,7 +756,7 @@
 }
 
 /* Microcopy comercial em Inter (informação técnica fica no mono). */
-.nc-hero__price {
+.nc-hero__microcopy {
   margin: 0;
   font-family: var(--nc-sans);
   font-weight: 500;
@@ -1907,16 +1900,6 @@
   color: var(--nc-text-soft);
 }
 
-.nc-offer-panel__price {
-  margin: 12px 0 0;
-  font-family: var(--nc-display);
-  font-size: clamp(56px, 6vw, 92px);
-  font-weight: 700;
-  line-height: .9;
-  letter-spacing: -.05em;
-  color: var(--nc-white);
-}
-
 .nc-offer-panel__installments {
   margin: 12px 0 0;
   font-family: var(--nc-sans);
@@ -2153,7 +2136,7 @@
   margin: 0;
 }
 
-.nc-final p:not(.nc-label):not(.nc-disclaimer):not(.nc-final__price):not(.nc-final__close) {
+.nc-final p:not(.nc-label):not(.nc-disclaimer):not(.nc-final__close) {
   max-width: 680px;
   margin: 28px 0 0;
   font-size: 19px;
@@ -2292,7 +2275,7 @@
   .nc-doctor__frame { max-width: 300px; }
 
   /* Oferta no mobile: as duas colunas se dissolvem (display: contents) e a
-     ordem aprovada é reconstruída — mock, preço, proposta, pilha, CTA, garantia. */
+     ordem aprovada é reconstruída — mock, proposta, pilha, CTA, garantia. */
   .nc-offer-panel { grid-template-columns: 1fr; gap: 0; padding: 40px 28px; }
   .nc-offer-panel__cover,
   .nc-offer-panel__pricing,
@@ -2300,7 +2283,6 @@
   .nc-offer-panel .nc-mock { order: 1; margin-bottom: 30px; justify-self: center; }
   .nc-offer-panel .nc-badge-row { order: 2; }
   .nc-offer-panel__name { order: 3; }
-  .nc-offer-panel__price { order: 4; }
   .nc-offer-panel .nc-offer-panel__text { order: 5; margin-top: 22px; }
   .nc-offer-panel__stack-title { order: 6; margin-top: 28px; }
   .nc-offer-panel .nc-stack { order: 7; }
@@ -2338,7 +2320,7 @@
   .nc-hero__actions { width: 100%; align-items: stretch; }
   .nc-final__actions { align-items: flex-start; flex-direction: column; }
   .neurocalma-page .nc-button { width: 100%; }
-  /* O botão do sticky divide espaço com a nota de preço — nunca 100%. */
+  /* O botão do sticky divide espaço com a nota de garantia — nunca 100%. */
   .neurocalma-page .nc-sticky__button { width: auto; }
   .nc-cover__card { transform: none; }
   .nc-checkout-mock__frame { transform: none; }
