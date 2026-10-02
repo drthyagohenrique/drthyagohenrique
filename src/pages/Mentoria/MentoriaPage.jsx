@@ -135,7 +135,7 @@ export default function MentoriaPage() {
       <h2 className="h2">Você já domina a técnica.<br />O problema nunca foi esse.</h2>
       <p className="lead" style={{"marginTop": "20px", "maxWidth": "700px", "color": "rgba(10,10,10,0.68)"}}>Médico que já atua — ou quer consolidar sua atuação — em saúde mental. Possui conhecimento técnico sólido. Mas ainda não transformou essa competência em posicionamento, autoridade e uma operação de consultório estruturada.</p>
       <div style={{"overflowX": "auto"}}>
-      <table className="cmp-table">
+        <table className="cmp-table"><tbody>
         <tr><th className="label" style={{"color": "#9C7A1A"}}>Hoje</th><th className="label" style={{"color": "#9C7A1A"}}>Com a Mind Legacy</th></tr>
         <tr><td style={{"fontSize": "15px"}}>Depende muito de indicação</td><td style={{"fontSize": "15px", "fontWeight": "600", "color": "#9C7A1A"}}>Geração própria de demanda e autoridade</td></tr>
         <tr><td style={{"fontSize": "15px"}}>Cobra menos do que gostaria</td><td style={{"fontSize": "15px", "fontWeight": "600", "color": "#9C7A1A"}}>Precificação alinhada ao seu valor real</td></tr>
@@ -147,7 +147,7 @@ export default function MentoriaPage() {
         <tr><td style={{"fontSize": "15px"}}>Centraliza tudo em si mesmo</td><td style={{"fontSize": "15px", "fontWeight": "600", "color": "#9C7A1A"}}>Operação que funciona além da sua agenda</td></tr>
         <tr><td style={{"fontSize": "15px"}}>É pouco conhecido fora do próprio círculo</td><td style={{"fontSize": "15px", "fontWeight": "600", "color": "#9C7A1A"}}>Autoridade reconhecida publicamente</td></tr>
         <tr><td style={{"fontSize": "15px"}}>Vê profissionais tecnicamente inferiores com mais visibilidade</td><td style={{"fontSize": "15px", "fontWeight": "600", "color": "#9C7A1A"}}>Visibilidade compatível com sua competência real</td></tr>
-      </table>
+        </tbody></table>
       </div>
     </div>
   </section>
