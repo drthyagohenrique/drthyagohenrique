@@ -50,10 +50,10 @@ export default function MentoriaPage() {
   return <>
     <RouteSEO title="Mind Legacy — Mentoria | Dr. Thyago Henrique" description="Mentoria Mind Legacy: uma jornada de 16 semanas para construir posicionamento, operação e autoridade na saúde mental com Dr. Thyago Henrique." path="/mentoria" />
     <Helmet><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet" /></Helmet>
-    
+
 <main ref={rootRef} className="mentoria-page" style={{"background": "#0A0A0A", "color": "#F2F4FF", "width": "100%", "overflowX": "hidden"}}>
 
-  
+
   <div style={{"position": "sticky", "top": "0", "zIndex": "10", "background": "rgba(10,10,10,0.88)", "backdropFilter": "blur(10px)", "borderBottom": "1px solid rgba(242,244,255,0.08)"}}>
     <div className="container" style={{"display": "flex", "alignItems": "center", "justifyContent": "space-between", "paddingBlock": "18px"}}>
       <img src="/assets/mentoria/8a197b6b7e5d84d52ef0cb8c182e4b8f.png" alt="Mind Legacy" style={{"height": "42px", "width": "auto", "display": "block"}} />
@@ -66,7 +66,7 @@ export default function MentoriaPage() {
     </div>
   </div>
 
-  
+
   <section style={{"position": "relative", "minHeight": "min(94vh,880px)", "display": "flex", "alignItems": "center", "overflow": "hidden", "paddingBlock": "140px 80px"}}>
     <div style={{"position": "absolute", "top": "-18%", "left": "0", "right": "0", "height": "136%", "backgroundImage": "url('/assets/mentoria/4142104c48115a5772a445d850bd73cc.png')", "backgroundSize": "cover", "backgroundPosition": "50% 12%", "filter": "brightness(0.6) saturate(0.85) contrast(1.08)", "transform": `translateY(${parallax}px)`, "willChange": "transform"}}></div>
     <div style={{"position": "absolute", "inset": "0", "background": "linear-gradient(100deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 30%, rgba(10,10,10,0.5) 62%, rgba(10,10,10,0.68) 100%)"}}></div>
@@ -88,7 +88,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <div style={{"background": "#0A0A0A", "borderTop": "1px solid rgba(242,244,255,0.1)"}}>
     <div className="container cred-grid" style={{"paddingBlock": "40px"}}>
       <div>
@@ -110,7 +110,7 @@ export default function MentoriaPage() {
     </div>
   </div>
 
-  
+
   <div className="marquee" style={{"background": "#0A0A0A", "borderTop": "1px solid rgba(242,244,255,0.1)", "borderBottom": "1px solid rgba(242,244,255,0.1)", "paddingBlock": "16px"}}>
     <div className="marquee-track">
       <span className="label" style={{"color": "rgba(242,244,255,0.5)", "paddingInline": "18px"}}>MÉTODO PRÓPRIO</span><span style={{"color": "#C9A227"}}>●</span>
@@ -128,7 +128,7 @@ export default function MentoriaPage() {
     </div>
   </div>
 
-  
+
   <section style={{"background": "#ECE9FF", "color": "#0A0A0A"}}>
     <div className="container">
       <div className="section-head"><span className="label" style={{"color": "#9C7A1A"}}>01 · O RETRATO DE AGORA</span><span className="section-rule"></span></div>
@@ -152,7 +152,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section style={{"background": "radial-gradient(ellipse at 30% 30%, rgba(201,162,39,0.14), transparent 60%), #0A0A0A", "textAlign": "center"}}>
     <div className="container">
       <div className="label" style={{"color": "#E3C564"}}>A promessa Mind Legacy</div>
@@ -169,7 +169,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section style={{"background": "#F2F4FF", "color": "#0A0A0A"}}>
     <div className="container" style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(min(420px,100%),1fr))", "gap": "48px"}}>
       <div>
@@ -188,7 +188,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section id="mentor" style={{"background": "#0A0A0A"}}>
     <div className="container" style={{"display": "grid", "gridTemplateColumns": "0.8fr 1.2fr", "gap": "56px"}}>
       <div>
@@ -268,7 +268,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section id="metodo" style={{"background": "#ECE9FF", "color": "#0A0A0A", "textAlign": "center"}}>
     <div className="container">
       <div className="label" style={{"color": "#9C7A1A"}}>02 · O MÉTODO</div>
@@ -292,7 +292,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section id="pilares" style={{"background": "#0A0A0A"}}>
     <div className="container">
       <div className="pillar">
@@ -354,7 +354,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section id="score" style={{"background": "#F2F4FF", "color": "#0A0A0A"}}>
     <div className="container">
       <div className="section-head"><span className="label" style={{"color": "#9C7A1A"}}>03 · FERRAMENTA EXCLUSIVA</span><span className="section-rule"></span></div>
@@ -377,7 +377,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section style={{"background": "#0A0A0A"}}>
     <div className="container">
       <div className="label" style={{"color": "#E3C564"}}>O AULÃO</div>
@@ -422,7 +422,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section style={{"background": "#0A0A0A"}}>
     <div className="container">
       <div className="label" style={{"color": "#E3C564"}}>ALÉM DOS 7 PILARES</div>
@@ -441,7 +441,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section style={{"background": "#ECE9FF", "color": "#0A0A0A"}}>
     <div className="container" style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(min(420px,100%),1fr))", "gap": "48px"}}>
       <div>
@@ -466,7 +466,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section style={{"background": "#0A0A0A"}}>
     <div className="container" style={{"maxWidth": "820px"}}>
       <div className="label" style={{"color": "#E3C564"}}>DÚVIDAS FREQUENTES</div>
@@ -487,7 +487,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <section id="cta-final" style={{"background": "radial-gradient(ellipse at 50% 20%, rgba(201,162,39,0.18), transparent 60%), #0A0A0A", "textAlign": "center"}}>
     <div className="container" style={{"maxWidth": "760px"}}>
       <p className="serif" style={{"fontStyle": "italic", "fontSize": "clamp(24px,3vw,32px)", "color": "#F2F4FF", "lineHeight": "1.3"}}>"Você não precisa necessariamente atender mais.<br />Precisa <span style={{"color": "#E3C564"}}>valer mais</span>."</p>
@@ -497,7 +497,7 @@ export default function MentoriaPage() {
     </div>
   </section>
 
-  
+
   <div id="site-footer" style={{"background": "#0A0A0A", "borderTop": "1px solid rgba(242,244,255,0.1)", "paddingBlock": "56px"}}>
     <div className="container" style={{"display": "flex", "flexDirection": "column", "alignItems": "center", "gap": "20px", "textAlign": "center"}}>
       <img src="/assets/mentoria/8a197b6b7e5d84d52ef0cb8c182e4b8f.png" alt="Mind Legacy" style={{"height": "64px", "width": "auto", "display": "block"}} />
@@ -509,7 +509,7 @@ export default function MentoriaPage() {
     </div>
   </div>
 
-  
+
   <div className="sticky-cta" style={{"opacity": `${stickyOpacity}`, "pointerEvents": `${stickyPointer}`, "transition": "opacity 0.35s ease"}}>
     <span>MIND LEGACY · MENTORIA MÉDICA</span>
     <a className="btn btn-primary" href="#cta-final" style={{"padding": "11px 22px", "fontSize": "12px"}}>Quero minha vaga →</a>
