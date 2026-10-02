@@ -72,22 +72,17 @@ const contactUrl = (message) =>
 
 const primaryLinks = [
   {
-    label: 'Mentoria Mind Legacy',
-    href: ROUTES.mentoria,
-    image: '/assets/link-bio/mentoria.svg',
-    imageAlt: 'Mind Legacy — mentoria com Dr. Thyago Henrique',
+    label: 'Consultas',
+    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de informações para agendar uma consulta. Meu nome é '),
+    image: '/assets/link-bio/consulta.webp',
+    imageAlt: 'Agende sua consulta com o Dr. Thyago Henrique',
+    external: true,
   },
   {
     label: 'NeuroCalma',
     href: ROUTES.neurocalma,
     image: '/assets/link-bio/neurocalma.webp',
     imageAlt: 'NeuroCalma — videoaulas e práticas guiadas',
-  },
-  {
-    label: 'Saturação Neural',
-    href: ROUTES.saturacaoNeural,
-    image: '/assets/link-bio/saturacao-neural.webp',
-    imageAlt: 'Saturação Neural — um novo olhar sobre cansaço e sobrecarga mental',
   },
   {
     label: 'Códigos da Mente',
@@ -97,30 +92,39 @@ const primaryLinks = [
     external: true,
   },
   {
-    label: 'Agende sua consulta',
-    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de informações para agendar uma consulta. Meu nome é '),
-    image: '/assets/link-bio/consulta.webp',
-    imageAlt: 'Agende sua consulta com o Dr. Thyago Henrique',
+    label: 'Palestras',
+    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de receber informações sobre palestras.'),
+    image: '/assets/link-bio/palestras.webp',
+    imageAlt: 'Palestras com o Dr. Thyago Henrique',
     external: true,
+  },
+  {
+    label: 'Mentoria Mind Legacy',
+    href: ROUTES.mentoria,
+    image: '/assets/link-bio/mentoria.svg',
+    imageAlt: 'Mind Legacy — mentoria com Dr. Thyago Henrique',
+    hidden: true,
+  },
+  {
+    label: 'Saturação Neural',
+    href: ROUTES.saturacaoNeural,
+    image: '/assets/link-bio/saturacao-neural.webp',
+    imageAlt: 'Saturação Neural — um novo olhar sobre cansaço e sobrecarga mental',
+    hidden: true,
   },
   {
     label: 'MindUp',
     image: '/assets/link-bio/mindup.webp',
     imageAlt: 'MindUp — seu bem-estar todos os dias, no seu ritmo',
     disabled: true,
+    hidden: true,
   },
   {
     label: 'Livro Domine o Jogo — em breve na Amazon',
     image: '/assets/link-bio/livro-domine-o-jogo.webp',
     imageAlt: 'Domine o Jogo — lançamento do primeiro livro do Dr. Thyago Henrique',
     disabled: true,
-  },
-  {
-    label: 'Palestras',
-    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de receber informações sobre palestras.'),
-    image: '/assets/link-bio/palestras.webp',
-    imageAlt: 'Palestras com o Dr. Thyago Henrique',
-    external: true,
+    hidden: true,
   },
 ];
 
@@ -182,7 +186,7 @@ const LinksPage = () => (
 
     <RouteSEO
       title='Links oficiais | Dr. Thyago Henrique'
-      description='Acesse consultas, NeuroCalma, MindUp, Códigos da Mente, o próximo livro, Saturação Neural e palestras do Dr. Thyago Henrique.'
+      description='Acesse consultas, NeuroCalma, Códigos da Mente e palestras do Dr. Thyago Henrique.'
       path={ROUTES.links}
       image='/assets/og-image.jpg'
       imageAlt='Links oficiais do Dr. Thyago Henrique'
@@ -237,7 +241,7 @@ const LinksPage = () => (
       </section>
 
       <section id='links-principais' className='links-list' aria-label='Links principais'>
-        {primaryLinks.map((item, index) => (
+        {primaryLinks.filter((item) => !item.hidden).map((item, index) => (
           <BioCard item={item} index={index} key={item.label} />
         ))}
       </section>
