@@ -17,7 +17,8 @@ export const routeConfig = {
     path: ROUTES.mindup,
     status: 'published',
   },
+  mentoria: { path: ROUTES.mentoria, status: 'published' },
   future: FUTURE_ROUTES
-    .filter((route) => ![ROUTES.links, ROUTES.privacy, ROUTES.terms].includes(route.path))
+    .filter((route) => ![ROUTES.links, ROUTES.privacy, ROUTES.terms, ROUTES.mentoria].includes(route.path))
     .map((route) => ({ ...route, status: 'technical-placeholder' })),
 };

@@ -1,0 +1,66 @@
+
+  .mentoria-page *{box-sizing:border-box;}
+  .mentoria-page{margin:0;background:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;}
+  .mentoria-page a{color:inherit;text-decoration:none;}
+  .mentoria-page .container{width:100%;max-width:1180px;margin:0 auto;padding-inline:clamp(20px,5vw,64px);}
+  .mentoria-page .serif{font-family:'Fraunces',serif;}
+  .mentoria-page .label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;}
+  .mentoria-page .section-head{display:flex;align-items:center;gap:18px;margin-bottom:28px;}
+  .mentoria-page .section-rule{flex:1;height:1px;background:currentColor;opacity:0.22;}
+  .mentoria-page .h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(42px,6vw,76px);line-height:1.06;color:#F2F4FF;margin:0;}
+  .mentoria-page .h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(32px,4.2vw,52px);line-height:1.12;margin:0;}
+  .mentoria-page .lead{font-weight:400;font-size:clamp(16px,1.5vw,18px);line-height:1.6;}
+  .mentoria-page .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;}
+  .mentoria-page .btn-primary{background:#C9A227;color:#F2F4FF;}
+  .mentoria-page .btn-ghost-dark{border:1px solid rgba(242,244,255,0.25);color:#F2F4FF;}
+  .mentoria-page .btn-ghost-light{border:1px solid rgba(10,10,10,0.2);color:#0A0A0A;}
+  .mentoria-page .nav-links{display:flex;gap:30px;align-items:center;}
+  @media (max-width:760px){.mentoria-page .nav-links a.hide-mobile{display:none;}}
+  .mentoria-page .hero-grid{display:grid;grid-template-columns:1.05fr 0.85fr;gap:56px;align-items:center;}
+  @media (max-width:860px){.mentoria-page .hero-grid{grid-template-columns:1fr;}}
+  .mentoria-page .cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:28px;}
+  .mentoria-page .marquee{overflow:hidden;white-space:nowrap;position:relative;}
+  .mentoria-page .marquee-track{display:inline-flex;align-items:center;animation:mentoria-marquee 32s linear infinite;}
+  @keyframes mentoria-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .mentoria-page .cmp-table{width:100%;border-collapse:collapse;margin-top:36px;}
+  .mentoria-page .cmp-table th{text-align:left;padding:16px 22px;background:rgba(201,162,39,0.12);}
+  .mentoria-page .cmp-table td{padding:18px 22px;vertical-align:top;border-bottom:1px solid rgba(10,10,10,0.08);}
+  .mentoria-page .cmp-table tr:nth-child(even) td{background:rgba(201,162,39,0.045);}
+  .mentoria-page .chain-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center;}
+  .mentoria-page .chain-item{font-family:'Fraunces',serif;font-size:clamp(20px,2.6vw,30px);font-weight:400;color:#F2F4FF;}
+  .mentoria-page .chain-arrow{color:#E3C564;font-size:18px;}
+  .mentoria-page .cards-3{display:grid;grid-template-columns:repeat(3,1fr);}
+  @media (max-width:860px){.mentoria-page .cards-3{grid-template-columns:1fr;}}
+  .mentoria-page .fcard{padding:40px 34px;}
+  .mentoria-page .pillar{display:grid;grid-template-columns:140px 1fr;gap:40px;padding:44px 0;border-top:1px solid rgba(242,244,255,0.1);}
+  @media (max-width:700px){.mentoria-page .pillar{grid-template-columns:1fr;gap:14px;}}
+  .mentoria-page .pillar-num{font-family:'Fraunces',serif;font-size:56px;font-weight:300;color:#E3C564;line-height:1;}
+  .mentoria-page .pillar-meta{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(242,244,255,0.45);margin-top:10px;}
+  .mentoria-page .pillar-title{font-family:'Fraunces',serif;font-size:clamp(24px,3vw,30px);font-weight:400;color:#F2F4FF;margin:0 0 6px 0;}
+  .mentoria-page .pillar-q{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:#E3C564;margin:0 0 14px 0;}
+  .mentoria-page .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:12px 36px;}
+  .mentoria-page .score-item{display:flex;align-items:center;gap:12px;font-size:14px;padding:13px 0;border-bottom:1px solid rgba(10,10,10,0.08);}
+  .mentoria-page .score-dot{width:6px;height:6px;border-radius:50%;background:#C9A227;flex-shrink:0;}
+  .mentoria-page .extras-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+  @media (max-width:900px){.mentoria-page .extras-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.mentoria-page .extras-grid{grid-template-columns:1fr;}}
+  .mentoria-page .extra-item{padding:30px 26px;}
+  .mentoria-page .extra-title{font-family:'Fraunces',serif;font-size:19px;font-weight:400;margin:0 0 8px 0;}
+  .mentoria-page .extra-desc{font-size:13.5px;line-height:1.55;}
+  .mentoria-page .list-dash{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .mentoria-page .list-dash li{font-size:15.5px;line-height:1.55;padding-left:24px;position:relative;}
+  .mentoria-page .list-dash li::before{content:"—";position:absolute;left:0;color:#C9A227;}
+  .mentoria-page section{padding-block:clamp(60px,7.5vw,112px);}
+  .mentoria-page .sticky-cta{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:30;background:rgba(10,10,10,0.94);border:1px solid rgba(242,244,255,0.12);border-radius:999px;display:flex;align-items:center;gap:16px;padding:10px 10px 10px 22px;backdrop-filter:blur(8px);max-width:92vw;}
+  .mentoria-page .sticky-cta span{font-size:12px;letter-spacing:0.05em;color:rgba(242,244,255,0.75);white-space:nowrap;}
+  @media (max-width:640px){.mentoria-page .sticky-cta span{display:none;}}
+
+.mentoria-page .faq-toggle { width:100%; background:none; border:0; color:inherit; font:inherit; text-align:left; }
+.mentoria-page a:focus-visible, .mentoria-page button:focus-visible { outline:2px solid #E3C564; outline-offset:4px; }
+@media (max-width:640px) {
+  .mentoria-page .btn { white-space:normal; text-align:center; justify-content:center; max-width:100%; }
+  .mentoria-page .cmp-table th, .mentoria-page .cmp-table td { padding:12px 8px; overflow-wrap:anywhere; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .mentoria-page .marquee-track { animation:none; }
+}

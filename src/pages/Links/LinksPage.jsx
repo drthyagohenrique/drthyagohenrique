@@ -72,6 +72,12 @@ const contactUrl = (message) =>
 
 const primaryLinks = [
   {
+    label: 'Mentoria Mind Legacy',
+    href: ROUTES.mentoria,
+    image: '/assets/link-bio/mentoria.svg',
+    imageAlt: 'Mind Legacy — mentoria com Dr. Thyago Henrique',
+  },
+  {
     label: 'NeuroCalma',
     href: ROUTES.neurocalma,
     image: '/assets/link-bio/neurocalma.webp',
