@@ -86,10 +86,11 @@ const primaryLinks = [
   },
   {
     label: 'Códigos da Mente',
-    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de receber informações sobre Códigos da Mente.'),
+    href: ROUTES.codigosDaMente,
     image: '/assets/link-bio/codigos-da-mente.webp',
     imageAlt: 'Códigos da Mente — ferramentas práticas para usar melhor a mente',
-    external: true,
+    reloadDocument: true,
+    disabled: true,
   },
   {
     label: 'Palestras',
@@ -160,7 +161,7 @@ const BioCard = ({ item, index }) => {
     return <a {...sharedProps} href={item.href} target='_blank' rel='noreferrer'>{content}</a>;
   }
 
-  return <Link {...sharedProps} to={item.href}>{content}</Link>;
+  return <Link {...sharedProps} to={item.href} reloadDocument={item.reloadDocument}>{content}</Link>;
 };
 
 const linksJsonLd = {

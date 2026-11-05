@@ -26,6 +26,14 @@
   ],
   "rewrites": [
     {
+      "source": "/codigos-da-mente",
+      "destination": "/codigos-da-mente.html"
+    },
+    {
+      "source": "/codigos-da-mente/",
+      "destination": "/codigos-da-mente.html"
+    },
+    {
       "source": "/mindup",
       "destination": "/mindup.html"
     },
@@ -34,7 +42,7 @@
       "destination": "/mindup.html"
     },
     {
-      "source": "/((?!api/|assets/|mindup.html|favicon.svg|favicon-32.png|apple-touch-icon.png).*)",
+      "source": "/((?!api/|assets/|mindup.html|codigos-da-mente.html|favicon.svg|favicon-32.png|apple-touch-icon.png).*)",
       "destination": "/index.html"
     }
   ]

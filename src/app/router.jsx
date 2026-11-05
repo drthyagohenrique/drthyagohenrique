@@ -18,6 +18,7 @@ const NeuroCalmaPage = lazy(() => import('../pages/NeuroCalma/NeuroCalmaPage.jsx
 const MindUpPage = lazy(() => import('../pages/MindUp/MindUpPage.jsx'));
 
 const MentoriaPage = lazy(() => import('../pages/Mentoria/MentoriaPage.jsx'));
+const CodigosDaMentePage = lazy(() => import('../pages/CodigosDaMente/CodigosDaMentePage.jsx'));
 
 const ScrollRestoration = () => {
   const { pathname, hash } = useLocation();
@@ -84,6 +85,7 @@ const AppRoutes = () => (
         <Route path={routeConfig.neurocalma.path} element={<NeuroCalmaPage />} />
         <Route path={routeConfig.mindup.path} element={<MindUpPage />} />
         <Route path={ROUTES.mentoria} element={<MentoriaPage />} />
+        <Route path={routeConfig.codigosDaMente.path} element={<CodigosDaMentePage />} />
         <Route path={ROUTES.privacy} element={<LegalPage page="privacy" />} />
         <Route path={ROUTES.terms} element={<LegalPage page="terms" />} />
         {routeConfig.future.map((route) => (

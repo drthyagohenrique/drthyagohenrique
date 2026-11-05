@@ -18,7 +18,8 @@ export const routeConfig = {
     status: 'published',
   },
   mentoria: { path: ROUTES.mentoria, status: 'published' },
+  codigosDaMente: { path: ROUTES.codigosDaMente, status: 'pre-launch' },
   future: FUTURE_ROUTES
-    .filter((route) => ![ROUTES.links, ROUTES.privacy, ROUTES.terms, ROUTES.mentoria].includes(route.path))
+    .filter((route) => ![ROUTES.links, ROUTES.privacy, ROUTES.terms, ROUTES.mentoria, ROUTES.codigosDaMente].includes(route.path))
     .map((route) => ({ ...route, status: 'technical-placeholder' })),
 };
