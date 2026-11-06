@@ -90,7 +90,6 @@ const primaryLinks = [
     image: '/assets/link-bio/codigos-da-mente.webp',
     imageAlt: 'Códigos da Mente — ferramentas práticas para usar melhor a mente',
     reloadDocument: true,
-    disabled: true,
   },
   {
     label: 'Palestras',
