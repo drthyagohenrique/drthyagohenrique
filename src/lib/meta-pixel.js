@@ -15,11 +15,21 @@ const isLocalhost =
   isBrowser && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
 let initialized = false;
+let pixelLoadPromise = Promise.resolve();
+
+const ATTRIBUTION_COOKIE_MAX_AGE = 90 * 24 * 60 * 60;
+const ATTRIBUTION_WAIT_MS = 750;
 
 function getCookie(name) {
   if (!isBrowser) return undefined;
   const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]+)'));
   return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+function setCookie(name, value, maxAge) {
+  if (!isBrowser) return;
+  const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+  document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${secure}`;
 }
 
 // Se o clique veio de um anúncio, a Meta manda ?fbclid=... na URL. Quando o
@@ -31,18 +41,38 @@ function fbcFromUrl() {
   return `fb.1.${Date.now()}.${fbclid}`;
 }
 
+function persistFbcFromUrl() {
+  const fbc = fbcFromUrl();
+  if (fbc && !getCookie('_fbc')) setCookie('_fbc', fbc, ATTRIBUTION_COOKIE_MAX_AGE);
+  return getCookie('_fbc') || fbc;
+}
+
+function waitForPixelAttribution() {
+  if (!isBrowser || getCookie('_fbp')) return Promise.resolve();
+
+  return new Promise((resolve) => {
+    const startedAt = Date.now();
+    const timer = window.setInterval(() => {
+      if (getCookie('_fbp') || Date.now() - startedAt >= ATTRIBUTION_WAIT_MS) {
+        window.clearInterval(timer);
+        resolve();
+      }
+    }, 50);
+  });
+}
+
 export function newEventId() {
   if (isBrowser && window.crypto?.randomUUID) return window.crypto.randomUUID();
   return `evt-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
 export function initPixel() {
-  if (!isBrowser || initialized) return;
+  if (!isBrowser || initialized) return pixelLoadPromise;
   if (!PIXEL_ID) {
     if (import.meta.env.DEV) {
       console.warn('[meta-pixel] VITE_META_PIXEL_ID ausente — Pixel desativado.');
     }
-    return;
+    return pixelLoadPromise;
   }
 
   /* eslint-disable */
@@ -67,7 +97,9 @@ export function initPixel() {
   // Não usamos `fbq('init', id, advancedMatching)` com PII em texto puro —
   // qualquer dado pessoal segue hasheado pelo servidor (LGPD-friendly).
   window.fbq('init', PIXEL_ID);
+  persistFbcFromUrl();
   initialized = true;
+  return pixelLoadPromise;
 }
 
 async function sendToCapi(payload) {
@@ -116,18 +148,22 @@ export function trackEvent(eventName, options = {}) {
     window.fbq(method, eventName, customData, { eventID: eventId });
   }
 
-  sendToCapi({
-    event_name: eventName,
-    event_id: eventId,
-    event_source_url: isBrowser ? window.location.href : undefined,
-    action_source: 'website',
-    custom_data: customData,
-    user_data: {
-      ...userData,
-      fbp: getCookie('_fbp'),
-      fbc: getCookie('_fbc') || fbcFromUrl(),
-    },
-  });
+  // Browser delivery is queued immediately. CAPI waits briefly for the async
+  // Pixel script to create _fbp, which improves the first PageView match rate.
+  Promise.resolve(initPixel())
+    .then(waitForPixelAttribution)
+    .then(() => sendToCapi({
+      event_name: eventName,
+      event_id: eventId,
+      event_source_url: isBrowser ? window.location.href : undefined,
+      action_source: 'website',
+      custom_data: customData,
+      user_data: {
+        ...userData,
+        fbp: getCookie('_fbp'),
+        fbc: persistFbcFromUrl(),
+      },
+    }));
 
   return eventId;
 }
