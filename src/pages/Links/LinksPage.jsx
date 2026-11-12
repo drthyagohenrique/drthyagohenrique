@@ -120,11 +120,12 @@ const primaryLinks = [
     hidden: true,
   },
   {
-    label: 'Livro Domine o Jogo — em breve na Amazon',
+    label: 'Livro Domine o Jogo — disponível na Amazon',
+    href: 'https://www.amazon.com.br/Domine-Jogo-neuroci%C3%AAncia-prosperar-fracassar-ebook/dp/B0HQNP4F3R/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1HBW8NQIY3KU9&dib=eyJ2IjoiMSJ9.2ZxJ5qz9n6TzSoAtn5mUWHKCx4Pr09OFbvlfBLugxFs.ylyqBSt4IQ3kvMs918kdj_vga2-toDNiiHZF9Fd4SY8&dib_tag=se&keywords=domine+o+jogo+thiago&qid=1794526347&sprefix=domine+o+jogo+thyag%2Caps%2C258&sr=8-1',
     image: '/assets/link-bio/livro-domine-o-jogo.webp',
     imageAlt: 'Domine o Jogo — lançamento do primeiro livro do Dr. Thyago Henrique',
-    disabled: true,
-    hidden: true,
+    external: true,
+    book: true,
   },
 ];
 
@@ -138,6 +139,7 @@ const BioCard = ({ item, index }) => {
   const content = (
     <>
       <img src={item.image} alt={item.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
+      {item.book && <span className='links-card__book-cta' aria-hidden='true'>Disponível na Amazon</span>}
       <span className='links-visually-hidden'>{item.label}</span>
       {item.disabled ? (
         <span className='links-card__coming-soon' aria-hidden='true'>EM BREVE</span>

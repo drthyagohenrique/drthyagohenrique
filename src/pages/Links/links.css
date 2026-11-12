@@ -326,6 +326,27 @@
   filter: none;
 }
 
+.links-card__book-cta {
+  position: absolute;
+  z-index: 1;
+  left: 5%;
+  top: 72%;
+  width: 44%;
+  height: 19%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  border: 1px solid #c87c33;
+  border-radius: 6px;
+  background: #0b0807;
+  color: #efbd7d;
+  font-size: clamp(9px, 2.1vw, 18px);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .links-card__access {
   position: absolute;
   z-index: 2;
