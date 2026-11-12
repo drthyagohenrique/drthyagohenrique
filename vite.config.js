@@ -6,6 +6,9 @@ import { resolve } from 'node:path';
 const standaloneCodigosDaMente = () => {
   const rewrite = (server) => {
     server.middlewares.use((req, _res, next) => {
+      if (/^\/palestras\/?(?:\?|$)/.test(req.url || '')) {
+        req.url = req.url.replace(/^\/palestras\/?/, '/palestras.html');
+      }
       if (/^\/codigos-da-mente\/?(?:\?|$)/.test(req.url || '')) {
         req.url = req.url.replace(/^\/codigos-da-mente\/?/, '/codigos-da-mente.html');
       }

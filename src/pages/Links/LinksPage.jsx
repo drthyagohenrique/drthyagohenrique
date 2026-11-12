@@ -93,10 +93,10 @@ const primaryLinks = [
   },
   {
     label: 'Palestras',
-    href: contactUrl('Olá, vim pelo link da bio do Dr. Thyago Henrique e gostaria de receber informações sobre palestras.'),
+    href: ROUTES.palestras,
     image: '/assets/link-bio/palestras.webp',
     imageAlt: 'Palestras com o Dr. Thyago Henrique',
-    external: true,
+    reloadDocument: true,
   },
   {
     label: 'Mentoria Mind Legacy',

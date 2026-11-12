@@ -25,6 +25,8 @@
     }
   ],
   "rewrites": [
+    { "source": "/palestras", "destination": "/palestras.html" },
+    { "source": "/palestras/", "destination": "/palestras.html" },
     {
       "source": "/codigos-da-mente",
       "destination": "/codigos-da-mente.html"
@@ -42,7 +44,7 @@
       "destination": "/mindup.html"
     },
     {
-      "source": "/((?!api/|assets/|mindup.html|codigos-da-mente.html|favicon.svg|favicon-32.png|apple-touch-icon.png).*)",
+      "source": "/((?!api/|assets/|palestras.html|mindup.html|codigos-da-mente.html|favicon.svg|favicon-32.png|apple-touch-icon.png).*)",
       "destination": "/index.html"
     }
   ]
